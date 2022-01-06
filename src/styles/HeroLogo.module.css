@@ -1,0 +1,19 @@
+.wrapper{
+    width: 24rem;
+}
+
+.thought, .grove{
+    font-size: var(--fs-hero-large);
+    font-weight: 800;
+}
+
+.textLogoWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoWrapper{
+    margin-left: 20%;
+    transform: translateX(-50%);
+}
