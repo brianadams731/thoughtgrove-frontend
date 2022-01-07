@@ -66,11 +66,17 @@ button{
     font-family: var(--font-button);
     font-size: var(--fs-standard-large);
     border: none;
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 button:hover{
     cursor: pointer;
     background-color: var(--c-logo-accent);
     transform: scale(1.05);
+}
+
+button:active{
+    cursor: pointer;
+    background-color: var(--c-main-gray);
+    transform: scale(.95);
 }

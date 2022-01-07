@@ -3,10 +3,14 @@
     align-items: center;
     justify-content: center;
     gap: 12%;
-    min-height: 100vh;
+    height: 100vh;
 }
 
+
 @media screen and (max-width:1025px){
+    .wrapper{
+        flex-direction: column;
+    }
     .heroLogoWrapper{
         display: none;
     }

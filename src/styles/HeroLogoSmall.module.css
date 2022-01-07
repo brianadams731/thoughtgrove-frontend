@@ -1,0 +1,11 @@
+.wrapper h3{
+    font-family: var(--font-heading);
+    font-size: var(--fs-heading);
+    line-height: 1.5rem;
+}
+
+.logoTextWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

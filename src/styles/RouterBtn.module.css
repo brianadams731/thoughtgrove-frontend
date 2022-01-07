@@ -5,4 +5,15 @@
     background: var(--c-black);
     border-radius: var(--border-button-radius);
     text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+
+.wrapper:hover{
+    background-color: var(--c-logo-accent);
+    transform: scale(1.05);
+}
+
+.wrapper:active{
+    background-color: var(--c-main-gray);
+    transform: scale(.95);
 }

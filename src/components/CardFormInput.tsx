@@ -14,7 +14,7 @@ const CardFormInput = ({subject, title, inputValue, inputSetter}:Props):JSX.Elem
         <div className={styles.wrapper}>
             <h5 className={styles.subject}>{subject}</h5>
             <h2 className={styles.title}>{title}</h2>
-            <input className={styles.inputArea} type="text" value={inputValue} onChange={(e)=>{
+            <input className={styles.inputArea} type={title.toLowerCase()==="password"?"password":"text"} value={inputValue} onChange={(e)=>{
                 inputSetter(e.target.value);
             }}/>
         </div>

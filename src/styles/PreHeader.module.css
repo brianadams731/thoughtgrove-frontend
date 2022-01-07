@@ -1,0 +1,34 @@
+.wrapper{
+    width: 100%;
+    padding-top: 6%;
+    padding-right: 7%;
+    padding-left: 7%;
+    padding-bottom: 15px;
+    background-color: var(--c-off-white);
+    position: absolute;
+    top:0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.wrapper a{
+    color: var(--c-black);
+    font-weight: 600;
+    font-family: var(--font-heading);
+    font-size: var(--fs-standard-large);
+    text-decoration: none;
+}
+
+.smallLogoWrapper{
+    display: none;
+}
+
+@media screen and (max-width:1025px){
+    .wrapper{
+        justify-content: space-between;
+    }
+    .smallLogoWrapper{
+        display: initial;
+    }
+}

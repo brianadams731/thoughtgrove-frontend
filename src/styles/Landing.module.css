@@ -3,7 +3,7 @@
     /*background-color: var(--c-off-white); Consider what link overlay should look like*/
     font-weight: 600;
     position: fixed;
-    top:7%;
+    top:6%;
     right:7%;
     color: var(--c-black);
 }

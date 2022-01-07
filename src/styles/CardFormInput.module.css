@@ -10,7 +10,7 @@
     font-size: var(--fs-heading-small);
 }
 
-.wrapper input[type=text]{
+.wrapper input[type = text], .wrapper input[type = password]{
     font-size: var(--fs-standard-large);
     font-family: var(--font-heading);
     background: none;
@@ -18,7 +18,7 @@
     border-bottom: 3.5px solid var(--c-main-gray);
 }
 
-.wrapper input[type=text]:focus{
+.wrapper input[type = text]:focus, .wrapper input[type = password]:focus{
     outline: none;
 }
 
