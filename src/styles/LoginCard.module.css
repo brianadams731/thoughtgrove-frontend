@@ -1,0 +1,22 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--p-card-full);
+    box-shadow: var(--box-shadow-card);
+    border-radius: var(--border-card-radius);
+}
+
+.formWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:25px;
+    margin-bottom: 25px;
+}
+
+.wrapper button{
+    margin-top: 45%;
+}
