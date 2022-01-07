@@ -1,5 +1,6 @@
 .logInLink{
     text-decoration: none;
+    /*background-color: var(--c-off-white); Consider what link overlay should look like*/
     font-weight: 600;
     position: fixed;
     top:7%;

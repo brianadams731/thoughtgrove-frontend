@@ -31,10 +31,11 @@
     --font-button: 'Inter';
     --font-body: 'Open Sans';
     
-    /*box shadow: 2px 4px 12px rgba(0, 0, 0, .10)*/
+    --box-shadow-card: 2px 4px 12px rgba(0, 0, 0, .10);
 
     --p-card-lr: 50px;
     --p-card-tb: 50px; 
+    --p-button-standard: 15px 45px;
 }
 
 body {

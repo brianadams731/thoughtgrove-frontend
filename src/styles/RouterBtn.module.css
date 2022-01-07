@@ -1,6 +1,6 @@
 .wrapper{
     font-family: var(--font-button);
-    padding: 15px 45px;
+    padding: var(--p-button-standard);
     color: var(--c-white);
     background: var(--c-black);
     border-radius: var(--border-button-radius);

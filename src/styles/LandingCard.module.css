@@ -1,6 +1,6 @@
 .wrapper{
     border-radius: var(--border-card-radius);
-    box-shadow: 2px 4px 12px rgba(0, 0, 0, .10);
+    box-shadow: var(--box-shadow-card);
     width: fit-content;
     max-width: 95vw;
     padding: var(--p-card-tb) var(--p-card-lr);
