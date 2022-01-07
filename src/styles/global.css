@@ -18,7 +18,7 @@
     --fs-standard-large: 1.25rem;
 
     --fs-heading-small: 1.536rem;
-    --fs-heading: 1.935;
+    --fs-heading: 1.935rem;
     --fs-heading-large: 2.441rem;
 
     --fs-hero-small: 3.052rem;
@@ -28,6 +28,7 @@
     --border-card-radius: 20px;
     --border-button-radius: 10px;
 
+    --font-heading: 'Inter'
     --font-button: 'Inter';
     --font-body: 'Open Sans';
     
@@ -35,6 +36,7 @@
 
     --p-card-lr: 50px;
     --p-card-tb: 50px; 
+    --p-card-full: 25px 50px;
     --p-button-standard: 15px 45px;
 }
 
@@ -53,4 +55,14 @@ h1,h2,h3,h4,h5,h6{
 
 p{
     font-family: 'Open Sans',sans-serif;
+}
+
+button{
+    color: var(--c-white);
+    background-color: var(--c-black);
+    border-radius: var(--border-button-radius);
+    padding: var(--p-button-standard);
+    font-family: var(--font-button);
+    font-size: var(--fs-standard-large);
+    border: none;
 }

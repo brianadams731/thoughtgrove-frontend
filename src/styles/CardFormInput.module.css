@@ -1,0 +1,27 @@
+.wrapper{
+
+}
+
+.subject{
+    font-weight: 400;
+    color: var(--c-main-gray);
+    font-size: var(--fs-standard);
+}
+
+.title{
+    font-weight: 600;
+    color: var(--c-black);
+    font-size: var(--fs-heading-small);
+}
+
+.wrapper input[type=text]{
+    font-size: var(--fs-heading-small);
+    font-family: var(--font-heading);
+    background: none;
+    border: none;
+    border-bottom: 4px solid var(--c-main-gray);
+}
+
+.wrapper input[type=text]:focus{
+    outline: none;
+}

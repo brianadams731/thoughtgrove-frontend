@@ -1,0 +1,14 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:12%;
+    min-height: 100vh;
+}
+
+.heroLogoWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
