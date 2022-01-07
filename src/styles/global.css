@@ -29,7 +29,12 @@
     --border-button-radius: 10px;
 
     --font-button: 'Inter';
-    --font-body: 'Open Sans'
+    --font-body: 'Open Sans';
+    
+    /*box shadow: 2px 4px 12px rgba(0, 0, 0, .10)*/
+
+    --p-card-lr: 50px;
+    --p-card-tb: 50px; 
 }
 
 body {

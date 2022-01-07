@@ -1,0 +1,27 @@
+.wrapper{
+    display: flex;
+    max-width: 100%;
+}
+
+.wrapper{
+    display: flex;
+}
+
+.accentLineWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+}
+
+.LandingCardWrapper{
+    display: flex;
+    width:50vw;
+    align-items: center;
+}
+
+.accentLine{
+    height: 3px;
+    width: 65%;
+    background-color: var(--c-main-gray);
+}

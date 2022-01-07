@@ -1,0 +1,7 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: var(--p-card-tb);
+}

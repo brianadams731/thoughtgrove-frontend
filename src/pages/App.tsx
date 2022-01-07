@@ -1,5 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { Landing } from "./Landing";
+import { Footer } from "../components/Footer";
 import styles from "../styles/App.module.css";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <BrowserRouter>
       <div className={styles.wrapper}>
         <Landing />
+        <Footer />
       </div>
     </BrowserRouter>
   );
