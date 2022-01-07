@@ -8,7 +8,7 @@ const Login = ():JSX.Element =>{
             <div>
                 <LoginCard />                
             </div>
-            <div>
+            <div className={styles.heroLogoWrapper}>
                 <HeroLogo />
             </div>
         </div>

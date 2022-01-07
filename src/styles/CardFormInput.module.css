@@ -11,7 +11,7 @@
 }
 
 .wrapper input[type=text]{
-    font-size: var(--fs-heading-small);
+    font-size: var(--fs-standard-large);
     font-family: var(--font-heading);
     background: none;
     border: none;
@@ -20,4 +20,20 @@
 
 .wrapper input[type=text]:focus{
     outline: none;
+}
+
+@media screen and (max-width:450px){
+    .wrapper{
+        max-width: 95%;
+    }
+    .wrapper input[type=text]{
+        max-width: 100%;
+    }
+    .subject{
+        font-size: var(--fs-standard);
+    }
+
+    .title{
+        font-size: var(--fs-heading-small);
+    }
 }

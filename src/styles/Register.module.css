@@ -6,9 +6,11 @@
     min-height: 100vh;
 }
 
-.heroLogoWrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
+
+
+@media screen and (max-width:1025px){
+    .heroLogoWrapper{
+        display: none;
+    }
+}

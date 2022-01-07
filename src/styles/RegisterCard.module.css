@@ -1,5 +1,6 @@
 .wrapper{
     display: flex;
+    max-width: 95vw;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -15,4 +16,13 @@
     justify-content: center;
     gap:25px;
     margin-bottom: 25px;
+}
+
+@media screen and (max-width:500px){
+    .wrapper{
+        padding: var(--p-card-full-mobile);
+    }
+    .formWrapper{
+        max-width: 100%;
+    }
 }

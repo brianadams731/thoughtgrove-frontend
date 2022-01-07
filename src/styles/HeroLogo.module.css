@@ -17,3 +17,19 @@
     margin-left: 20%;
     transform: translateX(-50%);
 }
+
+@media screen and (max-width:500px) {
+    .wrapper{
+        width: 16rem;
+    }
+    .thought, .grove{
+        font-size: var(--fs-hero);
+    }
+    svg{
+        width: 50px !important;
+    }
+    .logoWrapper{
+        margin-left: 0;
+        transform: translate(25%);
+    }
+}

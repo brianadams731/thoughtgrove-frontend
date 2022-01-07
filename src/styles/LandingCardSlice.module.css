@@ -1,5 +1,6 @@
 .wrapper{
     display: flex;
+    padding: 15px;
     max-width: 100%;
 }
 
@@ -18,19 +19,28 @@
 
 .accentLine{
     height: 3px;
+    opacity: .3;
     width: 65%;
     background-color: var(--c-main-gray);
 }
 
 @media screen and (max-width:850px) {
     .wrapper{
+        position: relative;
         display: block;
+        margin: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
         width: fit-content;
     }
     .LandingCardWrapper{
         width: fit-content;
     }
     .accentLineWrapper{
-        display: none;
+        position: absolute;
+        width: 80%;
+        top:0;
+        left:50%;
+        transform: translate(-50%, -50%);
     }
 }

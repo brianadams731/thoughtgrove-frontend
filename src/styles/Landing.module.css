@@ -27,8 +27,6 @@
 @media screen and (max-width:850px) {
     .cardsSlice{
         display: block;
-        margin: auto;
-        width: fit-content;
-        justify-content: center;
+        margin-bottom: 0;
     }
 }

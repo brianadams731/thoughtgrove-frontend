@@ -2,7 +2,7 @@
     border-radius: var(--border-card-radius);
     box-shadow: var(--box-shadow-card);
     width: fit-content;
-    max-width: 95vw;
+    max-width: 90vw;
     padding: var(--p-card-tb) var(--p-card-lr);
 }
 
@@ -33,7 +33,7 @@
     width: 100%;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width:600px) {
     .wrapper {
         padding: 50px 25px;
     }
