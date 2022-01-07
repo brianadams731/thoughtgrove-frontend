@@ -1,9 +1,11 @@
 .logInLink{
+    position: fixed;
     text-decoration: none;
     /*background-color: var(--c-off-white); Consider what link overlay should look like*/
+    font-size: var(--fs-standard-large);
     font-weight: 600;
     position: fixed;
-    top:6%;
+    top:50px;
     right:7%;
     color: var(--c-black);
 }
@@ -25,6 +27,9 @@
 }
 
 @media screen and (max-width:850px) {
+    .logInLink{
+        top: 37px;
+    }
     .cardsSlice{
         display: block;
         margin-bottom: 0;
