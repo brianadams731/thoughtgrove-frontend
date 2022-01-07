@@ -15,7 +15,7 @@
     font-family: var(--font-heading);
     background: none;
     border: none;
-    border-bottom: 4px solid var(--c-main-gray);
+    border-bottom: 3.5px solid var(--c-main-gray);
 }
 
 .wrapper input[type=text]:focus{

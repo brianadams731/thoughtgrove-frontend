@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/RegisterCard.module.css";
 import { Logo } from "../svg/Logo";
 import { CardFormInput } from "./CardFormInput";
