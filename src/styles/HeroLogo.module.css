@@ -25,9 +25,6 @@
     .thought, .grove{
         font-size: var(--fs-hero);
     }
-    svg{
-        width: 50px !important;
-    }
     .logoWrapper{
         margin-left: 0;
         transform: translate(25%);
