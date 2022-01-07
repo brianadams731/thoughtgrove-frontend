@@ -3,10 +3,6 @@
     max-width: 100%;
 }
 
-.wrapper{
-    display: flex;
-}
-
 .accentLineWrapper{
     display: flex;
     justify-content: center;
@@ -24,4 +20,17 @@
     height: 3px;
     width: 65%;
     background-color: var(--c-main-gray);
+}
+
+@media screen and (max-width:850px) {
+    .wrapper{
+        display: block;
+        width: fit-content;
+    }
+    .LandingCardWrapper{
+        width: fit-content;
+    }
+    .accentLineWrapper{
+        display: none;
+    }
 }

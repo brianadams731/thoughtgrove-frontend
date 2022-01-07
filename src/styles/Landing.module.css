@@ -23,3 +23,12 @@
     gap: 75px;
     margin-bottom: 75px;
 }
+
+@media screen and (max-width:850px) {
+    .cardsSlice{
+        display: block;
+        margin: auto;
+        width: fit-content;
+        justify-content: center;
+    }
+}
