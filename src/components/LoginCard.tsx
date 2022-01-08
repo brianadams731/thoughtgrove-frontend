@@ -25,9 +25,7 @@ const LoginCard = ():JSX.Element =>{
                     navigate("/dashboard");
                 }catch(Error){
                     addToasts({subject:"Error", description:"Invalid Login Credentials"})
-                }
-                
-                
+                }             
             }}>
 
                 <CardFormInput  subject="Communication" title="Email" inputValue={email} inputSetter={setEmail} />

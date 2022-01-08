@@ -6,6 +6,7 @@ import { registerUserAsync } from "../utils/registerUser";
 import { CardFormInput } from "./CardFormInput";
 
 import styles from "../styles/RegisterCard.module.css";
+import { useToastStore } from "../stores/toastStore";
 
 const RegisterCard = ():JSX.Element =>{
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ const RegisterCard = ():JSX.Element =>{
     const [password, setPassword] = useState("");
     const [confirmPassword,setConfirmPassword] = useState("");
 
+    const addToasts = useToastStore(state => state.addToasts);
+    
     return (
         <div className={styles.wrapper}>
             <form className={styles.formWrapper} onSubmit={async (e)=>{
@@ -22,6 +25,7 @@ const RegisterCard = ():JSX.Element =>{
                     await registerUserAsync({username, email, password});
                     navigate("/dashboard")
                 }catch(Error){
+                    addToasts({subject:"Error", description:"Unable to register user"})
                     console.log("Error Cannot register user")
                 }
             }}>

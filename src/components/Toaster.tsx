@@ -15,7 +15,7 @@ const Toaster = ():JSX.Element =>{
             },2500)
         }
         //eslint-disable-next-line
-    },[toasts])
+    },[toasts.length])
 
     const displayToast = () =>{
         if(toasts.length === 0){

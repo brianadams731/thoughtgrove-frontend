@@ -14,8 +14,13 @@ interface IState{
 const useToastStore = create<IState>((set)=>({
     toasts: [],
     addToasts: (toast:IToast) => {
-        set((state) =>({
-            toasts: [...state.toasts, toast]
+        set((state) => ({
+            toasts: [...state.toasts.filter(item =>{
+                if(item.description !== toast.description){
+                    return true;
+                }
+                return false;
+            }), toast]
         }))
     },
     removeTopToast: ()=> {
