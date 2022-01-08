@@ -1,0 +1,21 @@
+.wrapper{
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+.wrapper:hover{
+    cursor: pointer;
+}
+
+.borderWrapper{
+    position: absolute;
+    top:0;
+    left:0;
+}
+.addWrapper{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
