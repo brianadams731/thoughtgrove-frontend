@@ -6,11 +6,15 @@ import { Logo } from "../svg/Logo";
 import styles from "../styles/LoginCard.module.css"
 import { logInUserAsync } from "../utils/logInUser";
 import { useNavigate } from "react-router-dom";
+import { useToastStore } from "../stores/toastStore";
 
 const LoginCard = ():JSX.Element =>{
     const navigate = useNavigate();
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const addToasts = useToastStore(state => state.addToasts);
+
 
     return (
         <div className={styles.wrapper}>
@@ -20,7 +24,7 @@ const LoginCard = ():JSX.Element =>{
                     await logInUserAsync({email,password}); 
                     navigate("/dashboard");
                 }catch(Error){
-                    console.log("Error cannot log in")
+                    addToasts({subject:"Error", description:"Invalid Login Credentials"})
                 }
                 
                 

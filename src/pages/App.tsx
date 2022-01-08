@@ -4,10 +4,13 @@ import { Register } from "./Register";
 import { Login } from "./Login";
 import styles from "../styles/App.module.css";
 import { Dashboard } from "./Dashboard";
+import { Toaster } from "../components/Toaster";
 
 function App() {
   return (
     <div className={styles.wrapper}>
+      <Toaster />
+      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />

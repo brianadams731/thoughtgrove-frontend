@@ -1,0 +1,19 @@
+.toastWrapper{
+    background-color: var(--c-white);
+    z-index: var(--z-index-toast);
+    position: absolute;
+    max-width: 95%;
+    padding: 25px 25px;
+    border-radius: var(--border-card-radius);
+    box-shadow: var(--box-shadow-card);
+
+    left:50%;
+    transform: translate(-50%);
+}
+
+.toastWrapper h3{
+    font-weight: 400;
+    font-family: var(--font-heading);
+    font-size: var(--fs-standard-large);
+    line-height: 1.3rem;
+}
