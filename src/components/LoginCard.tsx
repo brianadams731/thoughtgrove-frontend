@@ -5,8 +5,10 @@ import { Logo } from "../svg/Logo";
 
 import styles from "../styles/LoginCard.module.css"
 import { logInUserAsync } from "../utils/logInUser";
+import { useNavigate } from "react-router-dom";
 
 const LoginCard = ():JSX.Element =>{
+    const navigate = useNavigate();
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -14,7 +16,13 @@ const LoginCard = ():JSX.Element =>{
         <div className={styles.wrapper}>
             <form className={styles.formWrapper} onSubmit={async(e)=>{
                 e.preventDefault();
-                const res = await logInUserAsync({email,password});
+                try{
+                    await logInUserAsync({email,password}); 
+                    navigate("/dashboard");
+                }catch(Error){
+                    console.log("Error cannot log in")
+                }
+                
                 
             }}>
 

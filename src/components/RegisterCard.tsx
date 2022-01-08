@@ -1,10 +1,14 @@
 import { useState } from "react";
-import styles from "../styles/RegisterCard.module.css";
+import { useNavigate } from "react-router-dom";
+
 import { Logo } from "../svg/Logo";
 import { registerUserAsync } from "../utils/registerUser";
 import { CardFormInput } from "./CardFormInput";
 
+import styles from "../styles/RegisterCard.module.css";
+
 const RegisterCard = ():JSX.Element =>{
+    const navigate = useNavigate();
     const [username,setUserName] = useState("");
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,7 +18,12 @@ const RegisterCard = ():JSX.Element =>{
         <div className={styles.wrapper}>
             <form className={styles.formWrapper} onSubmit={async (e)=>{
                 e.preventDefault();
-                const res = await registerUserAsync({username, email, password})
+                try{
+                    await registerUserAsync({username, email, password});
+                    navigate("/dashboard")
+                }catch(Error){
+                    console.log("Error Cannot register user")
+                }
             }}>
                 <CardFormInput subject="Identity" title="User Name" inputValue={username} inputSetter={setUserName}/>
                 <CardFormInput subject="Communication" title="Email" inputValue={email} inputSetter={setEmail}/>

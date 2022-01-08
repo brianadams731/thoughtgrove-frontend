@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Landing } from "./Landing";
 import { Register } from "./Register";
 import { Login } from "./Login";
-import { Footer } from "../components/Footer";
 import styles from "../styles/App.module.css";
+import { Dashboard } from "./Dashboard";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
       

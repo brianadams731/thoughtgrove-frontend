@@ -1,3 +1,5 @@
+import {APIRoute} from "../utils/APIRoute";
+
 interface IRegisteredUser{
     username:string;
     email:string;
@@ -5,22 +7,22 @@ interface IRegisteredUser{
 }
 
 const registerUserAsync = async(registerUser:IRegisteredUser) =>{
-    const res = await fetch("",{
+    const res = await fetch(APIRoute.Register,{
         method: "POST",
         headers:{
             'Content-Type':'application/json'
         },
         body: JSON.stringify({
-            username:registerUser.username,
-            email:registerUser.email,
-            password:registerUser.password,
+            username: registerUser.username,
+            email: registerUser.email,
+            password: registerUser.password,
         })
     })
-    if(res.status !== 200){
-        
+    if(res.ok){
+        const parsedRes = await res;
+        return parsedRes;
     }
-    const parsedRes = await res.json();
-    return parsedRes;
+    return Promise.reject(res);
 }
 
 export {registerUserAsync};

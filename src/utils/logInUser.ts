@@ -1,10 +1,12 @@
+import {APIRoute} from "../utils/APIRoute";
+
 interface IRegisteredUser{
     email:string;
     password:string;
 }
 
 const logInUserAsync = async(logInUser:IRegisteredUser) => {
-    const res = await fetch("",{
+    const res = await fetch(APIRoute.LogIn,{
         method: "POST",
         headers:{
             'Content-Type':'application/json'
@@ -14,8 +16,11 @@ const logInUserAsync = async(logInUser:IRegisteredUser) => {
             password: logInUser.password,
         })
     })
-    const parsedRes = await res.json();
-    return parsedRes;
+    if(res.ok){
+        const parsedRes = await res;
+        return parsedRes;
+    }
+    return Promise.reject(res);
 }
 
 
