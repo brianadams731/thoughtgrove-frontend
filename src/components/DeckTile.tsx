@@ -1,18 +1,13 @@
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { IDeckTile } from "../Interfaces/IDeckTile";
 import styles from "../styles/DeckTile.module.css";
 import { Logo } from "../svg/Logo";
 
-interface Props{
-    subject: string;
-    title: string;
-    votes: string;
-    deckID: string;
-}
-
-const DeckTile = ({subject,title,votes, deckID}:Props):JSX.Element =>{
+const DeckTile = ({subject,title,votes, deckID}:IDeckTile):JSX.Element =>{
     const navigate = useNavigate();
     return (
-        <div className={styles.wrapper} onClick={()=>{navigate(`deck/${deckID}`)}}>
+        <motion.div className={styles.wrapper} onClick={()=>{navigate(`deck/${deckID}`)}} whileHover={{scale:1.07}}>
             <div className={styles.textBox}>
                 <h3 className={styles.subject}>{subject}</h3>
                 <h1 className={styles.title}>{title}</h1>
@@ -23,7 +18,7 @@ const DeckTile = ({subject,title,votes, deckID}:Props):JSX.Element =>{
                 </div>
                 <h3 className={styles.votes}>{votes}</h3>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

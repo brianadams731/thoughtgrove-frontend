@@ -1,0 +1,13 @@
+.gridTitle{
+    font-size: var(--fs-heading);
+    color: var(--c-dark-gray);
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-left: 15px;
+}
+
+.gridWrapper{
+    display: grid;
+    gap: 45px;
+    grid-template-columns: repeat(auto-fill, minmax(var(--deck-tile-width), var(--deck-tile-width)));
+}

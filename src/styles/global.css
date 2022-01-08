@@ -8,6 +8,7 @@
 
 :root{
     --c-black: #000000;
+    --c-dark-gray: #424242;
     --c-main-gray: #c0c0c0;
     --c-off-white: #FBFBFB;
     --c-white: #FFFFFF;
@@ -44,6 +45,8 @@
 
     --z-index-toast: 100;
     --z-index-modal: 75;
+
+    --deck-tile-width: 300px;
 }
 
 body {
