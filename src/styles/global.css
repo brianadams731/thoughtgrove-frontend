@@ -9,10 +9,15 @@
 :root{
     --c-black: #000000;
     --c-dark-gray: #424242;
+    --c-dark-gray-opaque: rgba(66, 66, 66,.5);
     --c-main-gray: #c0c0c0;
     --c-off-white: #FBFBFB;
     --c-white: #FFFFFF;
     --c-logo-accent: #5EF26D;
+
+    --c-achievement-orange: #F2A55E;
+    --c-achievement-green: #5EF26D;
+    --c-achievement-blue: #20BCFF;
 
     --fs-standard-small: .8rem;
     --fs-standard: 1rem;
@@ -41,9 +46,12 @@
     --p-card-full-mobile: 25px 25px;
     --p-card-tile: 30px 30px;
     --p-button-standard: 15px 45px;
+    --p-heading: 50px;
 
 
     --z-index-toast: 100;
+    --z-index-menu: 50;
+    --z-index-header: 60;
     --z-index-modal: 75;
 
     --deck-tile-width: 300px;

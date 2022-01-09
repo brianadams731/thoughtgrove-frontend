@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, RefObject } from "react";
 * @returns: clickEvent: event - the click event that is being observed to check if click is outSide of element
 */
 
-const useIsClickOutsideElement = <T extends HTMLElement> (): [isOutSide:boolean|undefined, clickEvent:MouseEvent|undefined, element:RefObject<T|undefined>] =>{
+const useIsClickOutsideElement = <T extends HTMLElement> (): [isOutSide:boolean|undefined, element:RefObject<T|undefined>, clickEvent:MouseEvent|undefined] =>{
     const [isOutside, setIsOutSide] = useState<boolean|undefined>(false);
     const [clickEvent, setClickEvent] = useState<MouseEvent>();
     const element = useRef<T>();
@@ -24,7 +24,7 @@ const useIsClickOutsideElement = <T extends HTMLElement> (): [isOutSide:boolean|
         };
     },[element])
 
-    return [isOutside, clickEvent, element];
+    return [isOutside, element, clickEvent];
 }
 
 export default useIsClickOutsideElement;

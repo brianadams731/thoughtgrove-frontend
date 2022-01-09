@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import styles from "../styles/Header.module.css";
 import { HeroLogoSmall } from "./HeroLogoSmall";
 
-const Header = () =>{
-    const [menuOpen, setMenuOpen] = useState(false);
+interface Props{
+    menuOpen: boolean;
+    setMenuOpen: Dispatch<SetStateAction<boolean>>;
+}
 
+const Header = ({menuOpen, setMenuOpen}:Props) =>{
     const upperLine = {
         init:{
             top:"0%",

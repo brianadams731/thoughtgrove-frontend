@@ -1,6 +1,7 @@
 .wrapper{
-    padding: 50px 7%;
+    padding: var(--p-heading) 5%;
     width: 100%;
+    z-index: var(--z-index-header);
     position: fixed;
     display: flex;
     justify-content: space-between;
