@@ -9,7 +9,8 @@ import styles from "../styles/MenuBar.module.css";
 enum CurrentSubSelection{
     Profile,
     Decks,
-    Groups
+    Groups,
+    Blank
 }
 
 interface Props{
@@ -50,8 +51,13 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
         return ()=>{
             observer.disconnect();
         }
-        
     },[menuOpen])
+
+    useEffect(()=>{
+        if(!showChildMenu){
+            currentSelection.current = undefined;
+        }
+    },[showChildMenu])
 
     const profileSubMenu:SubMenu[] = [
         {title:"Profile", url:"/"},
@@ -200,19 +206,19 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
                     </div>
                 </div>
 
-                <div className={styles.itemBox} onClick={()=>{
+                <div className={styles.itemBox} style={currentSelection.current === CurrentSubSelection.Profile && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={()=>{
                     setShowChildMenu(prev=>!prev);
                     currentSelection.current = CurrentSubSelection.Profile;
                 }}>
                     <h3>Profile</h3>
                 </div>
-                <div className={styles.itemBox} onClick={()=>{
+                <div className={styles.itemBox} style={currentSelection.current === CurrentSubSelection.Decks && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={()=>{
                     setShowChildMenu(prev=>!prev);
                     currentSelection.current = CurrentSubSelection.Decks;
                 }}>
                     <h3>Decks</h3>
                 </div>
-                <div className={styles.itemBox} onClick={()=>{
+                <div className={styles.itemBox} style={currentSelection.current === CurrentSubSelection.Groups && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={()=>{
                     setShowChildMenu(prev=>!prev)
                     currentSelection.current = CurrentSubSelection.Groups;
                 }}>
