@@ -5,12 +5,12 @@ import { Flame } from "../svg/Flame";
 import { Trophy } from "../svg/Trophy";
 
 import styles from "../styles/MenuBar.module.css";
+import { useNavigate } from "react-router-dom";
 
 enum CurrentSubSelection{
     Profile,
     Decks,
     Groups,
-    Blank
 }
 
 interface Props{
@@ -26,8 +26,9 @@ interface SubMenu{
 const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
 
     const [showChildMenu, setShowChildMenu] = useState<boolean>(false);
-    const currentSelection = useRef<CurrentSubSelection>();
+    const [currentSelection, setCurrentSelection] = useState<CurrentSubSelection>();
     const [parentLeft, setParentLeft] = useState(0);
+    const navigate = useNavigate();
     const refEle = useRef<HTMLDivElement>(); 
 
 
@@ -35,6 +36,7 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
     useEffect(()=>{
         if(!menuOpen){
             setShowChildMenu(false);
+            setCurrentSelection(undefined);
         }
     },[menuOpen])
 
@@ -54,27 +56,36 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
     },[menuOpen])
 
     useEffect(()=>{
-        if(!showChildMenu){
-            currentSelection.current = undefined;
+        if(currentSelection === undefined){
+            return 
         }
-    },[showChildMenu])
+        const timeout = setTimeout(()=>{
+            if(!showChildMenu && menuOpen){
+                setShowChildMenu(true);
+            }
+        },350)
+        return ()=>{
+            clearTimeout(timeout);
+        }
+        //eslint-disable-next-line
+    },[currentSelection])
 
     const profileSubMenu:SubMenu[] = [
-        {title:"Profile", url:"/"},
-        {title:"Test", url:"/"},
-        {title:"Test", url:"/"},
+        {title:"Your Profile", url:"/dashboard"},
+        {title:"Achievements", url:"/dashboard"},
+        {title:"Settings", url:"/dashboard"},
     ]
 
     const decksSubMenu:SubMenu[] = [
-        {title:"Deck", url:"/"},
-        {title:"Test", url:"/"},
-        {title:"Test", url:"/"},
+        {title:"Add Deck", url:"/dashboard"},
+        {title:"Start Practicing", url:"/dashboard"},
+        {title:"Search Decks", url:"/dashboard"},
     ]
 
     const groupsSubMenu:SubMenu[] = [
-        {title:"Group", url:"/"},
-        {title:"Test", url:"/"},
-        {title:"Test", url:"/"},
+        {title:"Your Groups", url:"/dashboard"},
+        {title:"Find Groups", url:"/dashboard"},
+        {title:"Create Group", url:"/dashboard"},
     ]
 
     const dashOverlay = {
@@ -156,7 +167,7 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
     }
 
     const getSelection =():SubMenu[]|undefined=>{
-        switch(currentSelection.current){
+        switch(currentSelection){
             case CurrentSubSelection.Decks:
                 return decksSubMenu;
             case CurrentSubSelection.Groups:
@@ -171,12 +182,15 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
             {menuOpen&&
             <motion.div className={styles.dashboardOverlay} key="overlay" variants={dashOverlay} initial="initial" animate="animated" exit="end" onClick={()=>setMenuOpen(false)}></motion.div>}
 
-            {showChildMenu&&
+            {showChildMenu && menuOpen &&
             <motion.div key="menuBarChild" className={styles.menuBarChild} style={{right:`${parentLeft}px`}} variants={childBar} initial="initial" animate="animated" exit="end">
                 <div className={styles.achievementBox}></div>
                     {getSelection()?.map((item, index) =>{
                         return (
-                            <div className={styles.itemBox} key={index}>
+                            <div className={styles.itemBox} key={index} onClick={()=>{
+                                navigate(item.url);
+                                setMenuOpen(false);
+                            }}>
                                 <h3>{item.title}</h3>
                             </div>
                         )
@@ -184,7 +198,10 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
             </motion.div>}
 
             {menuOpen&&
-            <motion.div className={styles.menuBarParent} key="menuBarParent" variants={menuBar} initial="initial" animate="animated" exit="end" ref={refEle as RefObject<HTMLDivElement>}>
+            <motion.div className={styles.menuBarParent} key="menuBarParent" variants={menuBar} initial="initial" animate="animated" exit="end" ref={refEle as RefObject<HTMLDivElement>} onClick={()=>{
+                setShowChildMenu(false);
+                setCurrentSelection(undefined);
+            }}>
                 <div className={styles.achievementBox}>
                     <div>
                         <Flame fill={"var(--c-achievement-orange)"} />
@@ -206,26 +223,43 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
                     </div>
                 </div>
 
-                <div className={styles.itemBox} style={currentSelection.current === CurrentSubSelection.Profile && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={()=>{
+                <div className={styles.itemBox} style={currentSelection === CurrentSubSelection.Profile && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={(e)=>{
+                    e.stopPropagation()
                     setShowChildMenu(prev=>!prev);
-                    currentSelection.current = CurrentSubSelection.Profile;
+                    if(currentSelection === CurrentSubSelection.Profile){
+                        setCurrentSelection(undefined)
+                    }else{
+                        setCurrentSelection(CurrentSubSelection.Profile);
+                    }
                 }}>
                     <h3>Profile</h3>
                 </div>
-                <div className={styles.itemBox} style={currentSelection.current === CurrentSubSelection.Decks && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={()=>{
+                <div className={styles.itemBox} style={currentSelection === CurrentSubSelection.Decks && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={(e)=>{
+                    e.stopPropagation()
                     setShowChildMenu(prev=>!prev);
-                    currentSelection.current = CurrentSubSelection.Decks;
+                    if(currentSelection === CurrentSubSelection.Decks){
+                        setCurrentSelection(undefined)
+                    }else{
+                        setCurrentSelection(CurrentSubSelection.Decks);
+                    }
                 }}>
                     <h3>Decks</h3>
                 </div>
-                <div className={styles.itemBox} style={currentSelection.current === CurrentSubSelection.Groups && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={()=>{
+                <div className={styles.itemBox} style={currentSelection === CurrentSubSelection.Groups && showChildMenu?{backgroundColor:"var(--c-light-gray)"}:{}} onClick={(e)=>{
+                    e.stopPropagation()
                     setShowChildMenu(prev=>!prev)
-                    currentSelection.current = CurrentSubSelection.Groups;
+                    if(currentSelection === CurrentSubSelection.Groups){
+                        setCurrentSelection(undefined)
+                    }else{
+                        setCurrentSelection(CurrentSubSelection.Groups);
+                    }
                 }}>
                     <h3>Groups</h3>
                 </div>
 
-                <div className={styles.logoutBox}>
+                <div className={styles.logoutBox} onClick={(e)=>{
+                    e.stopPropagation();
+                }}>
                     <h4>Log Out</h4>
                 </div>
             </motion.div>}
