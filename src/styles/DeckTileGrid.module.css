@@ -6,6 +6,7 @@
 .gridTitle{
     font-size: var(--fs-heading);
     color: var(--c-dark-gray);
+    user-select: none;
     font-weight: 600;
     margin-bottom: 15px;
     padding-left: 15px;

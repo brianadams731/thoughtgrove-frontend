@@ -76,9 +76,12 @@ const Header = ({menuOpen, setMenuOpen}:Props) =>{
     }
 
     return (
-        <header className={styles.wrapper}>
+        <header className={styles.wrapper} onClick={()=>setMenuOpen(false)}>
             <HeroLogoSmall />
-            <div className={styles.menuIcon} onClick={()=>{setMenuOpen(prev => !prev);}}>
+            <div className={styles.menuIcon} onClick={(e)=>{
+                e.stopPropagation();
+                setMenuOpen(prev => !prev);
+            }}>
                 <motion.div initial="init" animate={menuOpen?"animate":"init"} variants={upperLine} className={styles.lineTop}></motion.div>
                 <motion.div initial="init" animate={menuOpen?"animate":"init"} variants={middleLine} className={styles.lineMiddle}></motion.div>
                 <motion.div initial="init" animate={menuOpen?"animate":"init"} variants={lowerLine} className={styles.lineBottom}></motion.div>

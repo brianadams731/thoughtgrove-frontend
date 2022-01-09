@@ -49,6 +49,7 @@
 
 .achievementBox h5{
     color: var(--c-main-gray);
+    font-family: var(--font-heading);
     font-size: var(--fs-standard);
     text-align: center;
     user-select: none;
@@ -97,4 +98,17 @@
 .logoutBox h4:hover{
     cursor: pointer;
     color: var(--c-achievement-orange);
+}
+
+
+
+.menuBarChild{
+    position: fixed;
+    padding-top:calc(var(--p-heading) * 2); /*Heading padding *2*/
+    z-index: var(--z-index-menu);
+    top:0;
+    min-width: 25%;
+    height: 100vh;
+    background-color: var(--c-white);
+    box-shadow: var(--box-shadow-card);
 }
