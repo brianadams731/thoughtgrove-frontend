@@ -1,6 +1,5 @@
-import { AnimatePresence, motion, Variant, Variants } from "framer-motion";
-import { Dispatch, RefObject, SetStateAction, useEffect, useState } from "react"
-import useIsClickOutsideElement from "../hooks/useIsClickOutsideElement";
+import { AnimatePresence, motion } from "framer-motion";
+import { Dispatch, SetStateAction, useState } from "react"
 import styles from "../styles/MenuBar.module.css";
 import { CardCompleteIcon } from "../svg/CardCompleteIcon";
 import { Flame } from "../svg/Flame";

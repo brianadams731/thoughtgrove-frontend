@@ -49,6 +49,7 @@
 
 .achievementBox h5{
     color: var(--c-main-gray);
+    font-size: var(--fs-standard);
     text-align: center;
     user-select: none;
 }
