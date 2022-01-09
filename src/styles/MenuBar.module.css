@@ -14,7 +14,7 @@
     z-index: var(--z-index-menu);
     top:0;
     right:0;
-    min-width: 25%;
+    width: clamp(150px,350px,45%);
     height: 100vh;
     background-color: var(--c-white);
     box-shadow: var(--box-shadow-card);
@@ -107,7 +107,7 @@
     padding-top:calc(var(--p-heading) * 2); /*Heading padding *2*/
     z-index: var(--z-index-menu);
     top:0;
-    min-width: 25%;
+    width: clamp(150px,350px,45%);
     height: 100vh;
     background-color: var(--c-white);
     box-shadow: var(--box-shadow-card);
