@@ -1,0 +1,54 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap:100px;
+    box-shadow: var(--box-shadow-card);
+    border-radius: var(--border-card-radius);
+    background-color: var(--white);
+    padding: var(--p-card-thick);
+}
+
+.subject{
+    font-family: var(--font-heading);
+    font-size: var(--fs-standard);
+    font-weight: 400;
+    color: var(--c-main-gray);
+    user-select: none;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-heading-large);
+    font-weight: 600;
+    color: var(--c-black);
+    user-select: none;
+}
+
+.descriptionTitle {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: var(--fs-standard);
+    color: var(--c-main-gray);
+    user-select: none;
+}
+
+.dataWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.description{
+    font-family: var(--font-body);
+    max-width: 35ch;
+    font-size: var(--fs-standard-large);
+    color: var(--c-black);
+    user-select: none;
+}
+
+.practiceBtn{
+    display: block;
+    margin: auto;
+    user-select: none;
+    margin-bottom: 25px;
+}

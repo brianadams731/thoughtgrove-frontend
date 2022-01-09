@@ -3,7 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import { Header } from "../components/Header";
 import { MenuBar } from "../components/MenuBar";
 import styles from "../styles/Dashboard.module.css";
+
 import { Home } from "./Home";
+import { Deck } from "./Deck";
 
 const Dashboard = ():JSX.Element =>{
     const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +17,7 @@ const Dashboard = ():JSX.Element =>{
             
             <Routes>
                 <Route path="/" element={<Home />} />
-                {/*<Route path="deck/*" element={ } />*/}
+                <Route path="deck/*" element={<Deck />} />
             </Routes>
         </div>
     )
