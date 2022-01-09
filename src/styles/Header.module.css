@@ -1,0 +1,39 @@
+.wrapper{
+    padding: 50px 10%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuIcon{
+    position: relative;
+    width: 35px;
+    height: 25px;
+}
+
+.lineTop, .lineMiddle, .lineBottom{
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 15px;
+    background-color: var(--c-black);
+}
+
+.lineTop{
+    top:0;
+}
+
+.lineMiddle{
+    transform: translate(0, -50%);
+    top:50%;
+}
+
+.lineBottom{
+    bottom:0;
+}
+
+.menuIcon:hover{
+    cursor: pointer;
+}
