@@ -37,5 +37,6 @@
     color: var(--c-main-gray);
     font-size: var(--fs-standard);
     font-weight: 600;
+    user-select: none;
     text-align: center;
 }
