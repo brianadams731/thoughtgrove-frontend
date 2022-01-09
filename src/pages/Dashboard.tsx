@@ -1,13 +1,13 @@
-import { Routes } from "react-router-dom";
-import { DeckTileGrid } from "../components/DeckTileGrid";
+import { Route, Routes } from "react-router-dom";
 import styles from "../styles/Dashboard.module.css";
+import { Home } from "./Home";
 
 const Dashboard = ():JSX.Element =>{
+    
     return (
         <div className={styles.wrapper}>
-            <DeckTileGrid title="test" deckTileData={[]} />
             <Routes>
-                {/*<Route path="/" element={<DeckTile subject="Language" title="French 1" votes="39k" deckID="5"/>} />*/}
+                <Route path="/" element={<Home />} />
                 {/*<Route path="deck/*" element={ } />*/}
             </Routes>
         </div>

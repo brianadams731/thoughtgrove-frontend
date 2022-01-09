@@ -1,3 +1,8 @@
+.wrapper{
+    width: fit-content;
+    margin: auto;
+}
+
 .gridTitle{
     font-size: var(--fs-heading);
     color: var(--c-dark-gray);
@@ -9,5 +14,17 @@
 .gridWrapper{
     display: grid;
     gap: 45px;
-    grid-template-columns: repeat(auto-fill, minmax(var(--deck-tile-width), var(--deck-tile-width)));
+    grid-template-columns: var(--deck-tile-width) var(--deck-tile-width) var(--deck-tile-width);
+}
+
+@media screen and (max-width:1050px){
+    .gridWrapper{
+        grid-template-columns: var(--deck-tile-width) var(--deck-tile-width)
+    }
+}
+
+@media screen and (max-width:725px){
+    .gridWrapper{
+        grid-template-columns: var(--deck-tile-width)
+    }
 }

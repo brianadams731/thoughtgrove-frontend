@@ -8,20 +8,18 @@ import { DeckTile } from "./DeckTile";
 interface Props{
     title: string;
     deckTileData: IDeckTile[];
+    hasAddTile?: boolean
 }
 
-const DeckTileGrid = ({deckTileData, title}:Props):JSX.Element =>{
+const DeckTileGrid = ({deckTileData, title, hasAddTile}:Props):JSX.Element =>{
     return (
         <div className={styles.wrapper}>
-            <h3 className={styles.gridTitle}>Title</h3>
+            <h3 className={styles.gridTitle}>{title}</h3>
             <div className={styles.gridWrapper}>
-                <AddDeckTile />
-                <DeckTile subject="Language" title="French 1" votes="39k" deckID="5"/>
-                <DeckTile subject="Language" title="French 1" votes="39k" deckID="5"/>
-                <DeckTile subject="Language" title="French 1" votes="39k" deckID="5"/>
-                <DeckTile subject="Language" title="French 1" votes="39k" deckID="5"/>
-                <DeckTile subject="Language" title="French 1" votes="39k" deckID="5"/>
-                <DeckTile subject="Language" title="French 1" votes="39k" deckID="5"/>
+                {hasAddTile&&<AddDeckTile />}
+                {deckTileData.map((item) => (
+                    <DeckTile key={`${item.deckID}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.deckID}/>
+                ))}
             </div>
         </div>
     )
