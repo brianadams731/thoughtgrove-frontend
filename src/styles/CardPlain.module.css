@@ -12,6 +12,14 @@
     text-align: center;
 }
 
+.cardNumber{
+    font-size: var(--fs-heading-large);
+    color: var(--c-main-gray);
+    font-weight: 600;
+    opacity: .3;
+    text-align: end;    
+}
+
 .showAnswerBtn{
     width: fit-content;
     align-self: center;

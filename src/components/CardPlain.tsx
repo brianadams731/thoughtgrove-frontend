@@ -52,13 +52,15 @@ const CardPlain = ({prompt, answer, deckMetaData, dispatch}:Props):JSX.Element =
         <motion.div variants={flipVariant} animate={shouldFlip?"flip":"initial"} exit={cardCorrect?"exitRight":"exitLeft"} className={`${cardBase.wrapper} ${cardBase.wrapperFlip} ${shouldFlip?cardBase.triggerFlip:""} ${styles.wrapper}`}>
 
                 <div className={`${cardBase.front} ${styles.front}`}>
-                    <DeckMetaData title={deckMetaData.title} subject={deckMetaData.subject}/>
+                    <DeckMetaData title={deckMetaData.title} subject={deckMetaData.subject} fade={true}/>
                     <h3 className={styles.prompt}>{prompt}</h3>
                     <button className={styles.showAnswerBtn} onClick={()=>setShouldFlip(true)}>Show Answer</button>
                 </div>
 
                 <div className={`${cardBase.back} ${styles.back}`}>
-                    <DeckMetaData title={deckMetaData.title} subject={deckMetaData.subject}/>
+                    <div className={styles.cardNumber}>
+                        03
+                    </div>
                     <h3 className={styles.answer}>{answer}</h3>
 
                     <div className={styles.evaluationWrapper}>
