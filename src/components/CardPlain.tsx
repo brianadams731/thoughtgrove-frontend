@@ -6,12 +6,17 @@ import { DeckMetaData } from "./DeckMetaData";
 import { CorrectIcon } from "../svg/CorrectIcon";
 import { WrongIcon } from "../svg/WrongIcon";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const CardPlain = ({prompt, answer, deckMetaData}:ICardPlain):JSX.Element =>{
     const [shouldFlip,setShouldFlip] = useState(false);
 
+    const flipVariant = {
+        
+    }
+
     return (
-        <div className={`${cardBase.wrapper} ${cardBase.wrapperFlip} ${shouldFlip?cardBase.triggerFlip:""} ${styles.wrapper}`}>
+        <motion.div className={`${cardBase.wrapper} ${cardBase.wrapperFlip} ${shouldFlip?cardBase.triggerFlip:""} ${styles.wrapper}`}>
 
                 <div className={cardBase.front}>
                     <DeckMetaData title={deckMetaData.title} subject={deckMetaData.subject}/>
@@ -32,7 +37,7 @@ const CardPlain = ({prompt, answer, deckMetaData}:ICardPlain):JSX.Element =>{
                 </div>
 
 
-        </div>
+        </motion.div>
     )
 }
 

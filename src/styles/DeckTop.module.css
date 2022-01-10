@@ -1,7 +1,8 @@
 .wrapper{
+    padding: var(--p-card-thick);
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
-    gap:60px;
 }
 
 .descriptionTitle {
@@ -16,25 +17,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 25px;
 }
 
 .description{
     font-family: var(--font-body);
-    max-width: 35ch;
     font-size: var(--fs-standard-large);
     color: var(--c-black);
     user-select: none;
 }
 
 .practiceBtn{
-    display: block;
-    margin: auto;
+    width: fit-content;
+    align-self: center;
+    margin-top: 5px;
     user-select: none;
 }
 
 .commentIconWrapper{
-    margin-top: -20px;
     align-self: flex-end;
 }
 

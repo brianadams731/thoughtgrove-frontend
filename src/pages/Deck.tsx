@@ -28,9 +28,9 @@ const Deck = ():JSX.Element =>{
 
     return ( 
         <div className={styles.wrapper}>
-            {/*<CardPlain deckMetaData={cardData.deckMetaData} prompt={cardData.prompt} answer={cardData.answer}/>*/}
-
             <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} />
+            {true&&<CardPlain deckMetaData={cardData.deckMetaData} prompt={cardData.prompt} answer={cardData.answer}/>}
+
         </div>
     )
 }
