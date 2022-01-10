@@ -1,4 +1,6 @@
 import styles from "../styles/DeckTop.module.css";
+import cardBase from "../styles/CardBase.module.css";
+
 import { Votes } from "./Votes";
 import type { IDeckTop } from "../Interfaces/IDeckTop";
 import { CommentIcon } from "../svg/CommentIcon";
@@ -7,7 +9,7 @@ import { DeckMetaData } from "./DeckMetaData";
 
 const DeckTop = ({deckMetaData, description, vote}:IDeckTop):JSX.Element =>{
     return (
-        <article className={styles.wrapper}>
+        <article className={`${styles.wrapper} ${cardBase.wrapper}`}>
             <div className={styles.dataWrapper}>
                 <DeckMetaData subject={deckMetaData.subject} title={deckMetaData.title} />
                 <Votes numberOfVotes={vote.numberOfVotes} hasUpVoted={vote.hasUpVoted}/>

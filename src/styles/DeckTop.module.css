@@ -1,17 +1,7 @@
 .wrapper{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     display: flex;
-    width: 450px;
     flex-direction: column;
     gap:60px;
-    box-shadow: var(--box-shadow-card);
-    border-radius: var(--border-card-radius);
-    background-color: var(--white);
-    padding: var(--p-card-thick);
 }
 
 .descriptionTitle {

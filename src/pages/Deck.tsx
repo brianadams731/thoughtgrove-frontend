@@ -1,5 +1,6 @@
-import { AnimatePresence } from "framer-motion";
+import { CardPlain } from "../components/CardPlain";
 import { DeckTop } from "../components/DeckTop";
+import { ICardPlain } from "../Interfaces/ICardPlain";
 import { IDeckTop } from "../Interfaces/IDeckTop";
 import styles from "../styles/Deck.module.css";
 
@@ -16,12 +17,20 @@ const Deck = ():JSX.Element =>{
         }
     }
 
+    const cardData:ICardPlain = {
+        deckMetaData:{
+            subject:"Language",
+            title:"French 1",
+        },
+        prompt: "Test Prompt",
+        answer: "Test Answer"
+    }
+
     return ( 
         <div className={styles.wrapper}>
-            <AnimatePresence>
-                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} />
+            {/*<CardPlain deckMetaData={cardData.deckMetaData} prompt={cardData.prompt} answer={cardData.answer}/>*/}
 
-            </AnimatePresence>
+            <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} />
         </div>
     )
 }
