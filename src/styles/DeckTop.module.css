@@ -1,4 +1,9 @@
 .wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
     width: 450px;
     flex-direction: column;
@@ -7,23 +12,6 @@
     border-radius: var(--border-card-radius);
     background-color: var(--white);
     padding: var(--p-card-thick);
-}
-
-
-.subject{
-    font-family: var(--font-heading);
-    font-size: var(--fs-standard);
-    font-weight: 400;
-    color: var(--c-main-gray);
-    user-select: none;
-}
-
-.title {
-    font-family: var(--font-heading);
-    font-size: var(--fs-heading-large);
-    font-weight: 600;
-    color: var(--c-black);
-    user-select: none;
 }
 
 .descriptionTitle {

@@ -1,8 +1,8 @@
-import type {IVote} from "./IVote";
+import type { IDeckMetaData } from "./IDeckMetaData";
+import type { IVote } from "./IVote";
 
 interface IDeckTop{
-    subject: string;
-    title: string;
+    deckMetaData: IDeckMetaData
     description?: string;
     vote: IVote
 }

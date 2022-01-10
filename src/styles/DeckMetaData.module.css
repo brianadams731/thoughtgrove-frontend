@@ -1,0 +1,15 @@
+.subject{
+    font-family: var(--font-heading);
+    font-size: var(--fs-standard);
+    font-weight: 400;
+    color: var(--c-main-gray);
+    user-select: none;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-heading-large);
+    font-weight: 600;
+    color: var(--c-black);
+    user-select: none;
+}

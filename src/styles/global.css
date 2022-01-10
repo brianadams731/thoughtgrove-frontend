@@ -98,3 +98,9 @@ button:active{
     background-color: var(--c-main-gray);
     transform: scale(.95);
 }
+
+@media screen and (max-width:1025px){
+    :root{
+        --p-heading:25px;
+    }
+}

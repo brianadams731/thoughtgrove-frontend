@@ -5,8 +5,10 @@ import styles from "../styles/Deck.module.css";
 
 const Deck = ():JSX.Element =>{
     const exampleDeck:IDeckTop = {
-        subject:"Language",
-        title:"French 1",
+        deckMetaData:{
+            subject:"Language",
+            title:"French 1",
+        },
         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam`,
         vote:{
             numberOfVotes: 50,
@@ -17,8 +19,8 @@ const Deck = ():JSX.Element =>{
     return ( 
         <div className={styles.wrapper}>
             <AnimatePresence>
-                <DeckTop subject={exampleDeck.subject} title={exampleDeck.title} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.title} />
-                
+                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} />
+
             </AnimatePresence>
         </div>
     )
