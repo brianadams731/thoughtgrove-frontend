@@ -1,0 +1,31 @@
+.front, .back{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.prompt, .answer{
+    font-size: var(--fs-heading-small);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    text-align: center;
+}
+
+.showAnswerBtn{
+    width: fit-content;
+    align-self: center;
+    margin-bottom: 55px;
+}
+
+.evaluationWrapper{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-bottom: 55px;
+}
+
+.wrongIconWrapper:hover, .correctIconWrapper:hover{
+    cursor: pointer;
+}
+

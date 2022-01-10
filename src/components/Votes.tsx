@@ -6,12 +6,7 @@ import { useEffect, useState } from "react";
 
 
 const Votes = ({numberOfVotes, hasUpVoted}:IVote):JSX.Element =>{
-
     const [localHasUpVoted, setLocalHasUpVoted] = useState<boolean|undefined>(hasUpVoted);
-
-    useEffect(()=>{
-        console.log(localHasUpVoted);
-    },[localHasUpVoted])
 
     const calcVote = ():number =>{
         if(localHasUpVoted){
