@@ -1,7 +1,7 @@
 import styles from "../styles/Votes.module.css";
-import type { IVote } from "../Interfaces/IVote";
+import type { IVote } from "../interfaces/IVote";
 import { VoteChevron } from "../svg/VoteChevron";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 
@@ -19,7 +19,7 @@ const Votes = ({numberOfVotes, hasUpVoted}:IVote):JSX.Element =>{
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.upVoteWrapper} onClick={(e)=>{
+            <div className={styles.upVoteWrapper} onClick={()=>{
                 if(localHasUpVoted){
                     return setLocalHasUpVoted(undefined);
                 }
@@ -30,7 +30,7 @@ const Votes = ({numberOfVotes, hasUpVoted}:IVote):JSX.Element =>{
 
             <h5 className={styles.numberOfVotes}>{calcVote()}</h5>
 
-            <div className={styles.downVoteWrapper} onClick={(e)=>{
+            <div className={styles.downVoteWrapper} onClick={()=>{
                 if(localHasUpVoted === false){
                     return setLocalHasUpVoted(undefined);
                 }

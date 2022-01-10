@@ -1,4 +1,4 @@
-import { IDeckTile } from "../Interfaces/IDeckTile";
+import { IDeckTile } from "../interfaces/IDeckTile";
 import styles from "../styles/DeckTileGrid.module.css";
 import { AddDeckTile } from "./AddDeckTile";
 import { DeckTile } from "./DeckTile";

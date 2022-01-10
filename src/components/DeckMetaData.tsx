@@ -1,5 +1,5 @@
 import styles from "../styles/DeckMetaData.module.css";
-import type { IDeckMetaData } from "../Interfaces/IDeckMetaData";
+import type { IDeckMetaData } from "../interfaces/IDeckMetaData";
 import { Logo } from "../svg/Logo";
 
 interface Props extends IDeckMetaData{

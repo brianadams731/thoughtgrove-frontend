@@ -1,16 +1,20 @@
 import cardBase from "../styles/CardBase.module.css";
 import styles from "../styles/CardPlain.module.css";
 
-import { ICardPlain } from "../Interfaces/ICardPlain";
+import { ICardPlain } from "../interfaces/ICardPlain";
 import { DeckMetaData } from "./DeckMetaData";
 import { CorrectIcon } from "../svg/CorrectIcon";
 import { WrongIcon } from "../svg/WrongIcon";
 import { Dispatch, useState } from "react";
 import { motion } from "framer-motion";
 
+import { CardAction, CardActionKind } from "../interfaces/CardReducer";
+import { IDeckMetaData } from "../interfaces/IDeckMetaData";
+
 
 interface Props extends ICardPlain{
-    dispatch: Dispatch<any>
+    deckMetaData: IDeckMetaData;
+    dispatch: Dispatch<CardAction>;
 }
 
 const CardPlain = ({prompt, answer, deckMetaData, dispatch}:Props):JSX.Element =>{
@@ -60,13 +64,13 @@ const CardPlain = ({prompt, answer, deckMetaData, dispatch}:Props):JSX.Element =
                     <div className={styles.evaluationWrapper}>
                         <motion.div animate={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)"}} className={styles.wrongIconWrapper} onClick={()=>{
                             setCardCorrect(false);
-                            dispatch({type:"wrongAnswer", payload:false})
+                            dispatch({type: CardActionKind.WrongAnswer, payload:false})
                         }}>
                             <WrongIcon width="50px" />
                         </motion.div>
                         <motion.div animate={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-green)"}} className={styles.correctIconWrapper} onClick={()=>{
                             setCardCorrect(true);
-                            dispatch({type:"correctAnswer", payload:true})
+                            dispatch({type: CardActionKind.CorrectAnswer, payload:true})
                         }}>
                             <CorrectIcon height="50px" />
                         </motion.div>

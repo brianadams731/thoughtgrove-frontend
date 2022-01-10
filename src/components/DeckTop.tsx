@@ -2,7 +2,7 @@ import styles from "../styles/DeckTop.module.css";
 import cardBase from "../styles/CardBase.module.css";
 
 import { Votes } from "./Votes";
-import type { IDeckTop } from "../Interfaces/IDeckTop";
+import type { IDeckTop } from "../interfaces/IDeckTop";
 import { CommentIcon } from "../svg/CommentIcon";
 import { motion } from "framer-motion";
 import { DeckMetaData } from "./DeckMetaData";

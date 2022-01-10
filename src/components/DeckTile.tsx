@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { IDeckTile } from "../Interfaces/IDeckTile";
+import { IDeckTile } from "../interfaces/IDeckTile";
 import styles from "../styles/DeckTile.module.css";
 import { Logo } from "../svg/Logo";
 
