@@ -65,8 +65,14 @@ const Deck = ():JSX.Element =>{
     }
 
     useEffect(()=>{
+        const updateDeckOnServer = () =>{
+            // SEND UPDATED DECK DATA BACK TO THE SERVER HERE
+            console.log(cardDeck.complete);
+        }
+        window.addEventListener('beforeunload',updateDeckOnServer)
         return () =>{
-            console.log(cardDeck.toStudy);
+            updateDeckOnServer();
+            window.removeEventListener('beforeunload', updateDeckOnServer)
         }
         //eslint-disable-next-line
     },[])
