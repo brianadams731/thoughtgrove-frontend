@@ -1,12 +1,14 @@
 .wrapper{
     display: flex;
+    width: 450px;
     flex-direction: column;
-    gap:100px;
+    gap:60px;
     box-shadow: var(--box-shadow-card);
     border-radius: var(--border-card-radius);
     background-color: var(--white);
     padding: var(--p-card-thick);
 }
+
 
 .subject{
     font-family: var(--font-heading);
@@ -36,6 +38,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 
 .description{
@@ -50,5 +53,13 @@
     display: block;
     margin: auto;
     user-select: none;
-    margin-bottom: 25px;
+}
+
+.commentIconWrapper{
+    margin-top: -20px;
+    align-self: flex-end;
+}
+
+.commentIconWrapper:hover{
+    cursor: pointer;
 }
