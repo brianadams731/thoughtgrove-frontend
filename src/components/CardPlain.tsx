@@ -26,26 +26,29 @@ const CardPlain = ({prompt, answer, deckMetaData, dispatch}:Props):JSX.Element =
 
         },
         flip:{
-            y:[0,-30,0],
+            y:[0,-25,0],
             rotateY:"180deg",
             transition:{
-                duration:1.1,
+                mass:.4,
+                duration:.65,
             }
         },
         exitLeft:{
             x:"-75vw",
-            rotate:"-15deg",
+            rotate:"-12deg",
             transition:{
-                duration:1
+                mass:.4,
+                duration:.8
             }
         },
         exitRight:{
             x:"75vw",
-            rotate:"15deg",
+            rotate:"12deg",
             transition:{
-                duration:1
+                mass:.4,
+                duration:.8
             }
-        }
+        },
     }
 
     return (

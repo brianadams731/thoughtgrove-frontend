@@ -6,10 +6,15 @@ import type { IDeckTop } from "../interfaces/IDeckTop";
 import { CommentIcon } from "../svg/CommentIcon";
 import { motion } from "framer-motion";
 import { DeckMetaData } from "./DeckMetaData";
+import { Dispatch, SetStateAction } from "react";
 
-const DeckTop = ({deckMetaData, description, vote}:IDeckTop):JSX.Element =>{
+interface Props extends IDeckTop{
+    setShowDeckTop: Dispatch<SetStateAction<boolean>>;
+}
+
+const DeckTop = ({deckMetaData, description, vote, setShowDeckTop}:Props):JSX.Element =>{
     return (
-        <article className={`${styles.wrapper} ${cardBase.wrapper}`}>
+        <motion.article exit={{x:"-75vw", rotate:"-12deg"}} transition={{mass:.4, duration:.8}} className={`${styles.wrapper} ${cardBase.wrapper}`}>
             <div className={styles.dataWrapper}>
                 <DeckMetaData subject={deckMetaData.subject} title={deckMetaData.title} />
                 <Votes numberOfVotes={vote.numberOfVotes} hasUpVoted={vote.hasUpVoted}/>
@@ -19,11 +24,13 @@ const DeckTop = ({deckMetaData, description, vote}:IDeckTop):JSX.Element =>{
                 <h3 className={styles.descriptionTitle}>Description</h3>
                 <p className={styles.description}>{description}</p>
             </section>
-            <button className={styles.practiceBtn}>Practice</button>
+            <button className={styles.practiceBtn} onClick={()=>{
+                setShowDeckTop(false);
+            }}>Practice</button>
             <motion.div whileHover={{scale:1.1}} whileTap={{scale:1}} className={styles.commentIconWrapper}>
                 <CommentIcon fill="var(--c-main-gray)" hoverFill="var(--c-achievement-blue)" width="40px" />
             </motion.div>
-        </article>
+        </motion.article>
     )
 }
 

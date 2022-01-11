@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { CardPlain } from "../components/CardPlain";
 import { DeckTop } from "../components/DeckTop";
 import { ICardPlain } from "../interfaces/ICardPlain";
@@ -8,7 +8,7 @@ import { CardAction, CardActionKind } from "../interfaces/CardReducer";
 import styles from "../styles/Deck.module.css";
 
 const Deck = ():JSX.Element =>{
-
+    const [showDeckTop, setShowDeckTop] = useState(true);
     const exampleDeck:IDeckTop = {
         deckMetaData:{
             subject:"Language",
@@ -25,13 +25,13 @@ const Deck = ():JSX.Element =>{
     const cardStore:CardState = {
         toStudy: [
         {
-            prompt: "Test Prompt 1",
-            answer: "Test Answer 1",
+            prompt: "Je ne sais pas",
+            answer: "I don't know",
             correctAnswer:undefined
         },
         {
-            prompt: "Test Prompt 2",
-            answer: "Test Answer 2",
+            prompt: "S'il vous plait",
+            answer: "If it pleases you",
             correctAnswer:undefined
         }],
         complete:[]
@@ -81,13 +81,14 @@ const Deck = ():JSX.Element =>{
 
     return ( 
         <div className={styles.wrapper}>
-            <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} />
             <AnimatePresence>
                 {cardDeck.toStudy?.map((item)=>{
                     return (
                         <CardPlain key={item.prompt} deckMetaData={exampleDeck.deckMetaData} prompt={item.prompt} answer={item.answer} dispatch={dispatch} />
                     )             
                 })}
+                {showDeckTop&&
+                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} setShowDeckTop={setShowDeckTop}/>}
             </AnimatePresence>
         </div>
     )
