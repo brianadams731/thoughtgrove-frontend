@@ -8,12 +8,13 @@ import { CardAction, CardActionKind } from "../interfaces/CardReducer";
 import styles from "../styles/Deck.module.css";
 
 const Deck = ():JSX.Element =>{
-    const [showDeckTop, setShowDeckTop] = useState(true);
+    // Mock Data Start
     const exampleDeck:IDeckTop = {
         deckMetaData:{
             subject:"Language",
             title:"French 1",
         },
+        userOwnsDeck: true,
         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam`,
@@ -22,6 +23,7 @@ const Deck = ():JSX.Element =>{
             hasUpVoted: undefined,
         }
     }
+
     const cardStore:CardState = {
         toStudy: [
         {
@@ -36,10 +38,14 @@ const Deck = ():JSX.Element =>{
         }],
         complete:[]
     }
+    // Mock Data End
+
+    const [showDeckTop, setShowDeckTop] = useState(true);
 
     interface CardData extends ICardPlain{
         correctAnswer:boolean|undefined;
     }
+
     interface CardState{
         toStudy: CardData[];
         complete: CardData[];
@@ -66,7 +72,7 @@ const Deck = ():JSX.Element =>{
 
     useEffect(()=>{
         const updateDeckOnServer = () =>{
-            // SEND UPDATED DECK DATA BACK TO THE SERVER HERE
+            // SEND UPDATED DECK DATA BACK TO THE SERVER HERE, use beacon
             console.log(cardDeck.complete);
         }
         window.addEventListener('beforeunload',updateDeckOnServer)
@@ -88,7 +94,7 @@ const Deck = ():JSX.Element =>{
                     )             
                 })}
                 {showDeckTop&&
-                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} setShowDeckTop={setShowDeckTop}/>}
+                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} setShowDeckTop={setShowDeckTop} userOwnsDeck={exampleDeck.userOwnsDeck}/>}
             </AnimatePresence>
         </div>
     )
