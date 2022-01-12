@@ -1,7 +1,12 @@
 .wrapper{
     position: relative;
+    margin: auto;
+    padding-top: 125px;
+    padding-bottom: 125px;
+}
+
+.deckTileWrapper{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }

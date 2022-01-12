@@ -4,7 +4,7 @@ import styles from "../styles/AddDeckTile.module.css";
 import { AddDeckBorder } from "../svg/AddDeckBorder";
 import { PlusSign } from "../svg/PlusSign";
 
-const AddDeckTile = () =>{
+const AddCardTile = () =>{
     
     return(
         <motion.div className={styles.wrapper} onClick={()=>console.log("addDeck")} style={{fill:"var(--c-main-gray)", stroke:"var(--c-main-gray)"}} animate={{fill:"var(--c-main-gray)", stroke:"var(--c-main-gray)"}} 
@@ -19,4 +19,4 @@ const AddDeckTile = () =>{
     )
 }
 
-export {AddDeckTile};
+export {AddCardTile};
