@@ -18,7 +18,7 @@ const DeckTileGrid = ({deckTileData, title, hasAddTile}:Props):JSX.Element =>{
             <div className={styles.gridWrapper}>
                 {hasAddTile&&<AddDeckTile />}
                 {deckTileData.map((item) => (
-                    <DeckTile key={`${item.deckID}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.deckID}/>
+                    <DeckTile key={`${item.deckID}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.deckID} showEditIcon={item.userOwnsDeck} />
                 ))}
             </div>
         </div>

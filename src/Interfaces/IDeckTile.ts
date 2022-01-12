@@ -3,6 +3,7 @@ interface IDeckTile {
     title: string;
     votes: string;
     deckID: string;
+    userOwnsDeck?:boolean;
 }
 
 export type {IDeckTile}

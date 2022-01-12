@@ -78,13 +78,13 @@ const Header = ({menuOpen, setMenuOpen}:Props) =>{
     }
 
     return (
-        <header className={styles.wrapper} onClick={()=>setMenuOpen(false)}>
-            <div className={styles.logoWrapper} onClick={()=>{
+        <header className={styles.wrapper} style={{pointerEvents:"none"}} onClick={()=>setMenuOpen(false)}>
+            <div className={styles.logoWrapper} style={{pointerEvents:"auto"}} onClick={()=>{
                 navigate("/dashboard")
             }}>
                 <HeroLogoSmall />
             </div>
-            <div className={styles.menuIcon} onClick={(e)=>{
+            <div className={styles.menuIcon} style={{pointerEvents:"auto"}} onClick={(e)=>{
                 e.stopPropagation();
                 setMenuOpen(prev => !prev);
             }}>

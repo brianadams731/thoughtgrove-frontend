@@ -54,6 +54,7 @@ const EditDeck = ():JSX.Element =>{
         title: "French 1" ,
         deckID: "2" ,
         votes: "30",
+        userOwnsDeck: true,
     }
 
     const mockCardTiles: ICardTile[] = [
@@ -87,7 +88,7 @@ const EditDeck = ():JSX.Element =>{
         <div className={styles.wrapper}>
             <div className={styles.deckTileWrapper}>
                 <div className={styles.DeckTileClickWrapper} onClick={()=>dispatch({type:EditFocusKind.EditDeck})}>
-                    <DeckTile subject={mockDeckTile.subject} title={mockDeckTile.title} deckID={mockDeckTile.deckID} votes={mockDeckTile.votes} />
+                    <DeckTile subject={mockDeckTile.subject} title={mockDeckTile.title} deckID={mockDeckTile.deckID} votes={mockDeckTile.votes} userOwnsDeck={false} suppressOnClick/>
                 </div>
             </div>
             <CardTileGrid cardTileData={mockCardTiles} title="Cards" callBackOnTileClick={()=>{dispatch({type:EditFocusKind.EditCard})}} hasAddTile />

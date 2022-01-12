@@ -13,6 +13,16 @@
     cursor: pointer;
 }
 
+.mainContent{
+    display: flex;
+    justify-content: space-between;
+}
+
+.editWrapper{
+    width: fit-content;
+    height: fit-content;
+}
+
 .subject{
     color: var(--c-main-gray);
     font-size: var(--fs-standard);
