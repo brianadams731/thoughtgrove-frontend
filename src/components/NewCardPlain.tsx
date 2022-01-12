@@ -4,17 +4,40 @@ import { DeckMetaData } from "./DeckMetaData";
 import { IDeckMetaData } from "../interfaces/IDeckMetaData";
 import { useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
+import { motion } from "framer-motion";
 
 const NewCardPlain = ():JSX.Element =>{
     const mockDeckMetaData:IDeckMetaData = {
         subject: "Language",
         title:"French 1"
     }
+
+    const variants = {
+        initial:{
+            y:"-50%", 
+            x:"125vw",
+        },
+        animate:{
+            y:"-50%",
+            x:"-50%",
+            transition:{
+                duration: .7,
+            }
+        },
+        exit:{
+            y:"-50%",
+            x:"-125vw",
+            transition:{
+                duration: .7,
+            }
+        }
+    }
+
     const [prompt, setPrompt] = useState("");
     const [answer, setAnswer] = useState("");
 
     return (
-        <div className={`${cardBase.wrapper} ${styles.cardWrapper}`}>
+        <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${cardBase.wrapper} ${styles.cardWrapper}`}>
             <DeckMetaData subject={mockDeckMetaData.subject} title={mockDeckMetaData.title} fade/>
             <form onSubmit={(e)=>{
                 e.preventDefault();
@@ -29,7 +52,7 @@ const NewCardPlain = ():JSX.Element =>{
                     <button className={styles.saveBtn} type="submit">Save</button>
                 </div>
             </form>
-        </div>
+        </motion.div>
     )
 }
 

@@ -5,11 +5,17 @@ import styles from "../styles/CardTile.module.css";
 import type { ICardTile } from "../interfaces/ICardTile";
 
 interface Props extends ICardTile{
+    callBackOnClick: ()=> void;
 }
 
-const CardTile = ({prompt,cardID}:Props):JSX.Element =>{
+const CardTile = ({prompt,cardID, callBackOnClick}:Props):JSX.Element =>{
     return (
-        <motion.div className={`${deckTile.wrapper} ${styles.wrapper}`} onClick={()=>{console.log(cardID)}} whileHover={{scale:1.07}}>
+        <motion.div className={`${deckTile.wrapper} ${styles.wrapper}`} whileHover={{scale:1.07}} onClick={(e)=>{
+            e.stopPropagation();
+            if(callBackOnClick){
+                callBackOnClick();
+            }
+        }}>
             <h3 className={styles.promptText}>{prompt}</h3>
         </motion.div>
     )

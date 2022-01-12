@@ -1,5 +1,8 @@
 .cardWrapper{
     padding: var(--p-card-thick);
+    position: fixed;
+    top: 50%;
+    left: 50%;
     display: flex;
     gap:15px;
     flex-direction: column;

@@ -10,6 +10,9 @@
 
 
 .cardWrapper{
+    position: fixed;
+    top: 50%;
+    left: 50%;
     padding: var(--p-card-thick);
 }
 

@@ -10,8 +10,33 @@ const NewDeckCard = () =>{
     const [subject, setSubject] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+
+    const variants = {
+        initial:{
+            scale:0, 
+            y:"-50%", 
+            x:"-50%",
+        },
+        animate:{
+            scale:1,
+            y:"-50%",
+            x:"-50%",
+            transition:{
+                duration: .5,
+                delay:.3,
+            }
+        },
+        exit:{
+            y:"-125vh",
+            x:"-50%",
+            transition:{
+                duration: .5,
+            }
+        }
+    }
+
     return (
-        <motion.div initial={{scale:0}} animate={{scale:1}} exit={{y:"-75vh"}} transition={{duration: .5, delay:.4}}className={`${styles.cardWrapper} ${cardBase.wrapper}`}>
+        <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${styles.cardWrapper} ${cardBase.wrapper}`}>
             <form onSubmit={(e)=>{
                 e.preventDefault();
                 console.log(subject);

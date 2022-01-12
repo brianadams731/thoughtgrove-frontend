@@ -5,6 +5,11 @@
     padding-bottom: 125px;
 }
 
+.DeckTileClickWrapper{
+    width: fit-content;
+    height: fit-content;
+}
+
 .deckTileWrapper{
     display: flex;
     align-items: center;
