@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "../styles/Header.module.css";
 import { HeroLogoSmall } from "./HeroLogoSmall";
@@ -10,6 +11,7 @@ interface Props{
 }
 
 const Header = ({menuOpen, setMenuOpen}:Props) =>{
+    const navigate = useNavigate();
     const upperLine = {
         init:{
             top:"0%",
@@ -77,7 +79,11 @@ const Header = ({menuOpen, setMenuOpen}:Props) =>{
 
     return (
         <header className={styles.wrapper} onClick={()=>setMenuOpen(false)}>
-            <HeroLogoSmall />
+            <div className={styles.logoWrapper} onClick={()=>{
+                navigate("/dashboard")
+            }}>
+                <HeroLogoSmall />
+            </div>
             <div className={styles.menuIcon} onClick={(e)=>{
                 e.stopPropagation();
                 setMenuOpen(prev => !prev);

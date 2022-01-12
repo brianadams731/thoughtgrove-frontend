@@ -1,0 +1,24 @@
+.cardWrapper{
+    padding: var(--p-card-thick);
+    display: flex;
+    gap:15px;
+    flex-direction: column;
+}
+
+.cardWrapper form{
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.textArea {
+    height: 115px;
+}
+
+.saveBtn{
+    display: block;
+    margin: auto;
+    background-color: var(--c-dark-gray);
+}

@@ -8,6 +8,10 @@
     align-items: center;
 }
 
+.logoWrapper:hover{
+    cursor: pointer;
+}
+
 .menuIcon{
     position: relative;
     width: 35px;

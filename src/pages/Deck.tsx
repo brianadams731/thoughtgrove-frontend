@@ -90,7 +90,7 @@ const Deck = ():JSX.Element =>{
             <AnimatePresence>
                 {cardDeck.toStudy?.map((item)=>{
                     return (
-                        <CardPlain key={item.prompt} deckMetaData={exampleDeck.deckMetaData} prompt={item.prompt} answer={item.answer} dispatch={dispatch} />
+                        <CardPlain key={item.prompt} deckMetaData={exampleDeck.deckMetaData} prompt={item.prompt} answer={item.answer} dispatch={dispatch} cardIndex={cardDeck.complete.length}/>
                     )             
                 })}
                 {showDeckTop&&

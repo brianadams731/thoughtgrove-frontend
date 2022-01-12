@@ -14,12 +14,17 @@ import { IDeckMetaData } from "../interfaces/IDeckMetaData";
 
 interface Props extends ICardPlain{
     deckMetaData: IDeckMetaData;
+    cardIndex: number;
     dispatch: Dispatch<CardAction>;
 }
 
-const CardPlain = ({prompt, answer, deckMetaData, dispatch}:Props):JSX.Element =>{
+const CardPlain = ({prompt, answer, deckMetaData, dispatch, cardIndex}:Props):JSX.Element =>{
     const [shouldFlip,setShouldFlip] = useState<boolean>(false);
     const [cardCorrect, setCardCorrect] = useState<boolean>(false)
+
+    const formatIndexNumber = (index:number):string =>{
+        return (index < 10? "0":"") + (index + 1);
+    }
 
     const flipVariant = {
         initial:{
@@ -62,7 +67,7 @@ const CardPlain = ({prompt, answer, deckMetaData, dispatch}:Props):JSX.Element =
 
                 <div className={`${cardBase.back} ${styles.back}`}>
                     <div className={styles.cardNumber}>
-                        03
+                        {formatIndexNumber(cardIndex)}
                     </div>
                     <h3 className={styles.answer}>{answer}</h3>
 

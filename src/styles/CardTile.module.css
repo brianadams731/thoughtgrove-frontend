@@ -1,0 +1,11 @@
+.wrapper{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.promptText{
+    color: var(--c-black);
+    font-family: var(--font-body);
+    font-size: var(--fs-standard-large);
+}

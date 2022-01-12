@@ -1,0 +1,35 @@
+.wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    font-size: var(--fs-standard-small);
+    font-weight: 400;
+    font-family: var(--font-header);
+    color: var(--c-main-gray);
+}
+
+.wrapper textarea{
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    resize: none;
+    font-size: var(--fs-standard-large);
+    font-family: var(--font-body);
+    background: none;
+    border: none;
+    border-bottom: 3.5px solid var(--c-main-gray);
+    overflow: hidden;
+}
+
+.wrapper textarea{
+    outline: none;
+}
+
+.submitBtn{
+    justify-self: center;
+    align-self: center;
+}

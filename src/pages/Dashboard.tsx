@@ -6,6 +6,7 @@ import styles from "../styles/Dashboard.module.css";
 
 import { Home } from "./Home";
 import { Deck } from "./Deck";
+import { EditDeck } from "./EditDeck";
 
 const Dashboard = ():JSX.Element =>{
     const [menuOpen, setMenuOpen] = useState(false);
@@ -17,6 +18,7 @@ const Dashboard = ():JSX.Element =>{
             
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="deck/edit/*" element={<EditDeck />} />
                 <Route path="deck/*" element={<Deck />} />
             </Routes>
         </div>
