@@ -22,22 +22,22 @@ const EditDeck = ():JSX.Element =>{
             case EditFocusKind.EditCard:
                 return {
                     currentState: EditFocusKind.EditCard,
-                    selectionID: action.payload
+                    selectionID: action.payload?.selectionID
                 }
             case EditFocusKind.EditDeck:
                 return {
                     currentState: EditFocusKind.EditDeck,
-                    selectionID: action.payload
+                    selectionID: action.payload?.selectionID
                 }
             case EditFocusKind.DeleteDeck:
                 return {
                     currentState: EditFocusKind.DeleteDeck,
-                    selectionID: action.payload
+                    selectionID: action.payload?.selectionID
                 }
             case EditFocusKind.DeleteCard:
                 return {
                     currentState: EditFocusKind.DeleteCard,
-                    selectionID: action.payload
+                    selectionID: action.payload?.selectionID
                 }
             case EditFocusKind.None:
                 return {currentState: EditFocusKind.None}
@@ -48,19 +48,27 @@ const EditDeck = ():JSX.Element =>{
 
             case EditFocusKind.Submit:
                 if(state.currentState === EditFocusKind.NewCard){
-                    // Post new card here
+                    const newCardData = action.payload?.cardData;
+                    // Post New Card Here
                 }else if(state.currentState === EditFocusKind.NewDeck){
+                    const newDeckData = action.payload?.deckData;
                     // Post new deck here
                 }else if(state.currentState === EditFocusKind.EditCard){
+                    const editCardData = action.payload?.cardData;
+                    const cardID = state.selectionID;
                     // put updated card here
                     // use selection id
                 }else if(state.currentState === EditFocusKind.EditDeck){
+                    const editDeckData = action.payload?.deckData;
+                    const deckID = state.selectionID;
                     // put updated deck here
                     // use selection id
                 }else if(state.currentState === EditFocusKind.DeleteCard){
+                    const cardID = state.selectionID;
                     // delete card here
                     // use selection id
                 }else if(state.currentState === EditFocusKind.DeleteDeck){
+                    const deckID = state.selectionID;
                     // delete deck here
                     // use selection id
                 }
@@ -124,7 +132,7 @@ const EditDeck = ():JSX.Element =>{
     return (
         <div className={styles.wrapper}>
             <div className={styles.deckTileWrapper}>
-                <div className={styles.DeckTileClickWrapper} onClick={()=>dispatch({type:EditFocusKind.EditDeck, payload: mockDeckTile.deckID})}>
+                <div className={styles.DeckTileClickWrapper} onClick={()=>dispatch({type:EditFocusKind.EditDeck, payload: {selectionID: mockDeckTile.deckID}})}>
                     <DeckTile subject={mockDeckTile.subject} title={mockDeckTile.title} deckID={mockDeckTile.deckID} votes={mockDeckTile.votes} userOwnsDeck={false} suppressOnClick/>
                 </div>
             </div>
@@ -133,15 +141,15 @@ const EditDeck = ():JSX.Element =>{
             <AnimatePresence>
                 {editFocus.currentState !== EditFocusKind.None && <FullPageDimmer key="pageDimmer" callBackOnClick={()=>dispatch({type:EditFocusKind.None})}/>}
 
-                {editFocus.currentState === EditFocusKind.NewCard && <NewCardPlain key="newCard" />}
-                {editFocus.currentState === EditFocusKind.NewDeck && <NewDeckCard key="newDeck" />}
+                {editFocus.currentState === EditFocusKind.NewCard && <NewCardPlain key="newCard" dispatch={dispatch} />}
+                {editFocus.currentState === EditFocusKind.NewDeck && <NewDeckCard key="newDeck" dispatch={dispatch} />}
 
-                {editFocus.currentState === EditFocusKind.EditCard && <NewCardPlain key="editCard" prefill={
+                {editFocus.currentState === EditFocusKind.EditCard && <NewCardPlain key="editCard" dispatch={dispatch} prefill={
                     // PREFILL FOR DEV, SWITCH TO FETCHING CARD DATA FROM CACHE GIVEN SELECTION ID
                     makeCardPrefill()
                 } />}
 
-                {editFocus.currentState === EditFocusKind.EditDeck && <NewDeckCard key="editDeck" prefill={{
+                {editFocus.currentState === EditFocusKind.EditDeck && <NewDeckCard key="editDeck" dispatch={dispatch} prefill={{
                     // PREFILL FOR DEV, SWITCH TO FETCHING DECK DATA FROM CACHE GIVEN SELECTION ID
                     subject:mockDeckTile.subject,
                     title: mockDeckTile.title,

@@ -2,18 +2,20 @@ import styles from "../styles/NewCardPlain.module.css";
 import cardBase from "../styles/CardBase.module.css";
 import { DeckMetaData } from "./DeckMetaData";
 import { IDeckMetaData } from "../interfaces/IDeckMetaData";
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
 import { motion } from "framer-motion";
+import { EditFocusAction, EditFocusKind } from "../interfaces/EditFocusReducer";
 
 interface Props{
+    dispatch: Dispatch<EditFocusAction>
     prefill?: {
         prompt: string,
         answer: string,
     }
 }
 
-const NewCardPlain = ({prefill}:Props):JSX.Element =>{
+const NewCardPlain = ({dispatch, prefill}:Props):JSX.Element =>{
     const mockDeckMetaData:IDeckMetaData = {
         subject: "Language",
         title:"French 1"
@@ -40,6 +42,7 @@ const NewCardPlain = ({prefill}:Props):JSX.Element =>{
         }
     }
 
+    // USE VALUE FROM CACHE
     const [prompt, setPrompt] = useState(prefill?prefill.prompt:"");
     const [answer, setAnswer] = useState(prefill?prefill.answer:"");
 
@@ -48,6 +51,13 @@ const NewCardPlain = ({prefill}:Props):JSX.Element =>{
             <DeckMetaData subject={mockDeckMetaData.subject} title={mockDeckMetaData.title} fade/>
             <form onSubmit={(e)=>{
                 e.preventDefault();
+                // MUTATE CACHE SYNCHRONOUSLY HERE, THEN THE SUBMIT WILL HAPPEN FROM THE OUTSIDE
+                dispatch({type:EditFocusKind.Submit, payload:{
+                    cardData:{
+                        prompt,
+                        answer
+                    }
+                }});
             }}>
                 <div className={styles.textArea}>
                     <BasicCardTextArea value={prompt} updateValue={setPrompt} title="Prompt"/>

@@ -3,17 +3,20 @@ import cardBase from "../styles/CardBase.module.css";
 import { motion } from "framer-motion";
 import { Logo } from "../svg/Logo";
 import { BasicCardInput } from "./BasicCardInput";
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
+import { EditFocusAction, EditFocusKind } from "../interfaces/EditFocusReducer";
 
 interface Props{
+    dispatch: Dispatch<EditFocusAction>;
     prefill?:{
         subject: string,
         title: string,
         description: string,
     }
 }
-const NewDeckCard = ({prefill}:Props) =>{
+const NewDeckCard = ({dispatch, prefill}:Props) =>{
+    // USE DATA FROM CACHE AS DEFAULT
     const [subject, setSubject] = useState(prefill?prefill.subject:"");
     const [title, setTitle] = useState(prefill?prefill.title:"");
     const [description, setDescription] = useState(prefill?prefill.description:"");
@@ -46,9 +49,14 @@ const NewDeckCard = ({prefill}:Props) =>{
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${styles.cardWrapper} ${cardBase.wrapper}`}>
             <form onSubmit={(e)=>{
                 e.preventDefault();
-                console.log(subject);
-                console.log(title);
-                console.log(description);
+                // MUTATE CACHE SYNCHRONOUSLY HERE WITH UPDATE VALUE, THEN THE SUBMIT WILL HAPPEN FROM THE OUTSIDE
+                dispatch({type:EditFocusKind.Submit, payload:{
+                    deckData:{
+                        subject,
+                        title,
+                        description
+                    }
+                }})
             }}>
                 <div className={styles.cardMetaData}>
                     <div className={styles.subjectInput}>

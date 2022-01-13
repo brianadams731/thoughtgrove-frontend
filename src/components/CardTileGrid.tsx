@@ -21,7 +21,7 @@ const CardTileGrid = ({cardTileData, title, hasAddTile, dispatch}:Props):JSX.Ele
             <div className={styles.gridWrapper}>
                 {hasAddTile&&<AddCardTile callBackOnClick={()=>dispatch({type:EditFocusKind.NewCard})} />}
                 {cardTileData.map((item) => (
-                    <CardTile key={`${item.cardID}`} prompt={item.prompt} cardID={item.cardID} callBackOnClick={()=>dispatch({type:EditFocusKind.EditCard, payload:item.cardID})}/>
+                    <CardTile key={`${item.cardID}`} prompt={item.prompt} cardID={item.cardID} callBackOnClick={()=>dispatch({type:EditFocusKind.EditCard, payload:{selectionID: item.cardID}})}/>
                 ))}
             </div>
         </div>
