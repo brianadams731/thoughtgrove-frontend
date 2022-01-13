@@ -1,4 +1,4 @@
-import { IDeckTile } from "../interfaces/IDeckTile";
+import { DeckOwnership, IDeckTile } from "../interfaces/IDeckTile";
 import styles from "../styles/DeckTileGrid.module.css";
 import { AddDeckTile } from "./AddDeckTile";
 import { DeckTile } from "./DeckTile";
@@ -18,7 +18,7 @@ const DeckTileGrid = ({deckTileData, title, hasAddTile}:Props):JSX.Element =>{
             <div className={styles.gridWrapper}>
                 {hasAddTile&&<AddDeckTile />}
                 {deckTileData.map((item) => (
-                    <DeckTile key={`${item.deckID}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.deckID} showEditIcon={item.userOwnsDeck} />
+                    <DeckTile key={`${item.deckID}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.deckID} deckRelation={item.deckRelation} showEditIcon={item.deckRelation === DeckOwnership.Owner} />
                 ))}
             </div>
         </div>

@@ -6,7 +6,7 @@ import { FullPageDimmer } from "../components/FullPageDimmer";
 import { NewCardPlain } from "../components/NewCardPlain";
 import { NewDeckCard } from "../components/NewDeckCard";
 import { ICardTile } from "../interfaces/ICardTile";
-import { IDeckTile } from "../interfaces/IDeckTile";
+import { DeckOwnership, IDeckTile } from "../interfaces/IDeckTile";
 import styles from "../styles/EditDeck.module.css";
 import { EditFocusAction, EditFocusKind } from "../interfaces/EditFocusReducer";
 
@@ -114,13 +114,15 @@ const EditDeck = ():JSX.Element =>{
             cardID: 8,
         }
     ]
+    
     const mockDeckTile:IDeckTile = {
         subject:"Language",
         title: "French 1" ,
         deckID: 2 ,
         votes: "30",
-        userOwnsDeck: true,
+        deckRelation: DeckOwnership.Owner,
     }
+
     const makeCardPrefill = ():any =>{
         const card = mockCardTiles.filter(card=>card.cardID === editFocus.selectionID);
         return {
@@ -133,7 +135,7 @@ const EditDeck = ():JSX.Element =>{
         <div className={styles.wrapper}>
             <div className={styles.deckTileWrapper}>
                 <div className={styles.DeckTileClickWrapper} onClick={()=>dispatch({type:EditFocusKind.EditDeck, payload: {selectionID: mockDeckTile.deckID}})}>
-                    <DeckTile subject={mockDeckTile.subject} title={mockDeckTile.title} deckID={mockDeckTile.deckID} votes={mockDeckTile.votes} userOwnsDeck={false} suppressOnClick/>
+                    <DeckTile subject={mockDeckTile.subject} title={mockDeckTile.title} deckID={mockDeckTile.deckID} votes={mockDeckTile.votes} deckRelation={mockDeckTile.deckRelation} suppressOnClick/>
                 </div>
             </div>
             <CardTileGrid cardTileData={mockCardTiles} title="Cards" dispatch={dispatch} hasAddTile />

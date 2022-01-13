@@ -3,7 +3,14 @@ interface IDeckTile {
     title: string;
     votes: string;
     deckID: number;
-    userOwnsDeck?:boolean;
+    deckRelation: DeckOwnership;
+}
+
+enum DeckOwnership{
+    Owner,
+    Subscriber,
+    Guest
 }
 
 export type {IDeckTile}
+export { DeckOwnership };
