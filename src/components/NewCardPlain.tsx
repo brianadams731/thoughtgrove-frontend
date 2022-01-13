@@ -6,7 +6,14 @@ import { useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
 import { motion } from "framer-motion";
 
-const NewCardPlain = ():JSX.Element =>{
+interface Props{
+    prefill?: {
+        prompt: string,
+        answer: string,
+    }
+}
+
+const NewCardPlain = ({prefill}:Props):JSX.Element =>{
     const mockDeckMetaData:IDeckMetaData = {
         subject: "Language",
         title:"French 1"
@@ -33,8 +40,8 @@ const NewCardPlain = ():JSX.Element =>{
         }
     }
 
-    const [prompt, setPrompt] = useState("");
-    const [answer, setAnswer] = useState("");
+    const [prompt, setPrompt] = useState(prefill?prefill.prompt:"");
+    const [answer, setAnswer] = useState(prefill?prefill.answer:"");
 
     return (
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${cardBase.wrapper} ${styles.cardWrapper}`}>

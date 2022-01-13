@@ -1,14 +1,18 @@
 enum EditFocusKind{
-    EditCard = "card",
-    EditDeck = "deck",
-    EditNone = "none",
-    ToggleCard = "toggleCard",
-    ToggleDeck = "toggleDeck"
+    NewCard,
+    EditCard,
+    NewDeck,
+    EditDeck,
+    DeleteDeck,
+    DeleteCard,
+    None,
+    Submit,
 }
 
 interface EditFocusAction{
     type: EditFocusKind;
+    payload?: number;
 }
 
 export { EditFocusKind };
-export type { EditFocusAction };
+export type { EditFocusAction }

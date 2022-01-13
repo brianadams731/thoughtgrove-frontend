@@ -6,10 +6,17 @@ import { BasicCardInput } from "./BasicCardInput";
 import { useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
 
-const NewDeckCard = () =>{
-    const [subject, setSubject] = useState("");
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+interface Props{
+    prefill?:{
+        subject: string,
+        title: string,
+        description: string,
+    }
+}
+const NewDeckCard = ({prefill}:Props) =>{
+    const [subject, setSubject] = useState(prefill?prefill.subject:"");
+    const [title, setTitle] = useState(prefill?prefill.title:"");
+    const [description, setDescription] = useState(prefill?prefill.description:"");
 
     const variants = {
         initial:{
