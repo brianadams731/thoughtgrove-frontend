@@ -2,14 +2,13 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useReducer, useState } from "react";
 import { CardPlain } from "../components/CardPlain";
 import { DeckTop } from "../components/DeckTop";
-import { IDeckTop } from "../interfaces/IDeckTop";
 import { CardAction, CardActionKind } from "../interfaces/CardReducer";
 import styles from "../styles/Deck.module.css";
-import { VoteState } from "../interfaces/IVote";
 import { useParams } from "react-router-dom";
 import { useDeckByID } from "../hooks/api/useDeckByID";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 import { ICard } from "../interfaces/ICard";
+import { DeckOwnership } from "../interfaces/IDeckTile";
 
 const Deck = ():JSX.Element =>{
     const {deckId} = useParams();
@@ -37,22 +36,6 @@ const Deck = ():JSX.Element =>{
             loadDeck: cardData.cards
         }})
     },[cardData])
-
-    const exampleDeck:IDeckTop = {
-        deckMetaData:{
-            subject:"Language",
-            title:"French 1",
-        },
-        userOwnsDeck: true,
-        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam`,
-        vote:{
-            count: 50,
-            voteCast: VoteState.NotVoted
-        }
-    }
-
 
     const cardStore:CardState = {
         toStudy: [],
@@ -101,14 +84,15 @@ const Deck = ():JSX.Element =>{
 
     return ( 
         <div className={styles.wrapper}>
+            {console.log(deckData)}
             <AnimatePresence>
-                {cardDeck.toStudy.map((item)=>{
+                {deckData&& cardDeck.toStudy.map((item)=>{
                     return (
-                        <CardPlain key={item.id} deckMetaData={exampleDeck.deckMetaData} prompt={item.prompt} answer={item.answer} dispatch={dispatch} cardIndex={cardDeck.complete.length}/>
+                        <CardPlain key={item.id} deckMetaData={{subject: deckData.subject, title: deckData.title}} prompt={item.prompt} answer={item.answer} dispatch={dispatch} cardIndex={cardDeck.complete.length}/>
                     )             
                 })}
                 {showDeckTop && deckData &&
-                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={deckData.description} vote={exampleDeck.vote} key={deckData.subject} setShowDeckTop={setShowDeckTop} userOwnsDeck={exampleDeck.userOwnsDeck}/>}
+                <DeckTop deckMetaData={{subject: deckData.subject, title: deckData.title}} description={deckData.description} vote={deckData.vote!} key={deckData.subject} setShowDeckTop={setShowDeckTop} userOwnsDeck={deckData.deckRelation === DeckOwnership.Owner}/>}
             </AnimatePresence>
         </div>
     )

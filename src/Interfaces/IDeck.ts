@@ -11,7 +11,7 @@ interface IDeck{
         id:number,
         username:string
     },
-    votes?:IVote;
+    vote?:IVote;
 }
 
 export type { IDeck }

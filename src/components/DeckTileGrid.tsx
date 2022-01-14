@@ -18,9 +18,12 @@ const DeckTileGrid = ({deckTileData, title, hasAddTile}:Props):JSX.Element =>{
             <h3 className={styles.gridTitle}>{title}</h3>
             <div className={styles.gridWrapper}>
                 {hasAddTile&&<AddDeckTile />}
-                {deckTileData?.map((item) => (
-                    <DeckTile key={`${item.id}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.id} deckRelation={item.deckRelation} showEditIcon={item.deckRelation === DeckOwnership.Owner} />
-                ))}
+                {deckTileData?.map((item) => {
+                    console.log(item)
+                    return(
+                        <DeckTile key={`${item.id}`} subject={item.subject} title={item.title} votes={item.vote} deckID={item.id} deckRelation={item.deckRelation} showEditIcon={item.deckRelation === DeckOwnership.Owner} />
+                    )
+                })}
             </div>
         </div>
     )
