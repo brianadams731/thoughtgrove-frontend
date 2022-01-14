@@ -1,11 +1,16 @@
+import { ICard } from "./ICard";
+
 enum CardActionKind{
     CorrectAnswer = "correctAnswer",
-    WrongAnswer = "wrongAnswer"
+    WrongAnswer = "wrongAnswer",
+    Reset = "reset",
 }
 
 interface CardAction{
     type: CardActionKind;
-    payload: boolean;
+    payload?: {
+        loadDeck?: ICard[];
+    };
 }
 
 export { CardActionKind };

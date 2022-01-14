@@ -12,13 +12,31 @@ import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 import { ICard } from "../interfaces/ICard";
 
 const Deck = ():JSX.Element =>{
-    // Mock Data Start
     const {deckId} = useParams();
-
     const {deckData} = useDeckByID(deckId);
     const {cardData} = useCardsByDeckID(deckId);
+    const [showDeckTop, setShowDeckTop] = useState(true);
 
-    console.log(cardData.cards)
+    useEffect(()=>{
+        const updateDeckOnServer = () =>{
+            // SEND UPDATED DECK DATA BACK TO THE SERVER HERE, use beacon
+        }
+        window.addEventListener('beforeunload',updateDeckOnServer)
+        return () =>{
+            updateDeckOnServer();
+            window.removeEventListener('beforeunload', updateDeckOnServer)
+        }
+        //eslint-disable-next-line
+    },[])
+
+    useEffect(()=>{
+        if(!cardData){
+            return;
+        }
+        dispatch({type:CardActionKind.Reset, payload: {
+            loadDeck: cardData.cards
+        }})
+    },[cardData])
 
     const exampleDeck:IDeckTop = {
         deckMetaData:{
@@ -35,32 +53,33 @@ const Deck = ():JSX.Element =>{
         }
     }
 
+
     const cardStore:CardState = {
-        toStudy: cardData.cards, // This is being consumed syncronusly, fix so it is async
+        toStudy: [],
         complete:[]
     }
-    // Mock Data End
-
-    const [showDeckTop, setShowDeckTop] = useState(true);
-
-    interface CardData extends ICard{
-        correctAnswer:boolean|undefined;
+    interface CompletedCard extends ICard{
+        correctAnswer?:boolean|undefined;
     }
-
     interface CardState{
         toStudy: ICard[];
-        complete: CardData[];
+        complete: CompletedCard[];
     }
-
     const cardStoreReducer = (state:CardState, action:CardAction) =>{
-        const currentCard = state.toStudy[state.toStudy.length -1];
-
-        const cardChange:CardData = {
-            prompt: currentCard.prompt,
-            answer: currentCard.answer,
-            correctAnswer: undefined
+        // Initializer
+        if(action.type === CardActionKind.Reset){
+            return ({
+                toStudy: action.payload?.loadDeck?action.payload.loadDeck:[], //TODO filter out completed, incase revalidate!
+                complete: state.complete,
+            })
         }
 
+        // Card Logic
+        const currentCard = state.toStudy[state.toStudy.length - 1];
+        const cardChange: CompletedCard = {
+            prompt: currentCard.prompt,
+            answer: currentCard.answer,
+        }
         switch(action.type){
             case CardActionKind.CorrectAnswer:
                 cardChange.correctAnswer = true
@@ -77,33 +96,19 @@ const Deck = ():JSX.Element =>{
                 }
         }
     }
-
-    useEffect(()=>{
-        const updateDeckOnServer = () =>{
-            // SEND UPDATED DECK DATA BACK TO THE SERVER HERE, use beacon
-            console.log(cardDeck.complete);
-        }
-        window.addEventListener('beforeunload',updateDeckOnServer)
-        return () =>{
-            updateDeckOnServer();
-            window.removeEventListener('beforeunload', updateDeckOnServer)
-        }
-        //eslint-disable-next-line
-    },[])
-
-    const [cardDeck, dispatch] = useReducer(cardStoreReducer, cardStore)
+    const [cardDeck, dispatch] = useReducer(cardStoreReducer, cardStore);
+    
 
     return ( 
         <div className={styles.wrapper}>
-            {console.log(deckData)}
             <AnimatePresence>
-                {cardDeck.toStudy?.map((item)=>{
+                {cardDeck.toStudy.map((item)=>{
                     return (
-                        <CardPlain key={item.prompt} deckMetaData={exampleDeck.deckMetaData} prompt={item.prompt} answer={item.answer} dispatch={dispatch} cardIndex={cardDeck.complete.length}/>
+                        <CardPlain key={item.id} deckMetaData={exampleDeck.deckMetaData} prompt={item.prompt} answer={item.answer} dispatch={dispatch} cardIndex={cardDeck.complete.length}/>
                     )             
                 })}
                 {showDeckTop && deckData &&
-                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={deckData.description} vote={exampleDeck.vote} key={deckData.id} setShowDeckTop={setShowDeckTop} userOwnsDeck={exampleDeck.userOwnsDeck}/>}
+                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={deckData.description} vote={exampleDeck.vote} key={deckData.subject} setShowDeckTop={setShowDeckTop} userOwnsDeck={exampleDeck.userOwnsDeck}/>}
             </AnimatePresence>
         </div>
     )

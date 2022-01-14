@@ -74,13 +74,13 @@ const CardPlain = ({prompt, answer, deckMetaData, dispatch, cardIndex}:Props):JS
                     <div className={styles.evaluationWrapper}>
                         <motion.div animate={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)"}} className={styles.wrongIconWrapper} onClick={()=>{
                             setCardCorrect(false);
-                            dispatch({type: CardActionKind.WrongAnswer, payload:false})
+                            dispatch({type: CardActionKind.WrongAnswer})
                         }}>
                             <WrongIcon width="50px" />
                         </motion.div>
                         <motion.div animate={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-green)"}} className={styles.correctIconWrapper} onClick={()=>{
                             setCardCorrect(true);
-                            dispatch({type: CardActionKind.CorrectAnswer, payload:true})
+                            dispatch({type: CardActionKind.CorrectAnswer})
                         }}>
                             <CorrectIcon height="50px" />
                         </motion.div>
