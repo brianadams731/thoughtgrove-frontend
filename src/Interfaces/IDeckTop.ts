@@ -4,7 +4,7 @@ import type { IVote } from "./IVote";
 interface IDeckTop{
     deckMetaData: IDeckMetaData;
     userOwnsDeck: boolean;
-    description?: string;
+    description: string;
     vote: IVote;
 }
 

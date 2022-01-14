@@ -8,7 +8,7 @@ import { CardTile } from "./CardTile";
 
 
 interface Props{
-    title: string;
+    title: string|undefined;
     cardTileData: ICardTile[];
     dispatch: Dispatch<EditFocusAction>;
     hasAddTile?: boolean

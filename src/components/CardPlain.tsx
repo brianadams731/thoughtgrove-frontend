@@ -13,7 +13,7 @@ import { IDeckMetaData } from "../interfaces/IDeckMetaData";
 
 
 interface Props extends ICardPlain{
-    deckMetaData: IDeckMetaData;
+    deckMetaData?: IDeckMetaData|undefined;
     cardIndex: number;
     dispatch: Dispatch<CardAction>;
 }
@@ -60,7 +60,7 @@ const CardPlain = ({prompt, answer, deckMetaData, dispatch, cardIndex}:Props):JS
         <motion.div variants={flipVariant} animate={shouldFlip?"flip":"initial"} exit={cardCorrect?"exitRight":"exitLeft"} className={`${cardBase.wrapper} ${cardBase.wrapperFlip} ${shouldFlip?cardBase.triggerFlip:""} ${styles.wrapper}`}>
 
                 <div className={`${cardBase.front} ${styles.front}`}>
-                    <DeckMetaData title={deckMetaData.title} subject={deckMetaData.subject} fade={true}/>
+                    <DeckMetaData title={deckMetaData!.title} subject={deckMetaData!.subject} fade={true}/>
                     <h3 className={styles.prompt}>{prompt}</h3>
                     <button className={styles.showAnswerBtn} onClick={()=>setShouldFlip(true)}>Show Answer</button>
                 </div>

@@ -8,7 +8,7 @@ import { DeckTile } from "./DeckTile";
 
 interface Props{
     title: string;
-    deckTileData?: IDeck[];
+    deckTileData: IDeck[];
     hasAddTile?: boolean
 }
 

@@ -7,10 +7,13 @@ import { IDeckTop } from "../interfaces/IDeckTop";
 import { CardAction, CardActionKind } from "../interfaces/CardReducer";
 import styles from "../styles/Deck.module.css";
 import { VoteState } from "../interfaces/IVote";
+import { useParams } from "react-router-dom";
+import { useDeckByID } from "../hooks/api/useDeckByID";
 
 const Deck = ():JSX.Element =>{
     // Mock Data Start
-
+    const {deckId} = useParams();
+    const {deckData} = useDeckByID(deckId);
 
     const exampleDeck:IDeckTop = {
         deckMetaData:{
@@ -90,14 +93,15 @@ const Deck = ():JSX.Element =>{
 
     return ( 
         <div className={styles.wrapper}>
+            {console.log(deckData)}
             <AnimatePresence>
                 {cardDeck.toStudy?.map((item)=>{
                     return (
                         <CardPlain key={item.prompt} deckMetaData={exampleDeck.deckMetaData} prompt={item.prompt} answer={item.answer} dispatch={dispatch} cardIndex={cardDeck.complete.length}/>
                     )             
                 })}
-                {showDeckTop&&
-                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={exampleDeck.description} vote={exampleDeck.vote} key={exampleDeck.deckMetaData.title} setShowDeckTop={setShowDeckTop} userOwnsDeck={exampleDeck.userOwnsDeck}/>}
+                {showDeckTop && deckData &&
+                <DeckTop deckMetaData={exampleDeck.deckMetaData} description={deckData.description} vote={exampleDeck.vote} key={deckData.id} setShowDeckTop={setShowDeckTop} userOwnsDeck={exampleDeck.userOwnsDeck}/>}
             </AnimatePresence>
         </div>
     )

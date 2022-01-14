@@ -66,13 +66,13 @@ const Votes = ({count, voteCast}:IVote):JSX.Element =>{
     return (
         <div className={styles.wrapper}>
             <div className={styles.upVoteWrapper} onClick={()=>{dispatch({type:VoteState.UpVoted})}}>
-                <VoteChevron fill={votesStore.voteState === VoteState.UpVoted?"var(--c-achievement-green)":"var(--c-main-gray)"} width="45px" isUpVote={true} />
+                <VoteChevron fill={votesStore?.voteState === VoteState.UpVoted?"var(--c-achievement-green)":"var(--c-main-gray)"} width="45px" isUpVote={true} />
             </div>
 
-            <h5 className={styles.numberOfVotes}>{votesStore.votes}</h5>
+            <h5 className={styles.numberOfVotes}>{votesStore?.votes}</h5>
 
             <div className={styles.downVoteWrapper} onClick={()=>{dispatch({type: VoteState.DownVoted})}}>
-                <VoteChevron fill={votesStore.voteState === VoteState.DownVoted?"var(--c-achievement-orange)":"var(--c-main-gray)"} width="45px" isUpVote={false} />
+                <VoteChevron fill={votesStore?.voteState === VoteState.DownVoted?"var(--c-achievement-orange)":"var(--c-main-gray)"} width="45px" isUpVote={false} />
             </div>
         </div>
     )

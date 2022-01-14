@@ -2,9 +2,10 @@ import { DeckOwnership } from "./IDeckTile";
 import { IVote, VoteState } from "./IVote";
 
 interface IDeck{
+    id: number;
     title: string;
     subject: string;
-    id: number;
+    description: string;
     deckRelation: DeckOwnership;
     user?:{
         id:number,

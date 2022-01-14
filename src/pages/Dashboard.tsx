@@ -20,7 +20,7 @@ const Dashboard = ():JSX.Element =>{
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="deck/edit/*" element={<EditDeck />} />
-                <Route path="deck/*" element={<Deck />} />
+                <Route path="deck/:deckId" element={<Deck />} />
             </Routes>
         </div>
     )
