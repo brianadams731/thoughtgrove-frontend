@@ -2,18 +2,23 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useReducer, useState } from "react";
 import { CardPlain } from "../components/CardPlain";
 import { DeckTop } from "../components/DeckTop";
-import { ICardPlain } from "../interfaces/ICardPlain";
 import { IDeckTop } from "../interfaces/IDeckTop";
 import { CardAction, CardActionKind } from "../interfaces/CardReducer";
 import styles from "../styles/Deck.module.css";
 import { VoteState } from "../interfaces/IVote";
 import { useParams } from "react-router-dom";
 import { useDeckByID } from "../hooks/api/useDeckByID";
+import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
+import { ICard } from "../interfaces/ICard";
 
 const Deck = ():JSX.Element =>{
     // Mock Data Start
     const {deckId} = useParams();
+
     const {deckData} = useDeckByID(deckId);
+    const {cardData} = useCardsByDeckID(deckId);
+
+    console.log(cardData.cards)
 
     const exampleDeck:IDeckTop = {
         deckMetaData:{
@@ -31,47 +36,44 @@ const Deck = ():JSX.Element =>{
     }
 
     const cardStore:CardState = {
-        toStudy: [
-        {
-            prompt: "Je ne sais pas",
-            answer: "I don't know",
-            correctAnswer:undefined
-        },
-        {
-            prompt: "S'il vous plait",
-            answer: "If it pleases you",
-            correctAnswer:undefined
-        }],
+        toStudy: cardData.cards, // This is being consumed syncronusly, fix so it is async
         complete:[]
     }
     // Mock Data End
 
     const [showDeckTop, setShowDeckTop] = useState(true);
 
-    interface CardData extends ICardPlain{
+    interface CardData extends ICard{
         correctAnswer:boolean|undefined;
     }
 
     interface CardState{
-        toStudy: CardData[];
+        toStudy: ICard[];
         complete: CardData[];
     }
 
     const cardStoreReducer = (state:CardState, action:CardAction) =>{
         const currentCard = state.toStudy[state.toStudy.length -1];
+
+        const cardChange:CardData = {
+            prompt: currentCard.prompt,
+            answer: currentCard.answer,
+            correctAnswer: undefined
+        }
+
         switch(action.type){
             case CardActionKind.CorrectAnswer:
-                currentCard.correctAnswer = true;
+                cardChange.correctAnswer = true
                 return {
                     toStudy:[...state.toStudy.slice(0, state.toStudy.length-1)],
-                    complete:[...state.complete, currentCard],
+                    complete:[...state.complete, cardChange],
                 }
 
             case CardActionKind.WrongAnswer:
-                currentCard.correctAnswer = false;
+                cardChange.correctAnswer = false;
                 return {
                     toStudy:[...state.toStudy.slice(0, state.toStudy.length-1)],
-                    complete:[...state.complete, currentCard],
+                    complete:[...state.complete, cardChange],
                 }
         }
     }

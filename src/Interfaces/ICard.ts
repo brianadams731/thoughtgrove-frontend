@@ -1,6 +1,12 @@
 interface ICard{
+    id?:number;
     prompt:string;
     answer:string;
 }
 
-export type {ICard};
+interface ICardResponse{
+    deckID: number;
+    cards: ICard[];
+}
+
+export type {ICard, ICardResponse};
