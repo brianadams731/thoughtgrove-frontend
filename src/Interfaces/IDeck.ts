@@ -6,11 +6,11 @@ interface IDeck{
     subject: string;
     id: number;
     deckRelation: DeckOwnership;
-    user:{
+    user?:{
         id:number,
         username:string
     },
-    votes:IVote;
+    votes?:IVote;
 }
 
 export type { IDeck }

@@ -3,7 +3,7 @@ import { IVote } from "./IVote";
 interface IDeckTile {
     subject: string;
     title: string;
-    votes: IVote;
+    votes?: IVote;
     deckID: number;
     deckRelation: DeckOwnership;
 }
