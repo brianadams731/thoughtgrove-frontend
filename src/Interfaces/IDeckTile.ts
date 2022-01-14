@@ -7,9 +7,9 @@ interface IDeckTile {
 }
 
 enum DeckOwnership{
-    Owner,
-    Subscriber,
-    Guest
+    Owner = "owner",
+    Subscriber = "subscriber",
+    Guest = "guest"
 }
 
 export type {IDeckTile}

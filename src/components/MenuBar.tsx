@@ -6,6 +6,8 @@ import { Trophy } from "../svg/Trophy";
 
 import styles from "../styles/MenuBar.module.css";
 import { useNavigate } from "react-router-dom";
+import { useOwner } from "../hooks/api/useOwner";
+import { APIRoute } from "../utils/APIRoute";
 
 enum CurrentSubSelection{
     Profile,
@@ -24,7 +26,7 @@ interface SubMenu{
 }
 
 const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
-
+    const {owner} = useOwner();
     const [showChildMenu, setShowChildMenu] = useState<boolean>(false);
     const [currentSelection, setCurrentSelection] = useState<CurrentSubSelection>();
     const [parentLeft, setParentLeft] = useState(0);
@@ -202,24 +204,27 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
                 setShowChildMenu(false);
                 setCurrentSelection(undefined);
             }}>
-                <div className={styles.achievementBox}>
-                    <div>
-                        <Flame fill={"var(--c-achievement-orange)"} />
-                        <h5>
-                            20
-                        </h5>
-                    </div>
-                    <div className={styles.trophyWrapper}>
-                        <Trophy fill={"var(--c-achievement-green)"} />
-                        <h5>
-                            15
-                        </h5>
-                    </div>
-                    <div>
-                        <CardCompleteIcon fill={"var(--c-achievement-blue)"} />
-                        <h5>
-                            10
-                        </h5>
+                <div className={styles.ownerBox}>
+                    <h5 className={styles.ownerName}>{owner?.username}</h5>
+                    <div className={styles.achievementBox}>
+                        <div>
+                            <Flame fill={"var(--c-achievement-orange)"} />
+                            <h5>
+                                20
+                            </h5>
+                        </div>
+                        <div className={styles.trophyWrapper}>
+                            <Trophy fill={"var(--c-achievement-green)"} />
+                            <h5>
+                                15
+                            </h5>
+                        </div>
+                        <div>
+                            <CardCompleteIcon fill={"var(--c-achievement-blue)"} />
+                            <h5>
+                                10
+                            </h5>
+                        </div>
                     </div>
                 </div>
 
@@ -257,8 +262,10 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
                     <h3>Groups</h3>
                 </div>
 
-                <div className={styles.logoutBox} onClick={(e)=>{
+                <div className={styles.logoutBox} onClick={async (e)=>{
                     e.stopPropagation();
+                    await fetch(APIRoute.LogOut);
+                    navigate("/")
                 }}>
                     <h4>Log Out</h4>
                 </div>

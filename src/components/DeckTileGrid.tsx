@@ -1,4 +1,5 @@
-import { DeckOwnership, IDeckTile } from "../interfaces/IDeckTile";
+import { IDeck } from "../interfaces/IDeck";
+import { DeckOwnership } from "../interfaces/IDeckTile";
 import styles from "../styles/DeckTileGrid.module.css";
 import { AddDeckTile } from "./AddDeckTile";
 import { DeckTile } from "./DeckTile";
@@ -7,7 +8,7 @@ import { DeckTile } from "./DeckTile";
 
 interface Props{
     title: string;
-    deckTileData: IDeckTile[];
+    deckTileData?: IDeck[];
     hasAddTile?: boolean
 }
 
@@ -17,8 +18,8 @@ const DeckTileGrid = ({deckTileData, title, hasAddTile}:Props):JSX.Element =>{
             <h3 className={styles.gridTitle}>{title}</h3>
             <div className={styles.gridWrapper}>
                 {hasAddTile&&<AddDeckTile />}
-                {deckTileData.map((item) => (
-                    <DeckTile key={`${item.deckID}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.deckID} deckRelation={item.deckRelation} showEditIcon={item.deckRelation === DeckOwnership.Owner} />
+                {deckTileData?.map((item) => (
+                    <DeckTile key={`${item.id}`} subject={item.subject} title={item.title} votes={item.votes} deckID={item.id} deckRelation={item.deckRelation} showEditIcon={item.deckRelation === DeckOwnership.Owner} />
                 ))}
             </div>
         </div>

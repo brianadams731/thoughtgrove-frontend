@@ -9,6 +9,7 @@ import { Deck } from "./Deck";
 import { EditDeck } from "./EditDeck";
 
 const Dashboard = ():JSX.Element =>{
+    // Consider pushing into global state
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (

@@ -15,3 +15,4 @@ const fetcher =  async(url:string) =>{
 }
 
 export { fetcher }
+export type { ResError };
