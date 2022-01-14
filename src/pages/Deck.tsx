@@ -6,9 +6,12 @@ import { ICardPlain } from "../interfaces/ICardPlain";
 import { IDeckTop } from "../interfaces/IDeckTop";
 import { CardAction, CardActionKind } from "../interfaces/CardReducer";
 import styles from "../styles/Deck.module.css";
+import { VoteState } from "../interfaces/IVote";
 
 const Deck = ():JSX.Element =>{
     // Mock Data Start
+
+
     const exampleDeck:IDeckTop = {
         deckMetaData:{
             subject:"Language",
@@ -19,8 +22,8 @@ const Deck = ():JSX.Element =>{
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam`,
         vote:{
-            numberOfVotes: 50,
-            hasUpVoted: undefined,
+            count: 50,
+            voteCast: VoteState.NotVoted
         }
     }
 

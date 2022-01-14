@@ -17,7 +17,7 @@ const DeckTop = ({deckMetaData, description, vote, setShowDeckTop}:Props):JSX.El
         <motion.article exit={{x:"-75vw", rotate:"-12deg"}} transition={{mass:.4, duration:.8}} className={`${styles.wrapper} ${cardBase.wrapper}`}>
             <div className={styles.dataWrapper}>
                 <DeckMetaData subject={deckMetaData.subject} title={deckMetaData.title} />
-                <Votes numberOfVotes={vote.numberOfVotes} hasUpVoted={vote.hasUpVoted}/>
+                <Votes count={vote.count} voteCast={vote.voteCast}/>
             </div>
 
             <section className={styles.descriptionWrapper}>

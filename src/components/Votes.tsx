@@ -1,17 +1,13 @@
 import styles from "../styles/Votes.module.css";
 import type { IVote } from "../interfaces/IVote";
+import { VoteState } from "../interfaces/IVote";
 import { VoteChevron } from "../svg/VoteChevron";
 import { useEffect, useReducer } from "react";
 
 
 
-const Votes = ({numberOfVotes, hasUpVoted}:IVote):JSX.Element =>{
+const Votes = ({count, voteCast}:IVote):JSX.Element =>{
 
-    enum VoteState{
-        UpVoted = "upVote",
-        DownVoted = "downVote",
-        NotVoted = "NotVoted"
-    }
     interface voteStore{
         votes: number;
         voteState:VoteState;
@@ -58,15 +54,6 @@ const Votes = ({numberOfVotes, hasUpVoted}:IVote):JSX.Element =>{
         }
     }
 
-    const boolToStoreAdapter = (votedArgument?:boolean) =>{
-        // TODO DELETE, NORMALIZE INCOMING DATA ON THE BACKEND SO THIS IS NOT NEEDED!
-        if(votedArgument){
-            return VoteState.UpVoted;
-        }else if(votedArgument === false){
-            return VoteState.DownVoted;
-        }
-        return VoteState.NotVoted;
-    }
 
     useEffect(()=>{
         return ()=>{
@@ -74,7 +61,7 @@ const Votes = ({numberOfVotes, hasUpVoted}:IVote):JSX.Element =>{
         }
     },[])
 
-    const [votesStore, dispatch] = useReducer(votesReducer, {votes: numberOfVotes, voteState: boolToStoreAdapter(hasUpVoted)})
+    const [votesStore, dispatch] = useReducer(votesReducer, {votes: count, voteState: voteCast})
 
     return (
         <div className={styles.wrapper}>

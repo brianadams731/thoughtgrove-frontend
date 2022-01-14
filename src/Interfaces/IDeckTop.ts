@@ -5,7 +5,7 @@ interface IDeckTop{
     deckMetaData: IDeckMetaData;
     userOwnsDeck: boolean;
     description?: string;
-    vote: IVote
+    vote: IVote;
 }
 
 export type {IDeckTop};

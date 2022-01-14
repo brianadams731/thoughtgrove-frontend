@@ -1,7 +1,9 @@
+import { IVote } from "./IVote";
+
 interface IDeckTile {
     subject: string;
     title: string;
-    votes: string;
+    votes: IVote;
     deckID: number;
     deckRelation: DeckOwnership;
 }

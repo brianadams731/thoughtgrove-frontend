@@ -36,7 +36,7 @@ const DeckTile = ({subject,title,votes, deckID, deckRelation, showEditIcon, supp
                 <div className={styles.svgWrapper}>
                     <Logo fill="var(--c-main-gray)" svgWidth="30px"/>
                 </div>
-                <h3 className={styles.votes}>{votes}</h3>
+                <h3 className={styles.votes}>{votes.count}</h3>
             </div>
         </motion.div>
     )

@@ -9,6 +9,7 @@ import { ICardTile } from "../interfaces/ICardTile";
 import { DeckOwnership, IDeckTile } from "../interfaces/IDeckTile";
 import styles from "../styles/EditDeck.module.css";
 import { EditFocusAction, EditFocusKind } from "../interfaces/EditFocusReducer";
+import { VoteState } from "../interfaces/IVote";
 
 const EditDeck = ():JSX.Element =>{
     
@@ -119,7 +120,10 @@ const EditDeck = ():JSX.Element =>{
         subject:"Language",
         title: "French 1" ,
         deckID: 2 ,
-        votes: "30",
+        votes: {
+            count: 50,
+            voteCast: VoteState.NotVoted
+        },
         deckRelation: DeckOwnership.Owner,
     }
 
