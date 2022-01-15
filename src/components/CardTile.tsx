@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import deckTile from "../styles/DeckTile.module.css";
 import styles from "../styles/CardTile.module.css";
 
-import type { ICardTile } from "../interfaces/ICardTile";
+import { ICard } from "../interfaces/ICard";
 
-interface Props extends ICardTile{
+interface Props extends ICard{
     callBackOnClick: ()=> void;
 }
 
-const CardTile = ({prompt,cardID, callBackOnClick}:Props):JSX.Element =>{
+const CardTile = ({prompt,id, callBackOnClick}:Props):JSX.Element =>{
     return (
         <motion.div className={`${deckTile.wrapper} ${styles.wrapper}`} whileHover={{scale:1.07}} onClick={(e)=>{
             e.stopPropagation();

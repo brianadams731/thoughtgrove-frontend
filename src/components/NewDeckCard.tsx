@@ -3,23 +3,21 @@ import cardBase from "../styles/CardBase.module.css";
 import { motion } from "framer-motion";
 import { Logo } from "../svg/Logo";
 import { BasicCardInput } from "./BasicCardInput";
-import { Dispatch, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
-import { EditFocusAction, EditFocusKind } from "../interfaces/EditFocusReducer";
+import { EditFocusKind } from "../interfaces/EditFocusKind";
+import { IDeck } from "../interfaces/IDeck";
 
 interface Props{
-    dispatch: Dispatch<EditFocusAction>;
-    prefill?:{
-        subject: string,
-        title: string,
-        description: string,
-    }
+    setEditState: Dispatch<SetStateAction<EditFocusKind>>;
+    editState: EditFocusKind;
+    existingDeckData?: IDeck;
 }
-const NewDeckCard = ({dispatch, prefill}:Props) =>{
+const NewDeckCard = ({editState, setEditState, existingDeckData}:Props) =>{
     // USE DATA FROM CACHE AS DEFAULT
-    const [subject, setSubject] = useState(prefill?prefill.subject:"");
-    const [title, setTitle] = useState(prefill?prefill.title:"");
-    const [description, setDescription] = useState(prefill?prefill.description:"");
+    const [subject, setSubject] = useState(existingDeckData?existingDeckData.subject:"");
+    const [title, setTitle] = useState(existingDeckData?existingDeckData.title:"");
+    const [description, setDescription] = useState(existingDeckData?existingDeckData.description:"");
 
     const variants = {
         initial:{
@@ -49,14 +47,13 @@ const NewDeckCard = ({dispatch, prefill}:Props) =>{
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${styles.cardWrapper} ${cardBase.wrapper}`}>
             <form onSubmit={(e)=>{
                 e.preventDefault();
+                if(editState === EditFocusKind.EditDeck){
+
+                }else if(editState === EditFocusKind.NewDeck){
+                    
+                }
                 // MUTATE CACHE SYNCHRONOUSLY HERE WITH UPDATE VALUE, THEN THE SUBMIT WILL HAPPEN FROM THE OUTSIDE
-                dispatch({type:EditFocusKind.Submit, payload:{
-                    deckData:{
-                        subject,
-                        title,
-                        description
-                    }
-                }})
+                setEditState(EditFocusKind.None)
             }}>
                 <div className={styles.cardMetaData}>
                     <div className={styles.subjectInput}>

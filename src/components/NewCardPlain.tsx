@@ -2,20 +2,19 @@ import styles from "../styles/NewCardPlain.module.css";
 import cardBase from "../styles/CardBase.module.css";
 import { DeckMetaData } from "./DeckMetaData";
 import { IDeckMetaData } from "../interfaces/IDeckMetaData";
-import { Dispatch, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
 import { motion } from "framer-motion";
-import { EditFocusAction, EditFocusKind } from "../interfaces/EditFocusReducer";
+import { EditFocusKind } from "../interfaces/EditFocusKind";
+import { ICard } from "../interfaces/ICard";
 
 interface Props{
-    dispatch: Dispatch<EditFocusAction>
-    prefill?: {
-        prompt: string,
-        answer: string,
-    }
+    setEditState: Dispatch<SetStateAction<EditFocusKind>>;
+    editState: EditFocusKind;
+    existingCardData?: ICard;
 }
 
-const NewCardPlain = ({dispatch, prefill}:Props):JSX.Element =>{
+const NewCardPlain = ({editState ,setEditState, existingCardData}:Props):JSX.Element =>{
     const mockDeckMetaData:IDeckMetaData = {
         subject: "Language",
         title:"French 1"
@@ -43,21 +42,20 @@ const NewCardPlain = ({dispatch, prefill}:Props):JSX.Element =>{
     }
 
     // USE VALUE FROM CACHE
-    const [prompt, setPrompt] = useState(prefill?prefill.prompt:"");
-    const [answer, setAnswer] = useState(prefill?prefill.answer:"");
+    const [prompt, setPrompt] = useState(existingCardData?existingCardData.prompt:"");
+    const [answer, setAnswer] = useState(existingCardData?existingCardData.answer:"");
 
     return (
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${cardBase.wrapper} ${styles.cardWrapper}`}>
             <DeckMetaData subject={mockDeckMetaData.subject} title={mockDeckMetaData.title} fade/>
             <form onSubmit={(e)=>{
                 e.preventDefault();
-                // MUTATE CACHE SYNCHRONOUSLY HERE, THEN THE SUBMIT WILL HAPPEN FROM THE OUTSIDE
-                dispatch({type:EditFocusKind.Submit, payload:{
-                    cardData:{
-                        prompt,
-                        answer
-                    }
-                }});
+                if(editState === EditFocusKind.EditCard){
+
+                }else if(editState === EditFocusKind.NewCard){
+                    
+                }
+                setEditState(EditFocusKind.None)
             }}>
                 <div className={styles.textArea}>
                     <BasicCardTextArea value={prompt} updateValue={setPrompt} title="Prompt"/>

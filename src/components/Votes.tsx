@@ -14,9 +14,10 @@ const Votes = ({deckID}:Props):JSX.Element =>{
 
     const deleteVoteRemote = async() =>{
         try{
-            await fetch(`${APIRoute.PostVotes}/${deckID}`,{
+            const res = await fetch(`${APIRoute.PostVotes}/${deckID}`,{
                 method:"DELETE",
             })
+            return await res.json();
         } catch(e){
             console.log("FAILED TO DELETE")
         }
@@ -24,7 +25,7 @@ const Votes = ({deckID}:Props):JSX.Element =>{
     }
     const updateVoteRemote = async(isUpVote:boolean) =>{
         try{
-            await fetch(`${APIRoute.PostVotes}/${deckID}`,{
+            const res = await fetch(`${APIRoute.PostVotes}/${deckID}`,{
                 method:"POST",
                 headers:{
                     "Content-Type":'application/json',
@@ -33,9 +34,11 @@ const Votes = ({deckID}:Props):JSX.Element =>{
                     isUpVote: isUpVote,
                 })
             })
+            return await res.json();
         } catch(e){
             console.log("FAILED TO SEND")
         }
+        return;
     }
     const mutateCache = (countIncrement:number, voteState:VoteState) =>{
         if(!deckData?.vote){
