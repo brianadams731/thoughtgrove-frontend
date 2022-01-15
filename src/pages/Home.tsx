@@ -8,7 +8,6 @@ const Home = ():JSX.Element =>{
     const {popularDecks} = usePopularDecks();
     const {ownersDecks} = useOwnersDecks();
 
-    console.log(popularDecks)
     return (
         <div className={styles.wrapper}>
 

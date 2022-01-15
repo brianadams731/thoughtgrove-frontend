@@ -2,27 +2,31 @@ import styles from "../styles/DeckTop.module.css";
 import cardBase from "../styles/CardBase.module.css";
 
 import { Votes } from "./Votes";
-import type { IDeckTop } from "../interfaces/IDeckTop";
 import { CommentIcon } from "../svg/CommentIcon";
 import { motion } from "framer-motion";
 import { DeckMetaData } from "./DeckMetaData";
 import { Dispatch, SetStateAction } from "react";
+import { useDeckByID } from "../hooks/api/useDeckByID";
 
-interface Props extends IDeckTop{
+interface Props{
+    deckID:number;
     setShowDeckTop: Dispatch<SetStateAction<boolean>>;
 }
 
-const DeckTop = ({deckMetaData, description, vote, setShowDeckTop}:Props):JSX.Element =>{
+const DeckTop = ({deckID, setShowDeckTop}:Props):JSX.Element =>{
+    
+    const {deckData} = useDeckByID(deckID);
+    
     return (
         <motion.article exit={{x:"-75vw", rotate:"-12deg"}} transition={{mass:.4, duration:.8}} className={`${styles.wrapper} ${cardBase.wrapper}`}>
             <div className={styles.dataWrapper}>
-                <DeckMetaData subject={deckMetaData!.subject} title={deckMetaData!.title} />
-                <Votes count={vote.count} voteCast={vote.voteCast}/>
+                <DeckMetaData subject={deckData.subject} title={deckData.title} />
+                <Votes deckID={deckID}/>
             </div>
 
             <section className={styles.descriptionWrapper}>
                 <h3 className={styles.descriptionTitle}>Description</h3>
-                <p className={styles.description}>{description}</p>
+                <p className={styles.description}>{deckData.description}</p>
             </section>
             <button className={styles.practiceBtn} onClick={()=>{
                 setShowDeckTop(false);

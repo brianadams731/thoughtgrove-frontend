@@ -8,12 +8,14 @@ enum APIRoute {
     DeckByID = "/deck/byID", // needs a /id appended
     OwnersDecks = "/deck/owner",
 
+    PostVotes = "/votes/byDeckID", // needs a /id appended
+
     Owner = "/user/owner",
     UserByID = "/user/byID", // needs a /id appended
     DeleteUser = "/user/delete",
 
     CardsByDeckID = "/card/byDeckID", // needs a /id appended
-    CardByID = "/card/byID" // needs a /id appended
+    CardByID = "/card/byID", // needs a /id appended
 } 
 
 export {APIRoute};

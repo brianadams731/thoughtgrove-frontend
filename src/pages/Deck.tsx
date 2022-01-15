@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import { useDeckByID } from "../hooks/api/useDeckByID";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 import { ICard } from "../interfaces/ICard";
-import { DeckOwnership } from "../interfaces/IDeckTile";
 
 const Deck = ():JSX.Element =>{
     const {deckId} = useParams();
@@ -84,7 +83,6 @@ const Deck = ():JSX.Element =>{
 
     return ( 
         <div className={styles.wrapper}>
-            {console.log(deckData)}
             <AnimatePresence>
                 {deckData&& cardDeck.toStudy.map((item)=>{
                     return (
@@ -92,7 +90,7 @@ const Deck = ():JSX.Element =>{
                     )             
                 })}
                 {showDeckTop && deckData &&
-                <DeckTop deckMetaData={{subject: deckData.subject, title: deckData.title}} description={deckData.description} vote={deckData.vote!} key={deckData.subject} setShowDeckTop={setShowDeckTop} userOwnsDeck={deckData.deckRelation === DeckOwnership.Owner}/>}
+                <DeckTop deckID={deckData.id} key={deckData.subject} setShowDeckTop={setShowDeckTop} />}
             </AnimatePresence>
         </div>
     )
