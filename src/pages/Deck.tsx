@@ -13,19 +13,8 @@ const Deck = ():JSX.Element =>{
     const {deckId} = useParams();
     const {deckData} = useDeckByID(deckId);
     const {cardData} = useCardsByDeckID(deckId);
+    
     const [showDeckTop, setShowDeckTop] = useState(true);
-
-    useEffect(()=>{
-        const updateDeckOnServer = () =>{
-            // SEND UPDATED DECK DATA BACK TO THE SERVER HERE, use beacon
-        }
-        window.addEventListener('beforeunload',updateDeckOnServer)
-        return () =>{
-            updateDeckOnServer();
-            window.removeEventListener('beforeunload', updateDeckOnServer)
-        }
-        //eslint-disable-next-line
-    },[])
 
     useEffect(()=>{
         if(!cardData){
@@ -40,13 +29,17 @@ const Deck = ():JSX.Element =>{
         toStudy: [],
         complete:[]
     }
-    interface CompletedCard extends ICard{
-        correctAnswer?:boolean|undefined;
+    
+    interface CompleteCardData{
+        cardID:number;
+        correctAnswer:boolean;
     }
+
     interface CardState{
         toStudy: ICard[];
-        complete: CompletedCard[];
+        complete: CompleteCardData[];
     }
+
     const cardStoreReducer = (state:CardState, action:CardAction) =>{
         // Initializer
         if(action.type === CardActionKind.Reset){
@@ -58,23 +51,22 @@ const Deck = ():JSX.Element =>{
 
         // Card Logic
         const currentCard = state.toStudy[state.toStudy.length - 1];
-        const cardChange: CompletedCard = {
-            prompt: currentCard.prompt,
-            answer: currentCard.answer,
-        }
         switch(action.type){
             case CardActionKind.CorrectAnswer:
-                cardChange.correctAnswer = true
                 return {
                     toStudy:[...state.toStudy.slice(0, state.toStudy.length-1)],
-                    complete:[...state.complete, cardChange],
+                    complete:[...state.complete, {
+                        cardID: currentCard.id!,
+                        correctAnswer: true
+                    }],
                 }
-
             case CardActionKind.WrongAnswer:
-                cardChange.correctAnswer = false;
                 return {
                     toStudy:[...state.toStudy.slice(0, state.toStudy.length-1)],
-                    complete:[...state.complete, cardChange],
+                    complete:[...state.complete, {
+                        cardID: currentCard.id!,
+                        correctAnswer: false
+                    }],
                 }
         }
     }
