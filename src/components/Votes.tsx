@@ -3,6 +3,8 @@ import { VoteState } from "../interfaces/IVote";
 import { VoteChevron } from "../svg/VoteChevron";
 import { APIRoute } from "../utils/APIRoute";
 import { useDeckByID } from "../hooks/api/useDeckByID";
+import { postDataAsync } from "../utils/postData";
+import { deleteDataAsync } from "../utils/deleteData";
 
 interface Props{
     deckID: number;
@@ -13,33 +15,14 @@ const Votes = ({deckID}:Props):JSX.Element =>{
     const {deckData, mutateDeck} = useDeckByID(deckID);
 
     const deleteVoteRemote = async() =>{
-        try{
-            const res = await fetch(`${APIRoute.PostVotes}/${deckID}`,{
-                method:"DELETE",
-            })
-            return await res.json();
-        } catch(e){
-            console.log("FAILED TO DELETE")
-        }
-        return;
+        await deleteDataAsync(`${APIRoute.PostVotes}/${deckID}`);
+    
     }
     const updateVoteRemote = async(isUpVote:boolean) =>{
-        try{
-            const res = await fetch(`${APIRoute.PostVotes}/${deckID}`,{
-                method:"POST",
-                headers:{
-                    "Content-Type":'application/json',
-                },
-                body:JSON.stringify({
-                    isUpVote: isUpVote,
-                })
-            })
-            return await res.json();
-        } catch(e){
-            console.log("FAILED TO SEND")
-        }
+        await postDataAsync(`${APIRoute.PostVotes}/${deckID}`,{isUpVote})
         return;
     }
+
     const mutateCache = (countIncrement:number, voteState:VoteState) =>{
         if(!deckData?.vote){
             return;

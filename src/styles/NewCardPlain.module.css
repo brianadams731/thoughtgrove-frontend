@@ -16,6 +16,15 @@
     flex-direction: column;
 }
 
+.deckTop{
+    display: flex;
+    justify-content: space-between;
+
+}
+.trash{
+    width: fit-content;
+    height: fit-content;
+}
 .textArea {
     height: 115px;
 }

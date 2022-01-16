@@ -7,14 +7,21 @@ import { BasicCardTextArea } from "./BasicCardTextArea";
 import { motion } from "framer-motion";
 import { EditFocusKind } from "../interfaces/EditFocusKind";
 import { ICard } from "../interfaces/ICard";
+import { APIRoute } from "../utils/APIRoute";
+import { postDataAsync } from "../utils/postData";
+import { TrashCan } from "../svg/TrashCan";
+import { deleteDataAsync } from "../utils/deleteData";
+import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 
 interface Props{
     setEditState: Dispatch<SetStateAction<EditFocusKind>>;
     editState: EditFocusKind;
     existingCardData?: ICard;
+    deckId:number;
 }
 
-const NewCardPlain = ({editState ,setEditState, existingCardData}:Props):JSX.Element =>{
+const NewCardPlain = ({editState ,setEditState, existingCardData, deckId}:Props):JSX.Element =>{
+    const {cardData, mutateCards} = useCardsByDeckID(deckId);
     const mockDeckMetaData:IDeckMetaData = {
         subject: "Language",
         title:"French 1"
@@ -47,13 +54,35 @@ const NewCardPlain = ({editState ,setEditState, existingCardData}:Props):JSX.Ele
 
     return (
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${cardBase.wrapper} ${styles.cardWrapper}`}>
-            <DeckMetaData subject={mockDeckMetaData.subject} title={mockDeckMetaData.title} fade/>
-            <form onSubmit={(e)=>{
+            <div className={styles.deckTop}>
+                <DeckMetaData subject={mockDeckMetaData.subject} title={mockDeckMetaData.title} fade/>
+                <motion.div initial={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)", cursor:"pointer"}} transition={{duration:.3}} className={styles.trash} onClick={async ()=>{
+                    if(editState !== EditFocusKind.EditCard){
+                        return;
+                    }
+                    await deleteDataAsync(`${APIRoute.CardByID}/${existingCardData?.id}`);
+                    mutateCards({
+                        ...cardData,
+                        cards: cardData.cards.filter((item) => item.id !== existingCardData?.id),
+                    })
+                    setEditState(EditFocusKind.None)
+                }}>
+                    <TrashCan height="30px"/>
+                </motion.div>
+            </div>
+            <form onSubmit={async (e)=>{
                 e.preventDefault();
                 if(editState === EditFocusKind.EditCard){
 
                 }else if(editState === EditFocusKind.NewCard){
-                    
+                    const res = await postDataAsync(`${APIRoute.CardsByDeckID}/${deckId}`,{
+                        prompt,
+                        answer
+                    })
+                    mutateCards({
+                        ...cardData,
+                        cards: [...cardData.cards, res],
+                    })
                 }
                 setEditState(EditFocusKind.None)
             }}>
