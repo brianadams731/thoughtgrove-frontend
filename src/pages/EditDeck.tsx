@@ -10,6 +10,7 @@ import { EditFocusKind } from "../interfaces/EditFocusKind";
 import { useParams } from "react-router-dom";
 import { useDeckByID } from "../hooks/api/useDeckByID";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
+import { DeleteDeckConfirmation } from "../components/DeleteDeckConfirmation";
 
 const EditDeck = ():JSX.Element =>{
     const {deckId} = useParams();
@@ -39,6 +40,8 @@ const EditDeck = ():JSX.Element =>{
             {cardData&&
             <CardTileGrid cardTileData={cardData.cards} title="Cards" setSelectedCardId={setSelectedCardId} setEditState={setEditState} hasAddTile />}
 
+            <button className={styles.deleteBtn} onClick={()=>setEditState(EditFocusKind.DeleteDeck)}>Delete Deck</button>
+
             <AnimatePresence>
                 {editState !== EditFocusKind.None && <FullPageDimmer key="pageDimmer" callBackOnClick={()=>setEditState(EditFocusKind.None)}/>}
 
@@ -48,7 +51,7 @@ const EditDeck = ():JSX.Element =>{
                 {editState === EditFocusKind.EditCard && <NewCardPlain key="editCard" setEditState={setEditState} existingCardData={findCardData()} editState={editState} deckId={deckData.id}/>}
                 {editState === EditFocusKind.EditDeck && <NewDeckCard key="editDeck" setEditState={setEditState} existingDeckData={deckData} editState={editState}/>}
 
-                {editState === EditFocusKind.DeleteDeck && <div>DELETE DECK</div>}
+                {editState === EditFocusKind.DeleteDeck && <DeleteDeckConfirmation existingDeckData={deckData} setEditState={setEditState} editState={editState}/>}
             </AnimatePresence>
         </div>
     )

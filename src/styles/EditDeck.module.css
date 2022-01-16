@@ -15,3 +15,18 @@
     align-items: center;
     justify-content: center;
 }
+
+.deleteBtn{
+    display: block;
+    margin: auto;
+    margin-top: 75px;
+    background-color: var(--c-achievement-orange);
+}
+
+.deleteBtn:hover{
+    background-color: var(--c-light-red);
+}
+
+.deleteBtn:active{
+    background-color: var(--c-light-red);
+}

@@ -1,0 +1,62 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    padding: var(--p-card-full);
+    box-shadow: var(--box-shadow-card);
+    border-radius: var(--border-card-radius);
+    background-color: var(--c-white);
+}
+
+.wrapper p{
+    font-family: var(--font-body);
+    font-size: var(--fs-standard-large);
+    max-width: 60ch;
+}
+
+.inputWrapper{
+    width: 50%;
+    background-color: var(--c-dark-gray);
+    box-shadow: var(--box-shadow-card);
+}
+
+.inputWrapper input[type=text]{
+    padding: 5px 5px;
+    color: var(--c-light-red) !important;
+}
+.btnWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:15px;
+}
+
+.confirmationString{
+    padding: 0px 5px;
+    background-color: var(--c-dark-gray);
+    color: var(--c-light-red);
+}
+
+.deleteBtn{
+    width: fit-content;
+}
+.deleteBtn:hover{
+    cursor: pointer;
+    background-color: initial;
+    transform: initial;
+}
+.deleteBtn:active{
+    cursor: pointer;
+    background-color: initial;
+    transform: initial;
+}
+
+.cancelBtn{
+    width: fit-content;
+}

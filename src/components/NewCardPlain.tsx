@@ -56,8 +56,9 @@ const NewCardPlain = ({editState ,setEditState, existingCardData, deckId}:Props)
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${cardBase.wrapper} ${styles.cardWrapper}`}>
             <div className={styles.deckTop}>
                 <DeckMetaData subject={mockDeckMetaData.subject} title={mockDeckMetaData.title} fade/>
-                <motion.div initial={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)", cursor:"pointer"}} transition={{duration:.3}} className={styles.trash} onClick={async ()=>{
+                {editState === EditFocusKind.EditCard && <motion.div initial={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)", scale:1.1, cursor:"pointer"}} whileTap={{fill:"var(--c-black)", scale:1}} transition={{duration:.3}} className={styles.trash} onClick={async ()=>{
                     if(editState !== EditFocusKind.EditCard){
+                        setEditState(EditFocusKind.None)
                         return;
                     }
                     await deleteDataAsync(`${APIRoute.CardByID}/${existingCardData?.id}`);
@@ -68,7 +69,7 @@ const NewCardPlain = ({editState ,setEditState, existingCardData, deckId}:Props)
                     setEditState(EditFocusKind.None)
                 }}>
                     <TrashCan height="30px"/>
-                </motion.div>
+                </motion.div>}
             </div>
             <form onSubmit={async (e)=>{
                 e.preventDefault();
