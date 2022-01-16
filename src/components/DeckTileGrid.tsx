@@ -25,7 +25,7 @@ const DeckTileGrid = ({deckTileData, title, hasAddTile, addDeckCallBack}:Props):
                 }}/>}
                 {deckTileData?.map((item) => {
                     return(
-                        <DeckTile key={`${item.id}`} subject={item.subject} title={item.title} votes={item.vote} deckID={item.id} deckRelation={item.deckRelation} showEditIcon={item.deckRelation === DeckOwnership.Owner} />
+                        <DeckTile key={`${item.id}`} subject={item.subject} title={item.title} votes={item.vote} deckID={item.id} deckRelation={item.deckRelation} showEditIcon={(hasAddTile && item.deckRelation === DeckOwnership.Owner)} />
                     )
                 })}
             </div>
