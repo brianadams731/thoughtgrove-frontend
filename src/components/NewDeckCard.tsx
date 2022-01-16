@@ -10,6 +10,7 @@ import { IDeck } from "../interfaces/IDeck";
 import { postDataAsync } from "../utils/postData";
 import { APIRoute } from "../utils/APIRoute";
 import { useNavigate } from "react-router-dom";
+import { patchDataAsync } from "../utils/patchData";
 
 interface Props{
     setEditState?: Dispatch<SetStateAction<EditFocusKind>>;
@@ -53,7 +54,13 @@ const NewDeckCard = ({editState, setEditState, existingDeckData}:Props) =>{
             <form onSubmit={async (e)=>{
                 e.preventDefault();
                 if(editState === EditFocusKind.EditDeck){
-
+                    await patchDataAsync(`${APIRoute.DeckByID}/${existingDeckData?.id}`,{
+                        subject,
+                        title,
+                        description,
+                        public: isPublic
+                    })
+                //TODO: add mutate here
                 }else if(editState === EditFocusKind.NewDeck){
                     const res = await postDataAsync(APIRoute.AddDeck, {
                         title,

@@ -12,6 +12,7 @@ import { postDataAsync } from "../utils/postData";
 import { TrashCan } from "../svg/TrashCan";
 import { deleteDataAsync } from "../utils/deleteData";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
+import { patchDataAsync } from "../utils/patchData";
 
 interface Props{
     setEditState: Dispatch<SetStateAction<EditFocusKind>>;
@@ -74,7 +75,11 @@ const NewCardPlain = ({editState ,setEditState, existingCardData, deckId}:Props)
             <form onSubmit={async (e)=>{
                 e.preventDefault();
                 if(editState === EditFocusKind.EditCard){
-
+                    await patchDataAsync(`${APIRoute.CardByID}/${existingCardData?.id}`,{
+                        prompt,
+                        answer
+                    })
+                    // TODO: Add mutate here
                 }else if(editState === EditFocusKind.NewCard){
                     const res = await postDataAsync(`${APIRoute.CardsByDeckID}/${deckId}`,{
                         prompt,
