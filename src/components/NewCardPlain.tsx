@@ -1,32 +1,33 @@
 import styles from "../styles/NewCardPlain.module.css";
 import cardBase from "../styles/CardBase.module.css";
 import { DeckMetaData } from "./DeckMetaData";
-import { IDeckMetaData } from "../interfaces/IDeckMetaData";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
 import { motion } from "framer-motion";
 import { EditFocusKind } from "../interfaces/EditFocusKind";
-import { ICard } from "../interfaces/ICard";
 import { APIRoute } from "../utils/APIRoute";
 import { postDataAsync } from "../utils/postData";
 import { TrashCan } from "../svg/TrashCan";
 import { deleteDataAsync } from "../utils/deleteData";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 import { patchDataAsync } from "../utils/patchData";
+import { useDeckByID } from "../hooks/api/useDeckByID";
 
 interface Props{
     setEditState: Dispatch<SetStateAction<EditFocusKind>>;
     editState: EditFocusKind;
-    existingCardData?: ICard;
     deckId:number;
+    cardId?:number;
 }
 
-const NewCardPlain = ({editState ,setEditState, existingCardData, deckId}:Props):JSX.Element =>{
+const NewCardPlain = ({editState ,setEditState, deckId, cardId}:Props):JSX.Element =>{
     const {cardData, mutateCards} = useCardsByDeckID(deckId);
-    const mockDeckMetaData:IDeckMetaData = {
-        subject: "Language",
-        title:"French 1"
-    }
+    const {deckData} = useDeckByID(deckId);
+    const cardIndex = useRef<number>(cardData.cards.findIndex(item => item.id === cardId))
+
+    const [prompt, setPrompt] = useState(cardIndex.current>=0?cardData.cards[cardIndex.current!].prompt:"");
+    const [answer, setAnswer] = useState(cardIndex.current>=0?cardData.cards[cardIndex.current].answer:"");
+
 
     const variants = {
         initial:{
@@ -49,23 +50,19 @@ const NewCardPlain = ({editState ,setEditState, existingCardData, deckId}:Props)
         }
     }
 
-    // USE VALUE FROM CACHE
-    const [prompt, setPrompt] = useState(existingCardData?existingCardData.prompt:"");
-    const [answer, setAnswer] = useState(existingCardData?existingCardData.answer:"");
-
     return (
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${cardBase.wrapper} ${styles.cardWrapper}`}>
             <div className={styles.deckTop}>
-                <DeckMetaData subject={mockDeckMetaData.subject} title={mockDeckMetaData.title} fade/>
+                <DeckMetaData subject={deckData.subject} title={deckData.title} fade/>
                 {editState === EditFocusKind.EditCard && <motion.div initial={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)", scale:1.1, cursor:"pointer"}} whileTap={{fill:"var(--c-black)", scale:1}} transition={{duration:.3}} className={styles.trash} onClick={async ()=>{
                     if(editState !== EditFocusKind.EditCard){
                         setEditState(EditFocusKind.None)
                         return;
                     }
-                    await deleteDataAsync(`${APIRoute.CardByID}/${existingCardData?.id}`);
+                    await deleteDataAsync(`${APIRoute.CardByID}/${cardId}`);
                     mutateCards({
                         ...cardData,
-                        cards: cardData.cards.filter((item) => item.id !== existingCardData?.id),
+                        cards: cardData.cards.filter((_,index) => index !== cardIndex.current),
                     })
                     setEditState(EditFocusKind.None)
                 }}>
@@ -75,20 +72,25 @@ const NewCardPlain = ({editState ,setEditState, existingCardData, deckId}:Props)
             <form onSubmit={async (e)=>{
                 e.preventDefault();
                 if(editState === EditFocusKind.EditCard){
-                    await patchDataAsync(`${APIRoute.CardByID}/${existingCardData?.id}`,{
-                        prompt,
-                        answer
-                    })
-                    // TODO: Add mutate here
-                }else if(editState === EditFocusKind.NewCard){
-                    const res = await postDataAsync(`${APIRoute.CardsByDeckID}/${deckId}`,{
-                        prompt,
-                        answer
-                    })
                     mutateCards({
                         ...cardData,
-                        cards: [...cardData.cards, res],
+                        cards:[...cardData.cards.filter((_,index) => index !== cardIndex.current), {
+                            id:cardId,
+                            prompt,
+                            answer
+                        }]
+                    }, false);
+                    await patchDataAsync(`${APIRoute.CardByID}/${cardId}`,{
+                        prompt,
+                        answer
                     })
+                    mutateCards();
+                }else if(editState === EditFocusKind.NewCard){
+                    await postDataAsync(`${APIRoute.CardsByDeckID}/${deckId}`,{
+                        prompt,
+                        answer
+                    })
+                    mutateCards()
                 }
                 setEditState(EditFocusKind.None)
             }}>

@@ -4,13 +4,13 @@ import { CardTileGrid } from "../components/CardTileGrid";
 import { DeckTile } from "../components/DeckTile";
 import { FullPageDimmer } from "../components/FullPageDimmer";
 import { NewCardPlain } from "../components/NewCardPlain";
-import { NewDeckCard } from "../components/NewDeckCard";
 import styles from "../styles/EditDeck.module.css";
 import { EditFocusKind } from "../interfaces/EditFocusKind";
 import { useParams } from "react-router-dom";
 import { useDeckByID } from "../hooks/api/useDeckByID";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 import { DeleteDeckConfirmation } from "../components/DeleteDeckConfirmation";
+import { EditDeckCard } from "../components/EditDeckCard";
 
 const EditDeck = ():JSX.Element =>{
     const {deckId} = useParams();
@@ -19,13 +19,6 @@ const EditDeck = ():JSX.Element =>{
 
     const [editState, setEditState] = useState<EditFocusKind>(EditFocusKind.None);
     const [selectedCardId, setSelectedCardId] = useState<number>(-1)
-
-    const findCardData = ():any =>{
-        const cardIndex = cardData.cards.findIndex(item=>{
-            return item.id === selectedCardId;
-        });
-        return cardData.cards[cardIndex];
-    }
 
     return (
         <div className={styles.wrapper}>
@@ -46,10 +39,8 @@ const EditDeck = ():JSX.Element =>{
                 {editState !== EditFocusKind.None && <FullPageDimmer key="pageDimmer" callBackOnClick={()=>setEditState(EditFocusKind.None)}/>}
 
                 {editState === EditFocusKind.NewCard && <NewCardPlain key="newCard" setEditState={setEditState} editState={editState} deckId={deckData.id} />}
-                {/*editState === EditFocusKind.NewDeck && <NewDeckCard key="newDeck" setEditState={setEditState} editState={editState}/>*/}
-
-                {editState === EditFocusKind.EditCard && <NewCardPlain key="editCard" setEditState={setEditState} existingCardData={findCardData()} editState={editState} deckId={deckData.id}/>}
-                {editState === EditFocusKind.EditDeck && <NewDeckCard key="editDeck" setEditState={setEditState} existingDeckData={deckData} editState={editState}/>}
+                {editState === EditFocusKind.EditCard && <NewCardPlain key="editCard" setEditState={setEditState} editState={editState} cardId={selectedCardId} deckId={deckData.id} />}
+                {editState === EditFocusKind.EditDeck && <EditDeckCard deckId={deckData.id} setEditState={setEditState} editState={editState} key="editDeck"/>}
 
                 {editState === EditFocusKind.DeleteDeck && <DeleteDeckConfirmation existingDeckData={deckData} setEditState={setEditState} editState={editState}/>}
             </AnimatePresence>

@@ -3,19 +3,25 @@ import cardBase from "../styles/CardBase.module.css";
 import { motion } from "framer-motion";
 import { Logo } from "../svg/Logo";
 import { BasicCardInput } from "./BasicCardInput";
-import {  useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
-import { postDataAsync } from "../utils/postData";
+import { EditFocusKind } from "../interfaces/EditFocusKind";
 import { APIRoute } from "../utils/APIRoute";
-import { useNavigate } from "react-router-dom";
+import { patchDataAsync } from "../utils/patchData";
+import { useDeckByID } from "../hooks/api/useDeckByID";
 
-const NewDeckCard = () =>{
-    const [subject, setSubject] = useState<string>("");
-    const [title, setTitle] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
+interface Props{
+    deckId:number;
+    setEditState: Dispatch<SetStateAction<EditFocusKind>>;
+    editState: EditFocusKind;
+}
+const EditDeckCard = ({deckId,editState, setEditState}:Props) =>{
+    const {deckData, mutateDeck} = useDeckByID(deckId);
+    const [subject, setSubject] = useState<string>(deckData.subject);
+    const [title, setTitle] = useState<string>(deckData.title);
+    const [description, setDescription] = useState<string>(deckData.description);
     // TODO: ADD SET PUBLIC FIELD 
     const [isPublic] = useState<boolean>(true);
-    const navigate = useNavigate();
 
     const variants = {
         initial:{
@@ -45,17 +51,16 @@ const NewDeckCard = () =>{
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${styles.cardWrapper} ${cardBase.wrapper}`}>
             <form onSubmit={async (e)=>{
                 e.preventDefault();
-                const res = await postDataAsync(APIRoute.AddDeck, {
-                    title,
-                    subject,
-                    description,
-                    public: isPublic
-                });
-                if(res.id){
-                    navigate(`/dashboard/deck/edit/${res.id}`)
-                }else{
-                    console.log("ERROR DECK NOT CREATED")
+                if(editState === EditFocusKind.EditDeck){
+                    await patchDataAsync(`${APIRoute.DeckByID}/${deckId}`,{
+                        subject,
+                        title,
+                        description,
+                        public: isPublic
+                    })
+                    mutateDeck();
                 }
+                setEditState(EditFocusKind.None)
             }}>
                 <div className={styles.cardMetaData}>
                     <div className={styles.subjectInput}>
@@ -80,4 +85,4 @@ const NewDeckCard = () =>{
     )
 }
 
-export { NewDeckCard };
+export { EditDeckCard };
