@@ -7,17 +7,22 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { BasicCardTextArea } from "./BasicCardTextArea";
 import { EditFocusKind } from "../interfaces/EditFocusKind";
 import { IDeck } from "../interfaces/IDeck";
+import { postDataAsync } from "../utils/postData";
+import { APIRoute } from "../utils/APIRoute";
+import { useNavigate } from "react-router-dom";
 
 interface Props{
-    setEditState: Dispatch<SetStateAction<EditFocusKind>>;
+    setEditState?: Dispatch<SetStateAction<EditFocusKind>>;
     editState: EditFocusKind;
     existingDeckData?: IDeck;
 }
 const NewDeckCard = ({editState, setEditState, existingDeckData}:Props) =>{
     // USE DATA FROM CACHE AS DEFAULT
-    const [subject, setSubject] = useState(existingDeckData?existingDeckData.subject:"");
-    const [title, setTitle] = useState(existingDeckData?existingDeckData.title:"");
-    const [description, setDescription] = useState(existingDeckData?existingDeckData.description:"");
+    const [subject, setSubject] = useState<string>(existingDeckData?existingDeckData.subject:"");
+    const [title, setTitle] = useState<string>(existingDeckData?existingDeckData.title:"");
+    const [description, setDescription] = useState<string>(existingDeckData?existingDeckData.description:"");
+    const [isPublic, setPublic] = useState<boolean>(true);
+    const navigate = useNavigate();
 
     const variants = {
         initial:{
@@ -45,15 +50,27 @@ const NewDeckCard = ({editState, setEditState, existingDeckData}:Props) =>{
 
     return (
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${styles.cardWrapper} ${cardBase.wrapper}`}>
-            <form onSubmit={(e)=>{
+            <form onSubmit={async (e)=>{
                 e.preventDefault();
                 if(editState === EditFocusKind.EditDeck){
 
                 }else if(editState === EditFocusKind.NewDeck){
-                    
+                    const res = await postDataAsync(APIRoute.AddDeck, {
+                        title,
+                        subject,
+                        description,
+                        public: isPublic
+                    });
+                    if(res.id){
+                        navigate(`/dashboard/deck/edit/${res.id}`)
+                    }else{
+                        console.log("ERROR DECK NOT CREATED")
+                    }
                 }
                 // MUTATE CACHE SYNCHRONOUSLY HERE WITH UPDATE VALUE, THEN THE SUBMIT WILL HAPPEN FROM THE OUTSIDE
-                setEditState(EditFocusKind.None)
+                if(setEditState){
+                    setEditState(EditFocusKind.None)
+                }
             }}>
                 <div className={styles.cardMetaData}>
                     <div className={styles.subjectInput}>

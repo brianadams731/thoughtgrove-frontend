@@ -46,7 +46,7 @@ const EditDeck = ():JSX.Element =>{
                 {editState !== EditFocusKind.None && <FullPageDimmer key="pageDimmer" callBackOnClick={()=>setEditState(EditFocusKind.None)}/>}
 
                 {editState === EditFocusKind.NewCard && <NewCardPlain key="newCard" setEditState={setEditState} editState={editState} deckId={deckData.id} />}
-                {editState === EditFocusKind.NewDeck && <NewDeckCard key="newDeck" setEditState={setEditState} editState={editState}/>}
+                {/*editState === EditFocusKind.NewDeck && <NewDeckCard key="newDeck" setEditState={setEditState} editState={editState}/>*/}
 
                 {editState === EditFocusKind.EditCard && <NewCardPlain key="editCard" setEditState={setEditState} existingCardData={findCardData()} editState={editState} deckId={deckData.id}/>}
                 {editState === EditFocusKind.EditDeck && <NewDeckCard key="editDeck" setEditState={setEditState} existingDeckData={deckData} editState={editState}/>}

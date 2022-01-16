@@ -9,15 +9,20 @@ import { DeckTile } from "./DeckTile";
 interface Props{
     title: string;
     deckTileData: IDeck[];
-    hasAddTile?: boolean
+    hasAddTile?: boolean;
+    addDeckCallBack?: ()=>any;
 }
 
-const DeckTileGrid = ({deckTileData, title, hasAddTile}:Props):JSX.Element =>{
+const DeckTileGrid = ({deckTileData, title, hasAddTile, addDeckCallBack}:Props):JSX.Element =>{
     return (
         <div className={styles.wrapper}>
             <h3 className={styles.gridTitle}>{title}</h3>
             <div className={styles.gridWrapper}>
-                {hasAddTile&&<AddDeckTile />}
+                {hasAddTile&&<AddDeckTile callbackOnClick={()=>{
+                    if(addDeckCallBack){
+                        addDeckCallBack();
+                    }
+                }}/>}
                 {deckTileData?.map((item) => {
                     return(
                         <DeckTile key={`${item.id}`} subject={item.subject} title={item.title} votes={item.vote} deckID={item.id} deckRelation={item.deckRelation} showEditIcon={item.deckRelation === DeckOwnership.Owner} />
