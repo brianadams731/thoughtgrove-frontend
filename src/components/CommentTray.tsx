@@ -83,7 +83,7 @@ const CommentTray = ({deckId, setShowComment}:Props):JSX.Element =>{
                 {commentsData &&
                 commentsData.comments.map(item =>{
                     return(
-                        <Comment title={"Placeholder"} comment={item.content} username={item.user.username} key={`${item.id}${item.user.id}`} />
+                        <Comment title={"Placeholder"} comment={item.content} username={item.user.username} userOwnsComment={item.userOwnsComment} key={`${item.id}${item.user.id}`} />
                     )
                 })}
             </div>

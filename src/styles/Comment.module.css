@@ -20,6 +20,26 @@
 .wrapper::after{
     content: none;
 }
+.commentHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userInfoWrapper{
+
+}
+
+.editWrapper{
+    transform-origin: 50% 50%;
+    height: min-content;
+    width: min-content;
+}
+
+
+.editWrapper:hover{
+    cursor: pointer;
+}
 
 .title{
     font-family: var(--font-header);
