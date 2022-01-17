@@ -10,10 +10,11 @@ import { useDeckByID } from "../hooks/api/useDeckByID";
 
 interface Props{
     deckID:number;
+    setShowComment:Dispatch<SetStateAction<boolean>>;
     setShowDeckTop: Dispatch<SetStateAction<boolean>>;
 }
 
-const DeckTop = ({deckID, setShowDeckTop}:Props):JSX.Element =>{
+const DeckTop = ({deckID, setShowDeckTop, setShowComment}:Props):JSX.Element =>{
     
     const {deckData} = useDeckByID(deckID);
     
@@ -31,7 +32,9 @@ const DeckTop = ({deckID, setShowDeckTop}:Props):JSX.Element =>{
             <button className={styles.practiceBtn} onClick={()=>{
                 setShowDeckTop(false);
             }}>Practice</button>
-            <motion.div whileHover={{scale:1.1}} whileTap={{scale:1}} className={styles.commentIconWrapper}>
+            <motion.div whileHover={{scale:1.1}} whileTap={{scale:1}} className={styles.commentIconWrapper} onClick={(e)=>{
+                setShowComment(prev => !prev);
+            }}>
                 <CommentIcon fill="var(--c-main-gray)" hoverFill="var(--c-achievement-blue)" width="40px" />
             </motion.div>
         </motion.article>

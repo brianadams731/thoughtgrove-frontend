@@ -1,0 +1,36 @@
+.wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 25px 15px;
+}
+
+.wrapper::after{
+    position: absolute;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    width: 50%;
+    background-color: var(--c-main-gray);
+    transform: translateX(-50%);
+    content: "";
+}
+
+.wrapper::after{
+    content: none;
+}
+
+.title{
+    font-family: var(--font-header);
+    color: var(--c-main-gray);
+    font-size: var(--fs-standard-small);
+    font-weight: 400;
+}
+
+.username{
+    font-family: var(--font-header);
+    color: var(--c-black);
+    font-size: var(--fs-heading-small);
+    font-weight: 400;
+}

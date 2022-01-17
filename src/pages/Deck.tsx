@@ -3,11 +3,13 @@ import { useEffect, useReducer, useState } from "react";
 import { CardPlain } from "../components/CardPlain";
 import { DeckTop } from "../components/DeckTop";
 import { CardAction, CardActionKind } from "../interfaces/CardReducer";
-import styles from "../styles/Deck.module.css";
 import { useParams } from "react-router-dom";
 import { useDeckByID } from "../hooks/api/useDeckByID";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 import { ICard } from "../interfaces/ICard";
+import { CommentTray } from "../components/CommentTray";
+
+import styles from "../styles/Deck.module.css";
 
 const Deck = ():JSX.Element =>{
     const {deckId} = useParams();
@@ -15,6 +17,7 @@ const Deck = ():JSX.Element =>{
     const {cardData} = useCardsByDeckID(deckId);
     
     const [showDeckTop, setShowDeckTop] = useState(true);
+    const [showComments, setShowComments] = useState(false);
 
     useEffect(()=>{
         if(!cardData){
@@ -74,15 +77,22 @@ const Deck = ():JSX.Element =>{
     
 
     return ( 
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} onClick={(e)=>{
+            if(e.target === e.currentTarget){
+                setShowComments(false)
+            }
+        }}>
             <AnimatePresence>
-                {deckData&& cardDeck.toStudy.map((item)=>{
+                {deckData && cardDeck.toStudy.map((item)=>{
                     return (
                         <CardPlain key={item.id} deckMetaData={{subject: deckData.subject, title: deckData.title}} prompt={item.prompt} answer={item.answer} dispatch={dispatch} cardIndex={cardDeck.complete.length}/>
                     )             
                 })}
                 {showDeckTop && deckData &&
-                <DeckTop deckID={deckData.id} key={deckData.subject} setShowDeckTop={setShowDeckTop} />}
+                <DeckTop deckID={deckData.id} key={deckData.subject} setShowDeckTop={setShowDeckTop} setShowComment={setShowComments} />}
+
+                {showComments && deckData && showDeckTop &&
+                <CommentTray deckId={deckData.id} setShowComment={setShowComments}/>}
             </AnimatePresence>
         </div>
     )
