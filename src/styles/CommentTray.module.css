@@ -7,14 +7,30 @@
     width: clamp(350px, 75vw, 95vw);
 
     position: absolute;
+    display: flex;
+    flex-direction: column;
     bottom: 0px;
     left: 50%;
+}
+.noCommentsToShowWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 25px;
+    text-align: center;
+}
+
+.noCommentsToShowWrapper h3{
+    font-family: var(--font-body);
+    font-size: var(--fs-standard-large);
+    font-weight: 400;
 }
 
 .commentWrapper{
     scrollbar-width: 8px;
     scrollbar-color: var(--c-achievement-blue) var(--c-white);
 
+    flex-shrink: 1;
     max-height: 75vh;
     overflow-y: auto;
 }
@@ -31,11 +47,14 @@
     height: 125px;
 }
 
+.userCommentInput::-webkit-scrollbar{
+    height: 90%;
+}
+
 .exitIcon{
     position: absolute;
     top:20px;
     right:25px;
-    transition: all .3 ease-in-out;
 }
 
 .exitIcon:hover{
@@ -72,6 +91,14 @@
     outline: none;
     font-size: var(--fs-standard);
     font-family: var(--font-body);
+
+    overflow: auto;
+    max-height: 40vh;
+
+    scrollbar-width: none;
+}
+.userCommentInput::-webkit-scrollbar{
+    width: none;
 }
 
 .userCommentInput:active{
