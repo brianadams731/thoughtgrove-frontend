@@ -78,6 +78,10 @@ p{
     font-family: 'Open Sans',sans-serif;
 }
 
+svg{
+    display: block;
+}
+
 button{
     color: var(--c-white);
     background-color: var(--c-black);
