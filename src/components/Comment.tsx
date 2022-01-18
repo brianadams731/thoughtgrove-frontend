@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { KeyedMutator } from "swr";
 import { ICommentResponse } from "../hooks/api/useCommentsByDeckId";
 
@@ -7,6 +7,7 @@ import styles from "../styles/Comment.module.css";
 import { CogIcon } from "../svg/CogIcon";
 import { APIRoute } from "../utils/APIRoute";
 import { deleteDataAsync } from "../utils/deleteData";
+import { patchDataAsync } from "../utils/patchData";
 
 interface Props{
     id:number;
@@ -20,7 +21,18 @@ interface Props{
 }
 
 const Comment = ({id,title, username, comment, userOwnsComment, mutateComments, commentsData, parentClicked}:Props):JSX.Element =>{
+    //TODO: REFACTOR THIS HOT SPAGHETTI!!!!! CONSIDER BREAKING USER OWNS COMMENTS AND OTHER COMMENTS APART! ALL THIS EDIT DATA ISN'T NEEDED FOR ALL
+    const commentEditInput = useRef<HTMLDivElement>(null);
     const [showEditMenu, setShowEditMenu] = useState(false);
+    const [editText, setEditText] = useState(false);
+
+    // This injects the comment into innerText, prevents contenteditable from causing react to not track children
+    useEffect(()=>{
+        if(!commentEditInput.current){
+            return;
+        }
+        commentEditInput.current.innerText = comment;
+    },[editText, comment])
 
     useEffect(()=>{
         if(showEditMenu){
@@ -62,12 +74,36 @@ const Comment = ({id,title, username, comment, userOwnsComment, mutateComments, 
                     <CogIcon height="25px"/>
                 </motion.div>}
             </div>
-            <p className={styles.commentBody}>{comment}</p>
-            
+            {!editText && <p className={styles.commentBody}>{comment}</p>}
+            {editText && <div className={styles.editing} ref={commentEditInput} contentEditable={userOwnsComment && editText}></div>}
+            {userOwnsComment && editText && <button className={styles.editBtn} onClick={async ()=>{
+                if(!commentEditInput.current){
+                    return
+                }
+                mutateComments({
+                    deckId: commentsData.deckId,
+                    comments: commentsData.comments.map((item)=>{
+                        if(item.id === id){
+                            return {
+                                ...item,
+                                content: commentEditInput.current!.innerText
+                            }
+                        }
+                        return item;
+                    })
+                }, false);
+                setEditText(false);
+                await patchDataAsync(`${APIRoute.CommentById}/${id}`,{
+                    content: commentEditInput.current.innerText
+                })
+                mutateComments();
+                }}>Save</button>}
             <AnimatePresence>
             {showEditMenu && userOwnsComment&&
             <motion.div initial={{x:"105%", y:"-50%"}} animate={{x:"0%", y:"-50%"}}  exit={{x:"115%", y:"-50%"}} transition={{duration:.7, type:"spring", bounce:.4}} className={styles.editMenu}>
-                <motion.div animate={{backgroundColor:"var(--c-white)"}} whileHover={{backgroundColor:"var(--c-achievement-blue)", color:"var(--c-white)"}} className={styles.editCommentWrapper}>
+                <motion.div animate={{backgroundColor:"var(--c-white)"}} whileHover={{backgroundColor:"var(--c-achievement-blue)", color:"var(--c-white)"}} className={styles.editCommentWrapper} onClick={()=>{
+                    setEditText(true);
+                }}>
                     <h5>Edit Comment</h5>
                 </motion.div>
                 <motion.div animate={{backgroundColor:"var(--c-white)"}} whileHover={{backgroundColor:"var(--c-achievement-orange)", color:"var(--c-white)"}} className={styles.deleteCommentWrapper} onClick={async ()=>{

@@ -33,6 +33,15 @@
     gap: 2px;
 }
 
+.editing{
+    padding: 12px 15px;
+    border: 2px solid var(--c-main-gray);
+    border-radius: var(--border-card-radius);
+    outline: none;
+    font-size: var(--fs-standard);
+    font-family: var(--font-body);
+}
+
 .editWrapper{
     transform-origin: 50% 50%;
     height: min-content;
@@ -58,7 +67,12 @@
     font-weight: 400;
 }
 
-
+.editBtn{
+    margin-top: 5px;
+    background-color: var(--c-achievement-blue);
+    width: fit-content;
+    align-self: center;
+}
 .editMenu{
     position: absolute;
     right: 10px;

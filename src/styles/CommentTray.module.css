@@ -92,7 +92,6 @@
     padding: 12px 15px;
     border: 2px solid var(--c-main-gray);
     flex-grow: 1;
-    border-color: var(--c-main-gray);
     border-radius: var(--border-card-radius);
     outline: none;
     font-size: var(--fs-standard);
