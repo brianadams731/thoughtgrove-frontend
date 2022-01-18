@@ -1,6 +1,7 @@
 .wrapper{
     position: relative;
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     gap: 2px;
     padding: 25px 15px;
@@ -55,4 +56,43 @@
     color: var(--c-black);
     font-size: var(--fs-heading-small);
     font-weight: 400;
+}
+
+
+.editMenu{
+    position: absolute;
+    right: 10px;
+    top:50%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-card-radius);
+    box-shadow: var(--box-shadow-card);
+}
+
+.deleteCommentWrapper, .editCommentWrapper{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--p-button-standard);
+
+    font-family: var(--font-header);
+    color: var(--c-black);
+    font-size: var(--fs-standard);
+}
+
+.deleteCommentWrapper h5, .editCommentWrapper h5{
+    font-weight: 600;
+}
+
+.deleteCommentWrapper:hover, .editCommentWrapper:hover{
+    cursor: pointer;
+}
+.editCommentWrapper{
+    border-radius: 20px 20px 0 0;
+}
+
+.deleteCommentWrapper{
+    border-radius: 0 0 20px 20px;
 }

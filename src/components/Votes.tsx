@@ -5,18 +5,14 @@ import { APIRoute } from "../utils/APIRoute";
 import { useDeckByID } from "../hooks/api/useDeckByID";
 import { postDataAsync } from "../utils/postData";
 import { deleteDataAsync } from "../utils/deleteData";
-import { useEffect } from "react";
 
 interface Props{
     deckID: number;
 }
 
 const Votes = ({deckID}:Props):JSX.Element =>{
-
     const {deckData, mutateDeck} = useDeckByID(deckID);
-    useEffect(()=>{
-        console.log(deckData);
-    },[deckData])
+
     const deleteVoteRemote = async() =>{
         const res = await deleteDataAsync(`${APIRoute.PostVotes}/${deckID}`);
         if(res.count !== deckData.vote?.count){

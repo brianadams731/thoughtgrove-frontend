@@ -18,7 +18,8 @@ enum APIRoute {
     CardByID = "/card/byID", // needs a /id appended
 
     AddComment = "/comments/addComment",
-    CommentsByDeckId = "/comments/byDeckID" // needs a /:deckId appended
+    CommentsByDeckId = "/comments/byDeckID", // needs a /:deckId appended
+    CommentById = "/comments/byID", // needs a /:commentId appended
 } 
 
 export {APIRoute};

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { useCommentsByDeckID } from "../hooks/api/useCommentsByDeckId";
 import styles from "../styles/CommentTray.module.css";
@@ -12,13 +12,19 @@ interface Props{
     deckId:number;
     setShowComment:Dispatch<SetStateAction<boolean>>;
 }
+
 const CommentTray = ({deckId, setShowComment}:Props):JSX.Element =>{
 
     const {commentsData, areCommentsLoading, mutateComments} = useCommentsByDeckID(deckId);
+    const [parentClicked, setParentClicked] = useState(false);
     const [scrollToBottom, setScrollToBottom] = useState<boolean>(false);
 
     const commentWrapperDiv = useRef<HTMLDivElement>(null);
     const inputDiv = useRef<HTMLDivElement>(null);
+
+    useEffect(()=>{
+        setParentClicked(false);
+    },[parentClicked])
 
     useEffect(()=>{
         if(scrollToBottom && commentWrapperDiv.current){
@@ -68,7 +74,10 @@ const CommentTray = ({deckId, setShowComment}:Props):JSX.Element =>{
     }
     
     return (
-        <motion.div variants={variants} initial="initial" animate={areCommentsLoading?"initial":"animate"} exit="exit" className={styles.wrapper} onClick={(e)=>e.stopPropagation()}>
+        <motion.div variants={variants} initial="initial" animate={areCommentsLoading?"initial":"animate"} exit="exit" className={styles.wrapper} onClick={(e)=>{
+            e.stopPropagation();
+            setParentClicked(true);
+        }}>
             <motion.div initial={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)", scale:1.05}} whileTap={{scale:.95}} className={styles.exitIcon} onClick={()=>{
                 setShowComment(false);
             }}>
@@ -80,12 +89,22 @@ const CommentTray = ({deckId, setShowComment}:Props):JSX.Element =>{
                         <h3>There are no comments yet!</h3>
                     </div>
                 }
-                {commentsData &&
-                commentsData.comments.map(item =>{
-                    return(
-                        <Comment title={"Placeholder"} comment={item.content} username={item.user.username} userOwnsComment={item.userOwnsComment} key={`${item.id}${item.user.id}`} />
-                    )
-                })}
+                <AnimatePresence>
+                    {commentsData &&
+                    commentsData.comments.map((item, index) =>{
+                        return(
+                            <Comment title={"Placeholder"}
+                            comment={item.content}
+                            username={item.user.username} 
+                            userOwnsComment={item.userOwnsComment}
+                            id={item.id}
+                            commentsData={commentsData} 
+                            mutateComments={mutateComments}
+                            parentClicked={parentClicked} 
+                            key={`${item.id}+${item.user.id}`} />
+                        )
+                    })}
+                </AnimatePresence>
             </div>
             <div className={styles.postCommentWrapper}>
                 <div className={styles.userCommentInput} contentEditable ref={inputDiv} onKeyDown={async(e)=>{

@@ -18,6 +18,7 @@ interface ICommentResponse{
     comments: IComment[];
 }
 
+export type { ICommentResponse };
 export { useCommentsByDeckID };
 
 /*
