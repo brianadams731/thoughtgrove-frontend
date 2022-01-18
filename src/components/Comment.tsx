@@ -75,11 +75,20 @@ const Comment = ({id,title, username, comment, userOwnsComment, mutateComments, 
                 </motion.div>}
             </div>
             {!editText && <p className={styles.commentBody}>{comment}</p>}
-            {editText && <div className={styles.editing} ref={commentEditInput} contentEditable={userOwnsComment && editText}></div>}
+            {editText && <div className={styles.editing} ref={commentEditInput} contentEditable={userOwnsComment && editText} onKeyDown={(e)=>{
+                if(e.key === "Enter"){
+                    e.preventDefault();
+                }
+            }}></div>}
             {userOwnsComment && editText && <button className={styles.editBtn} onClick={async ()=>{
                 if(!commentEditInput.current){
-                    return
+                    return;
                 }
+                if(!commentEditInput.current.innerText){
+                    setEditText(false);
+                    return;
+                }
+                
                 mutateComments({
                     deckId: commentsData.deckId,
                     comments: commentsData.comments.map((item)=>{
