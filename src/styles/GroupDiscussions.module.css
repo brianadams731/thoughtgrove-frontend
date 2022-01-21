@@ -1,7 +1,7 @@
 .heading{
     color: var(--c-dark-gray);
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 500;
     font-size: var(--fs-heading);
 }
 
@@ -23,6 +23,10 @@
     background-color: var(--c-main-gray);
     opacity: .3;
     transform: translate(-50%, -50%);
+}
+
+.discussionWrapper:last-of-type::after{
+    content: none;
 }
 
 .discussionMetaData h4{

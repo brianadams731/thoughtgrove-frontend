@@ -1,0 +1,30 @@
+.wrapper{
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: fit-content;
+    width: fit-content;
+}
+
+.loadMoreText{
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--fs-standard);
+    color: var(--c-main-gray);
+}
+
+.chevronWrapper{
+    transition: transform .2s ease-in-out;
+}
+.chevronWrapper:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.chevronWrapper:active{
+    transform: scale(.9);
+}

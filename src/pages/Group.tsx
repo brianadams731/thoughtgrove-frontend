@@ -19,20 +19,32 @@ const Group = () =>{
     return (
         <div className={styles.wrapper}>
             <div className={styles.headWrapper}>
-                <div className={styles.groupNameWrapper}>
-                    <h1>{mockGroup.title}</h1>
-                    <div className={styles.addGroupBtn}>
-                        <PlusSign width="35px" />
+
+        
+                <div className={styles.imageTitleBlock}>
+                    <div className={styles.headingImage}>
+                        <img alt="hero"  src="https://images.unsplash.com/photo-1623239715110-631c5195f442?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80" />
+                    </div>
+                    <div className={styles.subjectTitleBlock}>
+                        <h6 className={styles.subject}>Group</h6>
+                        <h1>{mockGroup.title}</h1>
                     </div>
                 </div>
-                <p>{mockGroup.description}</p>
+
+                <div className={styles.addGroupBtn}>
+                    <PlusSign width="35px" />
+                </div>
+                
             </div>
+
             <div className={styles.bulletinBoardWrapper}>
                 <GroupBulletinBoard groupId={groupId!} />
             </div>
+            
             <div className={styles.discussionsWrapper}>
                 <GroupDiscussions groupId={groupId!} />
             </div>
+            
             <div className={styles.decksWrapper}>
 
             </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Open+Sans&display=swap');
 
 *{
     margin: 0;
@@ -60,7 +60,7 @@
 
     --deck-tile-width: 300px;
 
-    --constrain-standard-width: clamp(65vw ,750px, 90vw);
+    --constrain-standard-width: clamp(750px ,1000px, 90vw);
 }
 
 body {

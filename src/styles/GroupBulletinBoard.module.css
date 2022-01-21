@@ -1,7 +1,7 @@
 .heading{
     color: var(--c-dark-gray);
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 500;
     font-size: var(--fs-heading);
 }
 
@@ -21,9 +21,15 @@
     transform: translate(-50%, -50%);
 }
 
+.bulletinItem:last-child::after{
+    content: none;
+}
+
 .bulletinWrapper{
     margin-bottom: 30px;
 }
+
+
 .wrapper button{
     display: block;
     margin: auto;

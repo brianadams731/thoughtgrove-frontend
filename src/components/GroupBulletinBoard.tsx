@@ -1,4 +1,5 @@
 import styles from "../styles/GroupBulletinBoard.module.css";
+import { LoadMore } from "./LoadMore";
 
 interface Props{
     groupId:number|string;
@@ -27,7 +28,7 @@ const GroupBulletinBoard = ({groupId}:Props):JSX.Element =>{
                     )
                 })}
             </article>
-            <button>Load More</button>
+            <LoadMore callBackOnClick={()=>{console.log("click")}}/>
         </div>
     )
 }
