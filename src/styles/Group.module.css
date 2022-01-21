@@ -1,0 +1,44 @@
+.wrapper{
+    --slice-bottom-spacing: 65px;
+}
+
+.headWrapper, .bulletinBoardWrapper, .discussionsWrapper{
+    width: var(--constrain-standard-width);
+    margin: auto;
+    margin-bottom: var(--slice-bottom-spacing);
+}
+
+.headWrapper{
+    padding-top: 125px;
+}
+
+.addGroupBtn{
+    fill: var(--c-achievement-green);
+    transition: transform .2s ease-in-out;
+}
+.addGroupBtn:hover{
+    cursor: pointer;
+    transform: scale(1.15);
+}
+.addGroupBtn:active{
+    transform: scale(.9);
+}
+
+.groupNameWrapper{
+    position:relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.groupNameWrapper h1{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50% ,-50%);
+    max-width: 85%;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--fs-heading-large);
+    text-align: center;
+}

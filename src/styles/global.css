@@ -59,6 +59,8 @@
     --z-index-modal: 75;
 
     --deck-tile-width: 300px;
+
+    --constrain-standard-width: clamp(65vw ,750px, 90vw);
 }
 
 body {

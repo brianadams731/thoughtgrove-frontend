@@ -7,6 +7,7 @@ import styles from "../styles/Dashboard.module.css";
 import { Home } from "./Home";
 import { Deck } from "./Deck";
 import { EditDeck } from "./EditDeck";
+import { Group } from "./Group";
 
 const Dashboard = ():JSX.Element =>{
     // Consider pushing into global state
@@ -21,6 +22,7 @@ const Dashboard = ():JSX.Element =>{
                 <Route path="/" element={<Home />} />
                 <Route path="deck/edit/:deckId" element={<EditDeck />} />
                 <Route path="deck/:deckId" element={<Deck />} />
+                <Route path="group/:groupId" element={<Group />} />
             </Routes>
         </div>
     )

@@ -1,0 +1,31 @@
+.heading{
+    color: var(--c-dark-gray);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--fs-heading);
+}
+
+.bulletinItem{
+    position: relative;
+    padding: 25px 0;
+}
+.bulletinItem::after{
+    content: "";
+    background-color: var(--c-main-gray);
+    opacity: .4;
+    height: 2px;
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+}
+
+.bulletinWrapper{
+    margin-bottom: 30px;
+}
+.wrapper button{
+    display: block;
+    margin: auto;
+    background-color: var(--c-dark-gray);
+}
