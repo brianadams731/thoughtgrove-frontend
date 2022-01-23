@@ -17,7 +17,6 @@ interface Props{
 const DeckTop = ({deckID, setShowDeckTop, setShowComment}:Props):JSX.Element =>{
     
     const {deckData} = useDeckByID(deckID);
-    
     return (
         <motion.article exit={{x:"-75vw", rotate:"-12deg"}} transition={{mass:.4, duration:.8}} className={`${styles.wrapper} ${cardBase.wrapper}`}>
             <div className={styles.dataWrapper}>

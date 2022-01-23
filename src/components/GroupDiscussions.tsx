@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import { useDiscussionsByGroupID } from "../hooks/api/useDiscussionsByGroupId";
 import styles from "../styles/GroupDiscussions.module.css"
 import { CommentIcon } from "../svg/CommentIcon"
 import { LoadMore } from "./LoadMore"
@@ -7,41 +9,37 @@ interface Props{
 }
 
     const GroupDiscussions = ({groupId}:Props):JSX.Element =>{
-        const mockDiscussions = [
-            {
-                id:1,
-                title: "How do you pernounce bois?",
-                authorUserName: "badams72",
-                commentCount:1
-            },{
-                id:2,
-                title: "How do you pernounce bois?",
-                authorUserName: "badams72",
-                commentCount: 52
-            },{
-                id:3,
-                title: "How do you pernounce bois?",
-                authorUserName: "badams72",
-                commentCount: 15
-            },
-        ]
+        const {groupDiscussionsData, groupDiscussionsError, areGroupDiscussionsLoading} = useDiscussionsByGroupID(groupId);
 
+        if(areGroupDiscussionsLoading) return (
+            <div>
+                Loading...
+            </div>
+        )
+        if(groupDiscussionsError) return(
+            <div>
+                Error...
+            </div>
+        )
         return(
             <div className={styles.wrapper}>
                 <h2 className={styles.heading}>Discussions</h2>
                 <div>
-                    {mockDiscussions.map(item =>{
+                    {groupDiscussionsData.map(item =>{
                         return (
-                            <div className={styles.discussionWrapper} key={item.id}>
+                            <motion.div animate={{scale:1}} whileHover={{scale:1.02}} whileTap={{scale:.99}} className={styles.discussionWrapper} key={item.id} onClick={()=>{
+                                // navigate to specific discussion here
+                                console.log(item.id)
+                            }}>
                                 <div className={styles.discussionMetaData}>
-                                    <h4>{item.title}</h4>
-                                    <h6>{item.authorUserName}</h6>
+                                    <h4 className={styles.title}>{item.title}</h4>
+                                    <h6 className={styles.authorUsername}>{item.author.username}</h6>
                                 </div>
                                 <div className={styles.commentWrapper}>
                                     <CommentIcon fill="var(--c-main-gray)" hoverFill="var(--c-achievement-blue)" width="25px"/>
                                     <p className={styles.commentCount}>{item.commentCount}</p>
                                 </div>
-                            </div>
+                            </motion.div>
                         )
                     })}
                 </div>

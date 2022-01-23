@@ -12,6 +12,9 @@
     align-items: center;
     padding: 25px 0;
 }
+.discussionWrapper:hover{
+    cursor: pointer;
+}
 
 .discussionWrapper::after{
     position: absolute;
@@ -39,6 +42,7 @@
     font-size: var(--fs-standard-small);
 }
 
+
 .commentWrapper{
     display: flex;
     flex-direction: column;
@@ -59,3 +63,13 @@
     margin-top: 30px;
 }
 
+
+.authorUsername{
+    width: fit-content;
+    color: var(--c-main-gray);
+    transition: color .2s ease-in-out;
+}
+
+.authorUsername:hover{
+    color: var(--c-achievement-blue);
+}

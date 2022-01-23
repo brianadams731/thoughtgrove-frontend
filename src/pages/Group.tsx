@@ -4,17 +4,22 @@ import { PlusSign } from "../svg/PlusSign";
 import styles from "../styles/Group.module.css";
 import { GroupBulletinBoard } from "../components/GroupBulletinBoard";
 import { GroupDiscussions } from "../components/GroupDiscussions";
+import { useGroupByID } from "../hooks/api/useGroupById";
 
 const Group = () =>{
     const {groupId} = useParams();
+    const {groupData, groupError} = useGroupByID(groupId)
 
-    const mockGroup = {
-        title:"The French Quarter",
-        id:1,
-        description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-        
-    }
+    if(!groupData)return (
+        <div>
+            Loading
+        </div>
+    )
+    if(groupError) return (
+        <div>
+            Error!
+        </div>
+    )
 
     return (
         <div className={styles.wrapper}>
@@ -27,7 +32,7 @@ const Group = () =>{
                     </div>
                     <div className={styles.subjectTitleBlock}>
                         <h6 className={styles.subject}>Group</h6>
-                        <h1>{mockGroup.title}</h1>
+                        <h1>{groupData.group.name}</h1>
                     </div>
                 </div>
 

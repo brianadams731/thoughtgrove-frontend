@@ -12,8 +12,8 @@ interface IDiscussion{
     }
 }
 
-const useGroupByID = (groupID:string|number|undefined):{groupDiscussionsData: IDiscussion[],  groupDiscussionsError:ResError, areGroupDiscussionsLoading: boolean, mutateGroupDiscussions: KeyedMutator<IDiscussion[]>} =>{
-    const {data, error, mutate} = useSWR( `${APIRoute.GroupById}/${groupID}`, fetcher)
+const useDiscussionsByGroupID = (groupID:string|number|undefined):{groupDiscussionsData: IDiscussion[],  groupDiscussionsError:ResError, areGroupDiscussionsLoading: boolean, mutateGroupDiscussions: KeyedMutator<IDiscussion[]>} =>{
+    const {data, error, mutate} = useSWR( `${APIRoute.DiscussionsByGroupId}/${groupID}`, fetcher)
     return ({
         groupDiscussionsData: data,
         areGroupDiscussionsLoading: !data && !error,
@@ -22,4 +22,4 @@ const useGroupByID = (groupID:string|number|undefined):{groupDiscussionsData: ID
     })
 }
 
-export { useGroupByID };
+export { useDiscussionsByGroupID };
