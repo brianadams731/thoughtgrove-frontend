@@ -11,7 +11,7 @@ interface IDiscussionCommentsByDiscussionIdResponse{
     }
 }
 
-const useDiscussionCommentsByDiscussionId = (discussionId:string|number|undefined):{discussionCommentsData: IDiscussionCommentsByDiscussionIdResponse,  discussionCommentsError:ResError, areDiscussionCommentsLoading: boolean, mutateDiscussionComments: KeyedMutator<IDiscussionCommentsByDiscussionIdResponse>} =>{
+const useDiscussionCommentsByDiscussionId = (discussionId:string|number|undefined):{discussionCommentsData: IDiscussionCommentsByDiscussionIdResponse[],  discussionCommentsError:ResError, areDiscussionCommentsLoading: boolean, mutateDiscussionComments: KeyedMutator<IDiscussionCommentsByDiscussionIdResponse[]>} =>{
     const {data, error, mutate} = useSWR( `${APIRoute.DiscussionCommentsByDiscussionId}/${discussionId}`, fetcher)
     return ({
         discussionCommentsData: data,

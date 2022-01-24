@@ -2,11 +2,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { useCommentsByDeckID } from "../hooks/api/useCommentsByDeckId";
 import styles from "../styles/CommentTray.module.css";
-import { SendIcon } from "../svg/SendIcon";
 import { WrongIcon } from "../svg/WrongIcon";
 import { APIRoute } from "../utils/APIRoute";
 import { postDataAsync } from "../utils/postData";
 import { Comment } from "./Comment";
+import { CommentInput } from "./CommentInput";
 
 interface Props{
     deckId:number;
@@ -91,7 +91,7 @@ const CommentTray = ({deckId, setShowComment}:Props):JSX.Element =>{
                 }
                 <AnimatePresence>
                     {commentsData &&
-                    commentsData.comments.map((item, index) =>{
+                    commentsData.comments.map((item) =>{
                         return(
                             <Comment title={"Placeholder"}
                             comment={item.content}
@@ -106,19 +106,7 @@ const CommentTray = ({deckId, setShowComment}:Props):JSX.Element =>{
                     })}
                 </AnimatePresence>
             </div>
-            <div className={styles.postCommentWrapper}>
-                <div className={styles.userCommentInput} contentEditable ref={inputDiv} onKeyDown={async(e)=>{
-                    if(e.key === "Enter"){
-                        e.preventDefault();
-                        submitCommentAsync();
-                    }
-                }}></div>
-                <button className={styles.sendBtn} onClick={async ()=>{
-                    submitCommentAsync();
-                }}>
-                    <SendIcon width="25px" />
-                </button>
-            </div>
+            <CommentInput submitCommentAsync={submitCommentAsync} ref={inputDiv}/>
         </motion.div>
     )
 }

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useDiscussionsByGroupID } from "../hooks/api/useDiscussionsByGroupId";
 import styles from "../styles/GroupDiscussions.module.css"
 import { CommentIcon } from "../svg/CommentIcon"
@@ -9,6 +10,7 @@ interface Props{
 }
 
     const GroupDiscussions = ({groupId}:Props):JSX.Element =>{
+        const navigate = useNavigate();
         const {groupDiscussionsData, groupDiscussionsError, areGroupDiscussionsLoading} = useDiscussionsByGroupID(groupId);
 
         if(areGroupDiscussionsLoading) return (
@@ -28,8 +30,7 @@ interface Props{
                     {groupDiscussionsData.map(item =>{
                         return (
                             <motion.div animate={{scale:1}} whileHover={{scale:1.02}} whileTap={{scale:.99}} className={styles.discussionWrapper} key={item.id} onClick={()=>{
-                                // navigate to specific discussion here
-                                console.log(item.id)
+                                navigate(`/dashboard/discussion/${item.id}`)
                             }}>
                                 <div className={styles.discussionMetaData}>
                                     <h4 className={styles.title}>{item.title}</h4>

@@ -1,0 +1,32 @@
+.wrapper{
+    padding-top: 125px;
+    width: var(--constrain-standard-width);
+    margin: auto;
+}
+
+.author{
+    color: var(--c-main-gray);
+    font-size: var(--fs-standard);
+    font-weight: 400;
+}
+
+.title{
+    color: var(--c-dark-gray);
+    font-size: var(--fs-heading);
+    font-weight: 500;
+}
+
+.content{
+    color: var(--c-black);
+    font-weight: 400;
+    font-size: var(--fs-standard);
+    font-family: var(--font-body);
+}
+
+.commentInputWrapper{
+    position: fixed;
+    background-color: var(--c-off-white);
+    width: var(--constrain-standard-width);
+    bottom: 0;
+    padding-bottom: 50px;
+}

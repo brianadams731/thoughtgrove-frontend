@@ -73,7 +73,7 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
     },[currentSelection])
 
     const profileSubMenu:SubMenu[] = [
-        {title:"Your Profile", url:"/dashboard"},
+        {title:"Your Profile", url:"profile/owner"},
         {title:"Achievements", url:"/dashboard"},
         {title:"Settings", url:"/dashboard"},
     ]
@@ -86,7 +86,7 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
 
     const groupsSubMenu:SubMenu[] = [
         {title:"Your Groups", url:"/dashboard"},
-        {title:"Find Groups", url:"/dashboard"},
+        {title:"Find Groups", url:"/dashboard/group/1"},
         {title:"Create Group", url:"/dashboard"},
     ]
 

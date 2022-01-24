@@ -5,8 +5,8 @@ interface IDimensions{
     width:number;
 }
 
-const useDimension = <T extends HTMLElement>():[IDimensions|undefined, RefObject<T|undefined>] =>{
-    const refToElement = useRef<T>();
+const useDimension = <T extends HTMLElement>():[IDimensions|undefined, RefObject<T>] =>{
+    const refToElement = useRef<T>(null);
     const [dimensions, setDimensions] = useState<IDimensions>();
 
     useLayoutEffect(()=>{

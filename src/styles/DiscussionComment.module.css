@@ -1,0 +1,40 @@
+.wrapper{
+    position: relative;
+    padding:35px 0;
+}
+
+.wrapper::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: var(--c-main-gray);
+    height: 2px;
+    opacity: .3;
+    width: 65%;
+}
+
+.wrapper:last-child::after{
+    content: none;
+}
+
+.username{
+    font-size: var(--fs-standard);
+    font-weight: 400;
+    color: var(--c-main-gray);
+    font-family: var(--font-heading);
+    transition: color .2s ease-in-out;
+}
+
+.username:hover{
+    cursor: pointer;
+    color: var(--c-achievement-blue);
+}
+
+.content{
+    font-size: var(--fs-standard);
+    font-weight: 400;
+    color: var(--c-black);
+    font-family: var(--font-body);
+}
