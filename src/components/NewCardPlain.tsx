@@ -25,8 +25,8 @@ const NewCardPlain = ({editState ,setEditState, deckId, cardId}:Props):JSX.Eleme
     const {deckData} = useDeckByID(deckId);
     const cardIndex = useRef<number>(cardData.cards.findIndex(item => item.id === cardId))
 
-    const [prompt, setPrompt] = useState(cardIndex.current>=0?cardData.cards[cardIndex.current!].prompt:"");
-    const [answer, setAnswer] = useState(cardIndex.current>=0?cardData.cards[cardIndex.current].answer:"");
+    const [prompt, setPrompt] = useState(cardIndex.current>=0 && cardData?.cards[cardIndex.current!]?.prompt ? cardData.cards[cardIndex.current!].prompt:"");
+    const [answer, setAnswer] = useState(cardIndex.current>=0 && cardData?.cards[cardIndex.current]?.answer ? cardData.cards[cardIndex.current].answer:"");
 
 
     const variants = {
@@ -59,12 +59,13 @@ const NewCardPlain = ({editState ,setEditState, deckId, cardId}:Props):JSX.Eleme
                         setEditState(EditFocusKind.None)
                         return;
                     }
+                    debugger;
                     await deleteDataAsync(`${APIRoute.CardByID}/${cardId}`);
                     mutateCards({
                         ...cardData,
                         cards: cardData.cards.filter((_,index) => index !== cardIndex.current),
                     })
-                    setEditState(EditFocusKind.None)
+                    setEditState(EditFocusKind.None);
                 }}>
                     <TrashCan height="30px"/>
                 </motion.div>}
