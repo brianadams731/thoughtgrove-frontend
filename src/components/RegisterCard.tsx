@@ -21,6 +21,21 @@ const RegisterCard = ():JSX.Element =>{
         <div className={styles.wrapper}>
             <form className={styles.formWrapper} onSubmit={async (e)=>{
                 e.preventDefault();
+                if(!username || !email || !password || password !== confirmPassword){
+                    if(!username ){
+                        addToasts({subject:"Error", description:"Add a username"});
+                    }
+                    if(!email){
+                        addToasts({subject:"Error", description:"Add a username"});
+                    }
+                    if(!password){
+                        addToasts({subject:"Error", description:"Add a password"});
+                    }
+                    if(password !== confirmPassword){
+                        addToasts({subject:"Error", description:"Passwords don't match"});
+                    }
+                    return;
+                }
                 try{
                     await registerUserAsync({username, email, password});
                     navigate("/dashboard")

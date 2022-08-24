@@ -8,6 +8,7 @@ import { BasicCardTextArea } from "./BasicCardTextArea";
 import { postDataAsync } from "../utils/postData";
 import { APIRoute } from "../utils/APIRoute";
 import { useNavigate } from "react-router-dom";
+import { useToastStore } from "../stores/toastStore";
 
 const NewDeckCard = () =>{
     const [subject, setSubject] = useState<string>("");
@@ -16,6 +17,9 @@ const NewDeckCard = () =>{
     // TODO: ADD SET PUBLIC FIELD 
     const [isPublic] = useState<boolean>(true);
     const navigate = useNavigate();
+
+    const addToasts = useToastStore(state => state.addToasts);
+
 
     const variants = {
         initial:{
@@ -45,6 +49,15 @@ const NewDeckCard = () =>{
         <motion.div variants={variants} initial="initial" animate="animate" exit="exit" className={`${styles.cardWrapper} ${cardBase.wrapper}`}>
             <form onSubmit={async (e)=>{
                 e.preventDefault();
+                if(!subject || !title){
+                    if(!subject){
+                        addToasts({subject:"Error", description:"Add a subject"});
+                    }
+                    if(!title){
+                        addToasts({subject:"Error", description:"Add a title"});
+                    }
+                    return;
+                }
                 const res = await postDataAsync(APIRoute.AddDeck, {
                     title,
                     subject,

@@ -12,6 +12,7 @@ import { deleteDataAsync } from "../utils/deleteData";
 import { useCardsByDeckID } from "../hooks/api/useCardsByDeckID";
 import { patchDataAsync } from "../utils/patchData";
 import { useDeckByID } from "../hooks/api/useDeckByID";
+import { useToastStore } from "../stores/toastStore";
 
 interface Props{
     setEditState: Dispatch<SetStateAction<EditFocusKind>>;
@@ -28,6 +29,7 @@ const NewCardPlain = ({editState ,setEditState, deckId, cardId}:Props):JSX.Eleme
     const [prompt, setPrompt] = useState(cardIndex.current>=0 && cardData?.cards[cardIndex.current!]?.prompt ? cardData.cards[cardIndex.current!].prompt:"");
     const [answer, setAnswer] = useState(cardIndex.current>=0 && cardData?.cards[cardIndex.current]?.answer ? cardData.cards[cardIndex.current].answer:"");
 
+    const addToasts = useToastStore(state => state.addToasts);
 
     const variants = {
         initial:{
@@ -59,7 +61,6 @@ const NewCardPlain = ({editState ,setEditState, deckId, cardId}:Props):JSX.Eleme
                         setEditState(EditFocusKind.None)
                         return;
                     }
-                    debugger;
                     await deleteDataAsync(`${APIRoute.CardByID}/${cardId}`);
                     mutateCards({
                         ...cardData,
@@ -72,6 +73,15 @@ const NewCardPlain = ({editState ,setEditState, deckId, cardId}:Props):JSX.Eleme
             </div>
             <form onSubmit={async (e)=>{
                 e.preventDefault();
+                if(!prompt || !answer){
+                    if(!prompt){
+                        addToasts({subject:"Error", description:"Add a question"});
+                    }
+                    if(!answer){
+                        addToasts({subject:"Error", description:"Add an answer"});
+                    }
+                    return;
+                }
                 if(editState === EditFocusKind.EditCard){
                     mutateCards({
                         ...cardData,
