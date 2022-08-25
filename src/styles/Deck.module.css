@@ -8,3 +8,25 @@
     overflow-y: hidden;
     grid-template-areas: "deck";
 }
+
+.counter{
+    position: absolute;
+    font-size: var(--fs-standard-large);
+    font-weight: 400;
+    color: var(--c-dark-gray);
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.counter h3:first-child{
+    padding-bottom: 5px;
+}
+
+.correct{
+    color: var(--c-logo-accent);
+}
+.incorrect{
+    color: var(--c-light-red);
+}
+

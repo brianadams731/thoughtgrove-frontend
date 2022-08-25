@@ -5,7 +5,7 @@ import { ICardPlain } from "../interfaces/ICardPlain";
 import { DeckMetaData } from "./DeckMetaData";
 import { CorrectIcon } from "../svg/CorrectIcon";
 import { WrongIcon } from "../svg/WrongIcon";
-import { Dispatch, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { motion } from "framer-motion";
 
 import { CardAction, CardActionKind } from "../interfaces/CardReducer";
@@ -16,9 +16,11 @@ interface Props extends ICardPlain{
     deckMetaData?: IDeckMetaData|undefined;
     cardIndex: number;
     dispatch: Dispatch<CardAction>;
+    setCorrect: Dispatch<SetStateAction<number>>;
+    setIncorrect: Dispatch<SetStateAction<number>>;
 }
 
-const CardPlain = ({prompt, answer, deckMetaData, dispatch, cardIndex}:Props):JSX.Element =>{
+const CardPlain = ({prompt, answer, deckMetaData, dispatch, cardIndex, setCorrect, setIncorrect}:Props):JSX.Element =>{
     const [shouldFlip,setShouldFlip] = useState<boolean>(false);
     const [cardCorrect, setCardCorrect] = useState<boolean>(false)
 
@@ -74,13 +76,16 @@ const CardPlain = ({prompt, answer, deckMetaData, dispatch, cardIndex}:Props):JS
                     <div className={styles.evaluationWrapper}>
                         <motion.div animate={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-orange)"}} className={styles.wrongIconWrapper} onClick={()=>{
                             setCardCorrect(false);
-                            dispatch({type: CardActionKind.WrongAnswer})
+                            dispatch({type: CardActionKind.WrongAnswer});
+                            // not in reducer to limit side effects
+                            setIncorrect((prev)=>prev + 1);
                         }}>
                             <WrongIcon width="50px" />
                         </motion.div>
                         <motion.div animate={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-achievement-green)"}} className={styles.correctIconWrapper} onClick={()=>{
                             setCardCorrect(true);
                             dispatch({type: CardActionKind.CorrectAnswer})
+                            setCorrect((prev)=>prev + 1);
                         }}>
                             <CorrectIcon height="50px" />
                         </motion.div>
