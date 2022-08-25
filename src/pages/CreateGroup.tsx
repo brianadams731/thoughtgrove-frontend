@@ -10,7 +10,7 @@ const CreateGroup = ():JSX.Element =>{
                     fontSize: "var(--fs-standard-large)",
                     color: "var(--c-dark-gray)"
                 }}>
-                    ...but there is a fully working group already created <Link to="/dashboard/group/1">Here</Link>!
+                    <h4>...but there is a fully working group already created <Link to="/dashboard/group/1">here</Link></h4>
                 </div>
             </UnderConstruction>
         </div>

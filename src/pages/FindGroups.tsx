@@ -6,11 +6,8 @@ const UserGroups = ():JSX.Element =>{
     return (
         <div>
             <UnderConstruction>
-                <div style={{
-                    fontSize: "var(--fs-standard-large)",
-                    color: "var(--c-dark-gray)"
-                }}>
-                    ...Although you can view a fully working group <Link to="/dashboard/group/1">Here</Link>!
+                <div>
+                    <h4>...although you can view a fully working group created <Link to="/dashboard/group/1">here</Link></h4>
                 </div>
             </UnderConstruction>
         </div>

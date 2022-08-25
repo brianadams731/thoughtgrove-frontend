@@ -80,7 +80,7 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
 
     const decksSubMenu:SubMenu[] = [
         {title:"Your Decks", url:"/dashboard"},
-        {title:"Start Practicing", url:"/dashboard"},
+        {title:"Start Practicing", url:"deck/start-practicing"},
         {title:"Search Decks", url:"deck/search"},
     ]
 

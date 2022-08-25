@@ -2,40 +2,24 @@
     height: 100vh;
     width: 100%;
 
-    padding: 0px 5%;
     display: flex;
     flex-direction: column;
+    gap: 10px;
     align-items: center;
     justify-content: center;
-    gap: 15px;
 
     text-align: center;
-}
-
-.wrapper svg{
-    height: 23vh;
-    fill: var(--c-logo-accent);
-}
-
-.wrapper h3{
-    color: var(--c-dark-gray);
-    font-size: var(--fs-heading-large);
-}
-
-.wrapper h4{
-    color: var(--c-dark-gray);
-    font-weight: 600;
-    font-size: var(--fs-heading-small);
+    padding: 0px 5%;
 }
 
 .wrapper a{
-    color: var(--c-light-red);
+    color: var(--c-achievement-blue);
     text-decoration: none;
     position: relative;
 }
 
 .wrapper a:visited{
-    color: var(--c-light-red);
+    color: var(--c-achievement-blue);
 }
 
 .wrapper a::after{
@@ -43,7 +27,7 @@
     position: absolute;
     height: 3px;
     width: 100%;
-    background-color: var(--c-light-red);
+    background-color: var(--c-achievement-blue);
 
     left: 0;
     bottom: 0px;

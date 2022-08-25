@@ -29,7 +29,7 @@ interface Props{
                 <div>
                     {groupDiscussionsData.map(item =>{
                         return (
-                            <motion.div animate={{scale:1}} whileHover={{scale:1.02}} whileTap={{scale:.99}} className={styles.discussionWrapper} key={item.id} onClick={()=>{
+                            <motion.div initial={{borderBottom:"2px solid transparent"}} animate={{scale:1, borderColor: "transparent"}} whileHover={{scale:1.02, borderColor:"var(--c-main-gray)"}} whileTap={{scale:.99}} className={styles.discussionWrapper} key={item.id} onClick={()=>{
                                 navigate(`/dashboard/discussion/${item.id}`)
                             }}>
                                 <div className={styles.discussionMetaData}>
