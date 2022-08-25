@@ -13,6 +13,7 @@ import { Discussion } from "./Discussion";
 import { CreateGroup } from "./CreateGroup";
 import { SearchDeck } from "./SearchDeck";
 import { StartPracticing } from "./StartPracticing";
+import { FindGroups } from "./FindGroups";
 
 const Dashboard = ():JSX.Element =>{
     // Consider pushing into global state
@@ -29,6 +30,7 @@ const Dashboard = ():JSX.Element =>{
                 <Route path="deck/edit/:deckId" element={<EditDeck />} />
                 <Route path="deck/start-practicing" element={<StartPracticing />} />
                 <Route path="deck/:deckId" element={<Deck />} />
+                <Route path="group/find" element={<FindGroups />} />
                 <Route path="group/:groupId" element={<Group />} />
                 <Route path="create-group" element={<CreateGroup />} />
                 <Route path="discussion/:discussionId" element={<Discussion />} />

@@ -37,6 +37,9 @@
     font-weight: 400;
 }
 
+.subject, .title{
+    white-space: nowrap;
+}
 .svgWrapper{
     display: flex;
     justify-content: center;

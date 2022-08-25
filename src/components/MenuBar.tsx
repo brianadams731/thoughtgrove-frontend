@@ -86,7 +86,7 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
 
     const groupsSubMenu:SubMenu[] = [
         {title:"Your Groups", url:"/dashboard/group/1"},
-        {title:"Find Groups", url:"/dashboard/group/1"},
+        {title:"Find Groups", url:"/dashboard/group/find"},
         {title:"Create Group", url:"/dashboard/create-group"},
     ]
 

@@ -12,8 +12,25 @@
     align-items: center;
     padding: 25px 0;
 }
+
 .discussionWrapper:hover{
     cursor: pointer;
+}
+
+.discussionWrapper::before{
+    position: absolute;
+    content: "";
+    height: 4px;
+    width: 100%;
+    bottom: 0;
+    left:0;
+    background-color: var(--c-achievement-blue);
+    transform: translateY(50%) scaleX(0);
+    transition: transform .25s ease-in-out;
+}
+
+.discussionWrapper:hover::before{
+    transform: translateY(50%) scaleX(1);
 }
 
 .discussionWrapper::after{

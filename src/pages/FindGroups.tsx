@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom"
 import { UnderConstruction } from "../components/UnderConstruction";
 
-const UserGroups = ():JSX.Element =>{
+const FindGroups = ():JSX.Element =>{
 
     return (
         <div>
@@ -14,4 +14,4 @@ const UserGroups = ():JSX.Element =>{
     )
 }
 
-export { UserGroups };
+export { FindGroups };

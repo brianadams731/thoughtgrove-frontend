@@ -21,8 +21,8 @@ const DeckTile = ({subject,title,votes, deckID, deckRelation, showEditIcon, supp
         }} whileHover={{scale:1.07}}>
             <div className={styles.mainContent}>
                 <div className={styles.textBox}>
-                    <h3 className={styles.subject}>{subject}</h3>
-                    <h1 className={styles.title}>{title}</h1>
+                    <h3 className={styles.subject}>{subject.substring(0,22)}</h3>
+                    <h1 className={styles.title}>{title.substring(0,10)}</h1>
                 </div>
                 { deckRelation === DeckOwnership.Owner && showEditIcon &&
                 <motion.div className={styles.editWrapper} initial={{fill:"var(--c-main-gray)"}} whileHover={{fill:"var(--c-logo-accent)"}} onClick={(e)=>{
