@@ -1,0 +1,22 @@
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+}
+
+.spinner {
+    fill: var(--c-main-gray);
+    width: 75px;
+    height: 75px;
+    animation: spin .6s infinite alternate-reverse;
+}
+
+@keyframes spin {
+    0% {
+        fill: var(--c-main-gray)
+    }
+    100% {
+        fill: var(--c-logo-accent);
+    }
+}

@@ -1,0 +1,17 @@
+.searchForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchForm input{
+    font-family: var(--font-body);
+    border: 2px solid var(--c-main-gray);
+    border-radius: var(--border-card-radius);
+    font-size: var(--fs-standard-large);
+    padding:  12px 15px;
+    width: 250px;
+    outline: none;
+}

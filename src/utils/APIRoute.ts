@@ -7,6 +7,7 @@ enum APIRoute {
     PopularDecks = "/deck/popular",
     DeckByID = "/deck/byID", // needs a /:deckId appended
     OwnersDecks = "/deck/owner",
+    SearchDeck = "/deck/search", // needs a /:deckSearchKey appended
 
     PostVotes = "/votes/byDeckID", // needs a /:deckId appended
 
