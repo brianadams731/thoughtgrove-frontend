@@ -74,20 +74,20 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
 
     const profileSubMenu:SubMenu[] = [
         {title:"Your Profile", url:"profile/owner"},
-        {title:"Achievements", url:"/dashboard"},
-        {title:"Settings", url:"/dashboard"},
+        {title:"Achievements", url:"profile/0"},
+        {title:"Settings", url:"profile/0"},
     ]
 
     const decksSubMenu:SubMenu[] = [
         {title:"Your Decks", url:"/dashboard"},
         {title:"Start Practicing", url:"/dashboard"},
-        {title:"Search Decks", url:"/dashboard"},
+        {title:"Search Decks", url:"profile/0"},
     ]
 
     const groupsSubMenu:SubMenu[] = [
-        {title:"Your Groups", url:"/dashboard"},
+        {title:"Your Groups", url:"/dashboard/group/1"},
         {title:"Find Groups", url:"/dashboard/group/1"},
-        {title:"Create Group", url:"/dashboard"},
+        {title:"Create Group", url:"/dashboard/create-group"},
     ]
 
     const dashOverlay = {
@@ -210,19 +210,19 @@ const MenuBar = ({menuOpen, setMenuOpen}:Props):JSX.Element =>{
                         <div>
                             <Flame fill={"var(--c-achievement-orange)"} />
                             <h5>
-                                20
+                                0
                             </h5>
                         </div>
                         <div className={styles.trophyWrapper}>
                             <Trophy fill={"var(--c-achievement-green)"} />
                             <h5>
-                                15
+                                0
                             </h5>
                         </div>
                         <div>
                             <CardCompleteIcon fill={"var(--c-achievement-blue)"} />
                             <h5>
-                                10
+                                0
                             </h5>
                         </div>
                     </div>

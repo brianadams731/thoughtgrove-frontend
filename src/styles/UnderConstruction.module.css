@@ -1,0 +1,21 @@
+.wrapper{
+    height: 100vh;
+    width: 100%;
+
+    padding: 0px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.wrapper svg{
+    height: 23vh;
+    fill: var(--c-logo-accent);
+}
+
+.wrapper h3{
+    color: var(--c-dark-gray);
+    font-size: var(--fs-heading-large);
+}
