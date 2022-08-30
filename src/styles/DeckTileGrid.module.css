@@ -4,6 +4,7 @@
 }
 
 .gridTitle{
+    font-family: var(--font-heading);
     font-size: var(--fs-heading);
     color: var(--c-dark-gray);
     user-select: none;

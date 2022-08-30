@@ -1,16 +1,35 @@
-import {Link} from "react-router-dom"
-import { UnderConstruction } from "../components/UnderConstruction";
+import { useCallback, useState } from "react";
+import { useToastStore } from "../stores/toastStore";
+import { APIRoute } from "../utils/APIRoute";
 
-const FindGroups = ():JSX.Element =>{
+import { TopSearchBar } from "../components/TopSearchBar";
+import { IGroupTile } from "../components/GroupTile";
+import { GroupGrid } from "../components/GroupGrid";
+
+const FindGroups = (): JSX.Element => {
+    const [groupData, setGroupData] = useState<IGroupTile[]>([])
+    const [isSearching, setIsSearching] = useState(false);
+    const addToasts = useToastStore(state => state.addToasts);
+
+    const getGroupData = useCallback(async (inputVal:string) => {
+        if (!inputVal) {
+            addToasts({ subject: "Tip", description: "Enter a search value" });
+            return;
+        }
+        try {
+            setIsSearching(true);
+            const res = await fetch(`${APIRoute.SearchForGroup}/${inputVal}`);
+            const parsed = await res.json() as IGroupTile[];
+            setGroupData(parsed);
+        } finally {
+            setIsSearching(false);
+        }
+    },[setIsSearching, setGroupData, addToasts])
 
     return (
-        <div>
-            <UnderConstruction>
-                <div>
-                    <h4>...although you can view a fully working group created <Link to="/dashboard/group/1">here</Link></h4>
-                </div>
-            </UnderConstruction>
-        </div>
+        <TopSearchBar onFormSubmitAsync={getGroupData} isSearching={isSearching}>
+            <GroupGrid groupTileData={groupData} title={`Results: ${groupData.length}`}/>
+        </TopSearchBar>
     )
 }
 

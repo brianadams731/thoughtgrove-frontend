@@ -1,0 +1,47 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+    border-radius: var(--border-card-radius);
+    box-shadow: var(--box-shadow-card);
+    padding: var(--p-card-tile);
+    width: var(--deck-tile-width);
+    height: 200px;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.wrapper:hover{
+    cursor: pointer;
+}
+
+.name{
+    white-space: nowrap;
+    font-size: var(--fs-standard-large);
+    font-family: var(--font-heading);
+}
+
+.description{
+    font-size: var(--fs-standard);
+    font-family: var(--font-body);
+}
+
+.userCount{
+    font-size: var(--fs-standard);
+    font-family: var(--font-body);
+}
+
+.count{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+.count svg{
+    width: 18px;
+}

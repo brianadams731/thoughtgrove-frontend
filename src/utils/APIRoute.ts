@@ -29,6 +29,7 @@ enum APIRoute {
     ChangeGroupUsersPermissions = "/group/changePermission", // needs a /:groupId appended
     AddGroupUser = "/group/users/add", // requires a /:groupId appended
     DeleteGroupUser = "/group/user", // requires a /:groupId appended
+    SearchForGroup = "/group/search", // requires a /:searchKey appended
 
     BulletinsByGroupId = "/bulletin/byGroupId", // requires a /:groupId appended
     BulletinsById = "/bulletin/byId", // requires a /:bulletinId appended
